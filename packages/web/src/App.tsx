@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 
+import Home from "./screens/Home";
 import Users from "./screens/Users";
 import Signup from "./screens/Signup";
 import Signin from "./screens/Signin";
@@ -14,10 +15,12 @@ const GlobalStyle = createGlobalStyle`${reset}`;
 
 const Wrapper = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 1;
     min-height: 100vh;
     flex-direction: column;
-    background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+    background-color: rgba(0, 0, 0, 0.8);
 `;
 
 class App extends Component {
@@ -28,6 +31,11 @@ class App extends Component {
                     <ApolloProvider client={client}>
                         <BrowserRouter>
                             <Switch>
+                                <PublicRoute
+                                    exact
+                                    path="/"
+                                    component={Home}
+                                />
                                 <PrivateRoute
                                     exact
                                     path="/users"
