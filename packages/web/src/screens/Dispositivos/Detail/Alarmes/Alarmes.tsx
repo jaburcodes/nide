@@ -9,6 +9,8 @@ import Paper from "@material-ui/core/Paper";
 
 import Title from '../../../../utils/styles/Title/Title';
 
+import StyledAlarmes from '../../../../utils/components/Dispositivos/Detail/Alarmes/Alarmes';
+
 let id = 0;
 
 function createData(name: any, calories: any, fat: any, carbs: any) {
@@ -24,7 +26,7 @@ const rows = [
 
 const Alarmes = ({ history }: any) => {
     return (
-        <div>
+        <StyledAlarmes>
             <Title color="black">Alarmes</Title>
             <Paper
                     style={{
@@ -115,7 +117,7 @@ const Alarmes = ({ history }: any) => {
                         </TableBody>
                     </Table>
                 </Paper>
-        </div>
+        </StyledAlarmes>
     );
 };
 
