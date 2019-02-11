@@ -3,7 +3,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 
-import Home from "./screens/Home";
+import HomeWrapper from "./screens/Home/HomeWrapper";
+import MapHome from "./screens/Home/MapHome";
+import MapDetail from "./screens/Home/MapDetail";
 import Users from "./screens/Users";
 import Signup from "./screens/Signup";
 import Signin from "./screens/Signin";
@@ -34,7 +36,17 @@ class App extends Component {
                                 <PublicRoute
                                     exact
                                     path="/"
-                                    component={Home}
+                                    component={HomeWrapper}
+                                />
+                                <PublicRoute
+                                    exact
+                                    path="/visualizar"
+                                    component={MapHome}
+                                />
+                                 <PublicRoute
+                                    exact
+                                    path="/visualizar/detail"
+                                    component={MapDetail}
                                 />
                                 <PrivateRoute
                                     exact

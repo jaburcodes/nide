@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const StyledHome = styled.div`
+const StyledHomeWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     width: 95%;
-    max-width: 820px;
+    max-width: 900px;
     height: 95vh;
     max-height: 500px;
 
@@ -15,4 +15,4 @@ const StyledHome = styled.div`
     }
 `;
 
-export default StyledHome;
+export default StyledHomeWrapper;
