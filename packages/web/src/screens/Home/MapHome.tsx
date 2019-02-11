@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import StyledHomeWrapper from "../../utils/components/Home/Home";
-import StyledMapHome from "../../utils/components/Home/Map/Home/Home";
+import Intro from "../../utils/components/Home/Map/Intro/Intro";
+import Map from "../../utils/components/Home/Map/Map/Map";
 
 import Title from "../../utils/styles/Title/Title";
 
@@ -17,11 +18,14 @@ const Wrapper = styled.div`
 
 const MapHome = () => (
     <StyledHomeWrapper>
-        <StyledMapHome>
+        <Intro>
             <Wrapper>
                 <Title color="black">Para iniciar, selecione um ponto.</Title>
             </Wrapper>
-        </StyledMapHome>
+        </Intro>
+        <Map>
+            <Title color="black">Map</Title>
+        </Map>
     </StyledHomeWrapper>
 );
 

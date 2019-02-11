@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { withRouter } from 'react-router-dom'
 
 import Button from "@material-ui/core/Button";
 
@@ -12,16 +13,16 @@ import { secondButtonStyle } from "../../utils/styles/Button/Button";
 import Title from "../../utils/styles/Title/Title";
 import MiniTitle from "../../utils/styles/MiniTitle/MiniTitle";
 
-const Home = () => (
+const Home = ({ history }: any) => (
     <Fragment>
-        <Visitante>
+        <Visitante>AnyARecord
             <Wrapper>
                 <Title color="white">Não tem conta?</Title>
                 <MiniTitle color="white">
                     Você pode visualizar os dados públicos da plataforma
                     entrando como visitante, basta clicar no botão abaixo.
                 </MiniTitle>
-                <Button style={secondButtonStyle}>Entrar como visitante</Button>
+                <Button onClick={() => history.push('/visualizar')} style={secondButtonStyle}>Entrar como visitante</Button>
             </Wrapper>
         </Visitante>
         <SignIn>
@@ -30,4 +31,4 @@ const Home = () => (
     </Fragment>
 );
 
-export default Home;
+export default withRouter(Home);

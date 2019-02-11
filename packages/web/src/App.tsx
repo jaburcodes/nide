@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
+import { createBrowserHistory } from 'history';
 
 import HomeWrapper from "./screens/Home/HomeWrapper";
 import MapHome from "./screens/Home/MapHome";
@@ -11,9 +12,12 @@ import Signup from "./screens/Signup";
 import Signin from "./screens/Signin";
 
 import client from "./graphql/client";
+
 import reset from "./constants/reset";
 
 const GlobalStyle = createGlobalStyle`${reset}`;
+
+const history = createBrowserHistory();
 
 const Wrapper = styled.div`
     display: flex;
@@ -37,31 +41,37 @@ class App extends Component {
                                     exact
                                     path="/"
                                     component={HomeWrapper}
+                                    history={history}
                                 />
                                 <PublicRoute
                                     exact
                                     path="/visualizar"
                                     component={MapHome}
+                                    history={history}
                                 />
                                  <PublicRoute
                                     exact
                                     path="/visualizar/detail"
                                     component={MapDetail}
+                                    history={history}
                                 />
                                 <PrivateRoute
                                     exact
                                     path="/users"
                                     component={Users}
+                                    history={history}
                                 />
                                 <PublicRoute
                                     exact
                                     path="/signup"
                                     component={Signup}
+                                    history={history}
                                 />
                                 <PublicRoute
                                     exact
                                     path="/signin"
                                     component={Signin}
+                                    history={history}
                                 />
                             </Switch>
                         </BrowserRouter>
