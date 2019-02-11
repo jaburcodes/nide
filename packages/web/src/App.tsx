@@ -7,9 +7,12 @@ import { createBrowserHistory } from 'history';
 import HomeWrapper from "./screens/Home/HomeWrapper";
 import MapHome from "./screens/Home/MapHome";
 import MapDetail from "./screens/Home/MapDetail";
+
 import Users from "./screens/Users";
 import Signup from "./screens/Signup";
 import Signin from "./screens/Signin";
+
+import Dispositivos from "./screens/Dispositivos/Dispositivos";
 
 import client from "./graphql/client";
 
@@ -49,10 +52,16 @@ class App extends Component {
                                     component={MapHome}
                                     history={history}
                                 />
-                                 <PublicRoute
+                                <PublicRoute
                                     exact
                                     path="/visualizar/detail"
                                     component={MapDetail}
+                                    history={history}
+                                />
+                                 <PublicRoute
+                                    exact
+                                    path="/dispositivos"
+                                    component={Dispositivos}
                                     history={history}
                                 />
                                 <PrivateRoute

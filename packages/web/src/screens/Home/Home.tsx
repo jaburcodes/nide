@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { withRouter } from 'react-router-dom'
 
 import Button from "@material-ui/core/Button";
 
@@ -15,7 +14,7 @@ import MiniTitle from "../../utils/styles/MiniTitle/MiniTitle";
 
 const Home = ({ history }: any) => (
     <Fragment>
-        <Visitante>AnyARecord
+        <Visitante>
             <Wrapper>
                 <Title color="white">Não tem conta?</Title>
                 <MiniTitle color="white">
@@ -31,4 +30,4 @@ const Home = ({ history }: any) => (
     </Fragment>
 );
 
-export default withRouter(Home);
+export default Home;
