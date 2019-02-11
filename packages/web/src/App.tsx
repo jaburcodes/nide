@@ -13,6 +13,7 @@ import Signup from "./screens/Signup";
 import Signin from "./screens/Signin";
 
 import Dispositivos from "./screens/Dispositivos/Dispositivos";
+import DispositivosDetail from "./screens/Dispositivos/Detail/DispositivosDetail";
 
 import client from "./graphql/client";
 
@@ -58,10 +59,16 @@ class App extends Component {
                                     component={MapDetail}
                                     history={history}
                                 />
-                                 <PublicRoute
+                                <PublicRoute
                                     exact
                                     path="/dispositivos"
                                     component={Dispositivos}
+                                    history={history}
+                                />
+                                <PublicRoute
+                                    exact
+                                    path="/dispositivos/detail"
+                                    component={DispositivosDetail}
                                     history={history}
                                 />
                                 <PrivateRoute

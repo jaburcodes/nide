@@ -1,5 +1,4 @@
 import React from "react";
-import styled from 'styled-components';
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,12 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import StyledDispositivos from "../../utils/components/Dispositivos/Dispositivos";
-import Wrapper from "../../utils/components/Dispositivos/Wrapper/Wrapper";
-
-import Title from "../../utils/styles/Title/Title";
-
-import { tableTitle, paperStyle, tableTd } from '../../utils/styles/Table/Table';
+import Title from '../../../../utils/styles/Title/Title';
 
 let id = 0;
 
@@ -23,27 +17,23 @@ function createData(name: any, calories: any, fat: any, carbs: any) {
 }
 
 const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24),
-    createData("Ice cream sandwich", 237, 9.0, 37),
-    createData("Eclair", 262, 16.0, 24),
-    createData("Cupcake", 305, 3.7, 63),
-    createData("Gingerbread", 356, 16.0, 49)
+    createData("Frozen yoghurt", 1120412, "Inclinação X Alta", "20/01/2018"),
+    createData("Ice cream sandwich", 2372151, "Risco de Desmoronamento", "13/03/2018"),
+    createData("Eclair", 262211, "Perigo Eminente de Desmoronamento", "04/06/2018")
 ];
 
-const Home = ({ history }: any) => {
+const Alarmes = ({ history }: any) => {
     return (
-        <StyledDispositivos>
-            <Wrapper>
-                <Title style={{ alignSelf: "center" }} color="black">
-                    Dispositivos
-                </Title>
-                <Paper
+        <div>
+            <Title color="black">Alarmes</Title>
+            <Paper
                     style={{
                         width: "100%",
-                        height: "100%",
+                        height: "auto",
                         gridRow: "2 / 3",
                         boxShadow: "0",
-                        borderRadius: "0"
+                        borderRadius: "0",
+                        marginTop: "25px"
                     }}
                 >
                     <Table>
@@ -55,7 +45,7 @@ const Home = ({ history }: any) => {
                                     fontSize: "1rem",
                                     color: "black" 
                                 }}>
-                                        Nome do Dispositivo
+                                        Nível de Alarme
                                 </TableCell>
                                 <TableCell 
                                 style={{ 
@@ -63,7 +53,7 @@ const Home = ({ history }: any) => {
                                     fontSize: "1rem",
                                     color: "black" 
                                 }}>
-                                    Latitude
+                                    Hardware ID
                                 </TableCell>
                                 <TableCell 
                                 style={{ 
@@ -71,7 +61,7 @@ const Home = ({ history }: any) => {
                                     fontSize: "1rem",
                                     color: "black" 
                                 }}>
-                                    Longitude
+                                    Mensagens
                                 </TableCell>
                                 <TableCell 
                                 style={{ 
@@ -79,7 +69,7 @@ const Home = ({ history }: any) => {
                                     fontSize: "1rem",
                                     color: "black" 
                                 }}>
-                                    Quantidade de Sensores
+                                    Data
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -125,9 +115,8 @@ const Home = ({ history }: any) => {
                         </TableBody>
                     </Table>
                 </Paper>
-            </Wrapper>
-        </StyledDispositivos>
+        </div>
     );
 };
 
-export default Home;
+export default Alarmes;
