@@ -2,14 +2,14 @@ import React from "react";
 
 import Button from "@material-ui/core/Button";
 
+import SignInForm from "../components/SignIn/SignIn";
+
 import StyledHome from "../utils/components/Home/Home";
 import Visitante from "../utils/components/Home/Visitante/Visitante";
 import SignIn from "../utils/components/Home/SignIn/SignIn";
 import Wrapper from "../utils/components/Home/Wrapper/Wrapper";
 
-import { mainButtonStyle } from "../utils/styles/Button/Button";
 import { secondButtonStyle } from "../utils/styles/Button/Button";
-import Input from "../utils/styles/Input/Input";
 import Title from "../utils/styles/Title/Title";
 import MiniTitle from "../utils/styles/MiniTitle/MiniTitle";
 
@@ -26,19 +26,7 @@ const Home = () => (
             </Wrapper>
         </Visitante>
         <SignIn>
-            <Wrapper>
-                <Title>Entrar</Title>
-                <Input
-                    placeholder="Nome de usuário"
-                    type="email"
-                    name="email"
-                />
-                <Input placeholder="Senha" type="password" />
-
-                <MiniTitle>Esqueceu a senha?</MiniTitle>
-                
-                <Button style={mainButtonStyle}>Entrar</Button>
-            </Wrapper>
+            <SignInForm />
         </SignIn>
     </StyledHome>
 );
