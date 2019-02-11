@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,64 +7,122 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import StyledDispositivos from '../../utils/components/Dispositivos/Dispositivos';
+import StyledDispositivos from "../../utils/components/Dispositivos/Dispositivos";
+import Wrapper from "../../utils/components/Dispositivos/Wrapper/Wrapper";
+
+import Title from "../../utils/styles/Title/Title";
 
 let id = 0;
 
-const createData = (
-    name: any,
-    calories: any,
-    fat: any,
-    carbs: any,
-    protein: any
-) => {
+function createData(name: any, calories: any, fat: any, carbs: any) {
     id += 1;
-    return { id, name, calories, fat, carbs, protein };
-};
+    return { id, name, calories, fat, carbs };
+}
 
 const rows = [
-    createData("Curitiba 1", 159, 6.0, 24, 4.0),
-    createData("Barragem Brumadinho 1", 237, 9.0, 37, 4.3),
-    createData("Barragem Brumadinho 2", 237, 9.0, 37, 4.3),
-    createData("Barragem Mariana 1", 237, 9.0, 37, 4.3)
+    createData("Frozen yoghurt", 159, 6.0, 24),
+    createData("Ice cream sandwich", 237, 9.0, 37),
+    createData("Eclair", 262, 16.0, 24),
+    createData("Cupcake", 305, 3.7, 63),
+    createData("Gingerbread", 356, 16.0, 49)
 ];
 
 const Home = ({ history }: any) => {
-    const [open, setOpen] = useState(false);
-
-    const handleDrawerOpen = () => setOpen(true);
-
-    const handleDrawerClose = () => setOpen(false);
-
     return (
         <StyledDispositivos>
-            <h1>Dispositivos</h1>
-            <Paper>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Nome do Dispositivo</TableCell>
-                            <TableCell align="center">Latitude</TableCell>
-                            <TableCell align="center">Longitude</TableCell>
-                            <TableCell align="center">Quantidade de Sensores</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={row.id}>
-                                <TableCell component="th" scope="row">
-                                    {row.name}
+            <Wrapper>
+                <Title style={{ alignSelf: "center" }} color="black">
+                    Dispositivos
+                </Title>
+                <Paper
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        gridRow: "2 / 3",
+                        boxShadow: "0",
+                        borderRadius: "0"
+                    }}
+                >
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell 
+                                style={{ 
+                                    textAlign: "center",
+                                    fontSize: "1rem",
+                                    color: "black" 
+                                }}>
+                                        Nome do Dispositivo
                                 </TableCell>
-                                <TableCell align="right">
-                                    {row.calories}
+                                <TableCell 
+                                style={{ 
+                                    textAlign: "center",
+                                    fontSize: "1rem",
+                                    color: "black" 
+                                }}>
+                                    Latitude
                                 </TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
+                                <TableCell 
+                                style={{ 
+                                    textAlign: "center",
+                                    fontSize: "1rem",
+                                    color: "black" 
+                                }}>
+                                    Longitude
+                                </TableCell>
+                                <TableCell 
+                                style={{ 
+                                    textAlign: "center",
+                                    fontSize: "1rem",
+                                    color: "black" 
+                                }}>
+                                    Quantidade de Sensores
+                                </TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Paper>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map(row => (
+                                <TableRow style={{ 
+                                    cursor: "pointer"
+                                }} key={row.id}>
+                                    <TableCell
+                                        style={{ 
+                                            textAlign: "center",
+                                            fontSize: "0.9rem",
+                                            color: "black" 
+                                        }}
+                                        component="th"
+                                        scope="row"
+                                    >
+                                        {row.name}
+                                    </TableCell>
+                                    <TableCell style={{ 
+                                            textAlign: "center",
+                                            fontSize: "0.9rem",
+                                            color: "black" 
+                                        }}>
+                                        {row.calories}
+                                    </TableCell>
+                                    <TableCell style={{ 
+                                            textAlign: "center",
+                                            fontSize: "0.9rem",
+                                            color: "black" 
+                                        }}>
+                                        {row.fat}
+                                    </TableCell>
+                                    <TableCell style={{ 
+                                            textAlign: "center",
+                                            fontSize: "0.9rem",
+                                            color: "black" 
+                                        }}>
+                                        {row.carbs}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Paper>
+            </Wrapper>
         </StyledDispositivos>
     );
 };

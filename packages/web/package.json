@@ -25,6 +25,7 @@
         "graphql-tag": "^2.10.0",
         "history": "^4.7.2",
         "jest": "23.6.0",
+        "rc-table": "^6.4.3",
         "react": "^16.7.0",
         "react-apollo": "^2.3.3",
         "react-dom": "^16.7.0",
