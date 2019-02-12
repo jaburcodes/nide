@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { withFormik, FormikProps } from "formik";
+import { Formik, withFormik, FormikProps } from "formik";
+import { graphql, compose } from "react-apollo"; // or whatevs
 
 import Button from "@material-ui/core/Button";
 
 import { mainButtonStyle } from "../../utils/styles/Button/Button";
 import Form from "../../utils/styles/Form/Form";
+import Wrapper from "../../utils/styles/Form/Wrapper";
 import Input from "../../utils/styles/Input/Input";
 import Title from "../../utils/styles/Title/Title";
 import Error from "../../utils/styles/Error/Error";
+
+import { loginUser } from "../../graphql/mutations";
 
 // Shape of form values
 interface FormValues {
@@ -19,11 +23,15 @@ interface FormValues {
 
 interface OtherProps {
     title?: string;
+    mutate?: any;
+    history?: any;
 }
 
 interface MyFormProps {
     initialEmail?: string;
     initialPassword?: string;
+    mutate?: any;
+    history?: any;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
@@ -62,20 +70,26 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <Error>{errors.password}</Error>
             )}
 
-            <Link to="/forgot">Esqueceu a senha?</Link>
-            <Button
-                style={mainButtonStyle}
-                type="submit"
-                disabled={isSubmitting}
-            >
-                Entrar
-            </Button>
+            <Wrapper>
+                <Link to="/forgot">Esqueceu a senha?</Link>
+                <Button
+                    style={mainButtonStyle}
+                    type="submit"
+                    disabled={
+                        isSubmitting ||
+                        !!(errors.email && touched.email) ||
+                        !!(errors.password && touched.password)
+                    }
+                >
+                    Entrar
+                </Button>
+            </Wrapper>
         </Form>
     );
 };
 
 // Wrap our form with the using withFormik HoC
-const FormEnhancer = withFormik<MyFormProps, FormValues>({
+const SignInForm = withFormik<MyFormProps, FormValues>({
     mapPropsToValues: props => ({
         email: props.initialEmail || "",
         password: props.initialPassword || ""
@@ -88,11 +102,27 @@ const FormEnhancer = withFormik<MyFormProps, FormValues>({
         password: Yup.string().required("Password is required")
     }),
 
-    handleSubmit(values: FormValues) {
-        console.log(values);
-    }
+    handleSubmit(
+        { email, password }: FormValues,
+        { props, setSubmitting, setErrors }
+    ) {
+        props
+            .mutate({ variables: { input: { email, password } } })
+            .then(({ data }: any) => {
+                const { loginUser } = data;
+
+                if (loginUser.token) {
+                    localStorage.setItem("token", loginUser.token);
+                    return props.history.push("/dispositivos");
+                }
+            })
+            .catch((error: string) => {
+                console.log("error", error);
+                setSubmitting(false);
+                setErrors({ email: "", password: "" });
+            });
+    },
+    displayName: "FormEnhancer"
 })(InnerForm);
 
-const SignInForm = () => <FormEnhancer />;
-
-export default SignInForm;
+export default graphql(loginUser)(SignInForm);

@@ -60,13 +60,13 @@ class App extends Component {
                                     component={MapDetail}
                                     history={history}
                                 />
-                                <PublicRoute
+                                <PrivateRoute
                                     exact
                                     path="/dispositivos"
                                     component={Dispositivos}
                                     history={history}
                                 />
-                                <PublicRoute
+                                <PrivateRoute
                                     exact
                                     path="/dispositivos/detail"
                                     component={DispositivosDetail}
@@ -111,7 +111,7 @@ function PublicRoute({ component: Component, ...rest }) {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/users",
+                            pathname: "/dispositivos",
                             state: { from: props.location }
                         }}
                     />
@@ -132,7 +132,7 @@ function PrivateRoute({ component: Component, ...rest }) {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/signin",
+                            pathname: "/",
                             state: { from: props.location }
                         }}
                     />
