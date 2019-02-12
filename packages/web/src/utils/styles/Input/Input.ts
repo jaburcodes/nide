@@ -8,7 +8,7 @@ const Input = styled.input`
     border: 1px solid #d8dde6;
     text-indent: 20px;
     font-size: 14px;
-    font-family: "Roboto";
+    font-family: "Poppins";
     transition: border-color 0.2s ease, background-color 0.2s ease;
     cursor: pointer;
 

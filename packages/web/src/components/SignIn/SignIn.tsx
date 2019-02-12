@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { Formik, withFormik, FormikProps } from "formik";
-import { graphql, compose } from "react-apollo"; // or whatevs
+import { withFormik, FormikProps } from "formik";
+import { graphql } from "react-apollo";
 
 import Button from "@material-ui/core/Button";
 
@@ -12,10 +12,10 @@ import Wrapper from "../../utils/styles/Form/Wrapper";
 import Input from "../../utils/styles/Input/Input";
 import Title from "../../utils/styles/Title/Title";
 import Error from "../../utils/styles/Error/Error";
+import LinkWrapper from "../../utils/components/Link/Link";
 
 import { loginUser } from "../../graphql/mutations";
 
-// Shape of form values
 interface FormValues {
     email: string;
     password: string;
@@ -71,7 +71,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             )}
 
             <Wrapper>
-                <Link to="/forgot">Esqueceu a senha?</Link>
+                <LinkWrapper to="/forgot">Esqueceu a senha?</LinkWrapper>
                 <Button
                     style={mainButtonStyle}
                     type="submit"

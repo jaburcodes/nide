@@ -1,5 +1,6 @@
 export const mainButtonStyle = {
     background: "#00A7D1",
+    fontFamily: "Poppins",
     borderRadius: 0,
     border: 0,
     color: "white",
@@ -10,6 +11,7 @@ export const mainButtonStyle = {
 
 export const secondButtonStyle = {
     background: "transparent",
+    fontFamily: "Poppins",
     alignSelf: 'flex-start',
     borderRadius: 0,
     border: "2px solid white",
