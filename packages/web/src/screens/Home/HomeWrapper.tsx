@@ -4,8 +4,8 @@ import { Switch, Route } from "react-router-dom";
 import StyledHomeWrapper from "../../utils/components/Home/Home";
 
 import Home from "./Home";
-import MapDetail from "./MapDetail";
-import MapHome from "./MapHome";
+import MapDetail from "./Map/MapDetail";
+import MapHome from "./Map/MapHome";
 
 const HomeWrapper = () => (
     <StyledHomeWrapper>

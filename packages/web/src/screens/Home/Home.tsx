@@ -1,18 +1,16 @@
 import React, { Fragment } from "react";
-
 import Button from "@material-ui/core/Button";
-
-import SignInForm from "../../components/SignIn/SignIn";
 
 import Visitante from "../../utils/components/Home/Visitante/Visitante";
 import SignIn from "../../utils/components/Home/SignIn/SignIn";
+import SignInForm from "../../components/SignIn/SignIn";
 import Wrapper from "../../utils/components/Home/Wrapper/Wrapper";
 
 import { secondButtonStyle } from "../../utils/styles/Button/Button";
 import Title from "../../utils/styles/Title/Title";
 import MiniTitle from "../../utils/styles/MiniTitle/MiniTitle";
 
-const Home = ({ history }: any) => (
+const Home: React.FC = ({ history }: any) => (
     <Fragment>
         <Visitante>
             <Wrapper>
@@ -21,7 +19,12 @@ const Home = ({ history }: any) => (
                     Você pode visualizar os dados públicos da plataforma
                     entrando como visitante, basta clicar no botão abaixo.
                 </MiniTitle>
-                <Button onClick={() => history.push('/visualizar')} style={secondButtonStyle}>Entrar como visitante</Button>
+                <Button
+                    onClick={() => history.push("/visualizar")}
+                    style={secondButtonStyle}
+                >
+                    Entrar como visitante
+                </Button>
             </Wrapper>
         </Visitante>
         <SignIn>

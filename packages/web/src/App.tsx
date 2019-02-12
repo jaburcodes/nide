@@ -5,8 +5,9 @@ import { ApolloProvider } from "react-apollo";
 import { createBrowserHistory } from 'history';
 
 import HomeWrapper from "./screens/Home/HomeWrapper";
-import MapHome from "./screens/Home/MapHome";
-import MapDetail from "./screens/Home/MapDetail";
+
+import MapHome from "./screens/Home/Map/MapHome";
+import MapDetail from "./screens/Home/Map/MapDetail";
 
 import Users from "./screens/Users";
 import Signup from "./screens/Signup";

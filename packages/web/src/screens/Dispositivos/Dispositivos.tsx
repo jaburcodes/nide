@@ -1,6 +1,4 @@
 import React from "react";
-import styled from 'styled-components';
-
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -12,8 +10,6 @@ import StyledDispositivos from "../../utils/components/Dispositivos/Dispositivos
 import Wrapper from "../../utils/components/Dispositivos/Wrapper/Wrapper";
 
 import Title from "../../utils/styles/Title/Title";
-
-import { tableTitle, paperStyle, tableTd } from '../../utils/styles/Table/Table';
 
 let id = 0;
 
@@ -49,47 +45,54 @@ const Home = ({ history }: any) => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell 
-                                style={{ 
-                                    textAlign: "start",
-                                    fontSize: "1rem",
-                                    color: "black" 
-                                }}>
-                                        Nome do Dispositivo
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontSize: "1rem",
+                                        color: "black"
+                                    }}
+                                >
+                                    Nome do Dispositivo
                                 </TableCell>
-                                <TableCell 
-                                style={{ 
-                                    textAlign: "start",
-                                    fontSize: "1rem",
-                                    color: "black" 
-                                }}>
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontSize: "1rem",
+                                        color: "black"
+                                    }}
+                                >
                                     Latitude
                                 </TableCell>
-                                <TableCell 
-                                style={{ 
-                                    textAlign: "start",
-                                    fontSize: "1rem",
-                                    color: "black" 
-                                }}>
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontSize: "1rem",
+                                        color: "black"
+                                    }}
+                                >
                                     Longitude
                                 </TableCell>
-                                <TableCell 
-                                style={{ 
-                                    textAlign: "start",
-                                    fontSize: "1rem",
-                                    color: "black" 
-                                }}>
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontSize: "1rem",
+                                        color: "black"
+                                    }}
+                                >
                                     Quantidade de Sensores
                                 </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {rows.map(row => (
-                                <TableRow style={{ 
-                                    cursor: "pointer"
-                                }} key={row.id}>
+                                <TableRow
+                                    style={{
+                                        cursor: "pointer"
+                                    }}
+                                    key={row.id}
+                                >
                                     <TableCell
-                                        style={{ 
+                                        style={{
                                             textAlign: "start",
                                             fontSize: "0.9rem",
                                             color: "black"
@@ -99,25 +102,31 @@ const Home = ({ history }: any) => {
                                     >
                                         {row.name}
                                     </TableCell>
-                                    <TableCell style={{ 
+                                    <TableCell
+                                        style={{
                                             textAlign: "start",
                                             fontSize: "0.9rem",
-                                            color: "black" 
-                                        }}>
+                                            color: "black"
+                                        }}
+                                    >
                                         {row.calories}
                                     </TableCell>
-                                    <TableCell style={{ 
+                                    <TableCell
+                                        style={{
                                             textAlign: "start",
                                             fontSize: "0.9rem",
-                                            color: "black" 
-                                        }}>
+                                            color: "black"
+                                        }}
+                                    >
                                         {row.fat}
                                     </TableCell>
-                                    <TableCell style={{ 
+                                    <TableCell
+                                        style={{
                                             textAlign: "start",
                                             fontSize: "0.9rem",
-                                            color: "black" 
-                                        }}>
+                                            color: "black"
+                                        }}
+                                    >
                                         {row.carbs}
                                     </TableCell>
                                 </TableRow>
