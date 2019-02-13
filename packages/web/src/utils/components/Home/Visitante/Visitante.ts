@@ -5,7 +5,7 @@ const Visitante = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 
