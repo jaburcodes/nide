@@ -1398,6 +1398,13 @@
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
   integrity sha512-42zEJkBpNfMEAvWR5WlwtTH22oDzcMjFsL9gDGExwF8X8WvAiw7Vwop7hPw03QT8TKfec83LwbHj6SvpqM4ELQ==
 
+"@types/victory@^31.0.8":
+  version "31.0.8"
+  resolved "https://registry.yarnpkg.com/@types/victory/-/victory-31.0.8.tgz#cef3027f0d0ff1dcf9afa8b057420392f9628d07"
+  integrity sha512-7BX1Ob8WuJeDgDl5vFX7RWbPmRBa7VP2ze+kjSXwH/h0KBRCfQXXnKtA5bB0rs4ZqsR5LcaDeeEnpwX/BsFi8Q==
+  dependencies:
+    "@types/react" "*"
+
 "@types/ws@^6.0.0":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-6.0.1.tgz#ca7a3f3756aa12f62a0a62145ed14c6db25d5a28"

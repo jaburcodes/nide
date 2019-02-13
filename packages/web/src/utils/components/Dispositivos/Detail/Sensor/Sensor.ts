@@ -5,7 +5,7 @@ const Sensor = styled.div`
     align-items: center;
     justify-content: space-around;
     flex-direction: column;
-    width: 30%;
+    width: 34%;
     height: 100%;
 `;
 
