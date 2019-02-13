@@ -29,9 +29,6 @@ interface OtherProps {
 }
 
 interface MyFormProps {
-    initialAlarme?: string;
-    initialLatitude?: number;
-    initialLongitude?: number;
     mutate?: any;
     history?: any;
 }
@@ -164,8 +161,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <FormControl style={{ width: "100%", marginTop: "25px" }}>
                 <InputLabel htmlFor="age-simple">Porta 4</InputLabel>
                 <Select
-                    value={porta2}
-                    onChange={e => setPorta2(e.target.value)}
+                    value={porta4}
+                    onChange={e => setPorta4(e.target.value)}
                     inputProps={{
                         name: "Porta 4",
                         id: "porta-4"
@@ -208,12 +205,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
 // Wrap our form with the using withFormik HoC
 const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
-    mapPropsToValues: props => ({
-        alarme: props.initialAlarme || "",
-        latitude: props.initialLatitude || 0,
-        longitude: props.initialLongitude || 0
-    }),
-
     validationSchema: Yup.object().shape({
         alarme: Yup.string().required("Alarme is required"),
         latitude: Yup.number().required("Latitude is required"),
