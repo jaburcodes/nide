@@ -1,19 +1,38 @@
-import React from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import React, { useState } from "react";
+
 import Paper from "@material-ui/core/Paper";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import Modal from "react-modal";
 
 import StyledDispositivos from "../../utils/components/Dispositivos/Dispositivos";
 import Wrapper from "../../utils/components/Dispositivos/Wrapper/Wrapper";
+import TableWrapper from "./Table/Table";
+import AddDispositivoForm from "./AddDispositivo/AddDispositivo";
 
 import Title from "../../utils/styles/Title/Title";
 
+const customStyles = {
+    content: {
+        width: "40%",
+        height: "80%",
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)"
+    }
+};
+
 let id = 0;
 
-function createData(name: any, calories: any, fat: any, carbs: any) {
+function createData(
+    name: string,
+    calories: number,
+    fat: number,
+    carbs: number
+) {
     id += 1;
     return { id, name, calories, fat, carbs };
 }
@@ -23,10 +42,16 @@ const rows = [
     createData("Ice cream sandwich", 237, 9.0, 37),
     createData("Eclair", 262, 16.0, 24),
     createData("Cupcake", 305, 3.7, 63),
-    createData("Gingerbread", 356, 16.0, 49)
+    createData("Gingerbread", 356, 16.0, 49),
+    createData("Eclair", 262, 16.0, 24),
+    createData("Cupcake", 305, 3.7, 63)
 ];
 
 const Home = ({ history }: any) => {
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleOpen = () => setOpen(!open);
+
     return (
         <StyledDispositivos>
             <Wrapper>
@@ -42,98 +67,38 @@ const Home = ({ history }: any) => {
                         borderRadius: "0"
                     }}
                 >
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "1rem",
-                                        color: "black"
-                                    }}
-                                >
-                                    Nome do Dispositivo
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "1rem",
-                                        color: "black"
-                                    }}
-                                >
-                                    Latitude
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "1rem",
-                                        color: "black"
-                                    }}
-                                >
-                                    Longitude
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "1rem",
-                                        color: "black"
-                                    }}
-                                >
-                                    Quantidade de Sensores
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map(row => (
-                                <TableRow
-                                    style={{
-                                        cursor: "pointer"
-                                    }}
-                                    key={row.id}
-                                >
-                                    <TableCell
-                                        style={{
-                                            textAlign: "start",
-                                            fontSize: "0.9rem",
-                                            color: "black"
-                                        }}
-                                        component="th"
-                                        scope="row"
-                                    >
-                                        {row.name}
-                                    </TableCell>
-                                    <TableCell
-                                        style={{
-                                            textAlign: "start",
-                                            fontSize: "0.9rem",
-                                            color: "black"
-                                        }}
-                                    >
-                                        {row.calories}
-                                    </TableCell>
-                                    <TableCell
-                                        style={{
-                                            textAlign: "start",
-                                            fontSize: "0.9rem",
-                                            color: "black"
-                                        }}
-                                    >
-                                        {row.fat}
-                                    </TableCell>
-                                    <TableCell
-                                        style={{
-                                            textAlign: "start",
-                                            fontSize: "0.9rem",
-                                            color: "black"
-                                        }}
-                                    >
-                                        {row.carbs}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                    <TableWrapper rows={rows} />
                 </Paper>
+                <Fab
+                    onClick={() => handleOpen()}
+                    style={{
+                        backgroundColor: "#00A7D1",
+                        color: "#FFF",
+                        alignSelf: "flex-end",
+                        justifySelf: "flex-end",
+                        marginTop: "20px"
+                    }}
+                    aria-label="Add"
+                >
+                    <AddIcon />
+                </Fab>
+                <Modal
+                    isOpen={open}
+                    onRequestClose={handleOpen}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            justifyContent: "center",
+                            backgroundColor: "white"
+                        }}
+                    >
+                        <AddDispositivoForm />
+                    </div>
+                </Modal>
             </Wrapper>
         </StyledDispositivos>
     );
