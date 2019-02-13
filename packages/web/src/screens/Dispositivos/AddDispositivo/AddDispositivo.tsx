@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 
@@ -13,7 +13,6 @@ import Form from "../../../utils/styles/Form/Form";
 import Wrapper from "../../../utils/styles/Form/Wrapper";
 import Input from "../../../utils/styles/Input/Input";
 import Title from "../../../utils/styles/Title/Title";
-import MiniTitle from "../../../utils/styles/MiniTitle/MiniTitle";
 import Error from "../../../utils/styles/Error/Error";
 
 interface FormValues {
@@ -33,11 +32,42 @@ interface MyFormProps {
     history?: any;
 }
 
+interface InputType {}
+
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     const [porta1, setPorta1] = useState<string>("");
     const [porta2, setPorta2] = useState<string>("");
     const [porta3, setPorta3] = useState<string>("");
     const [porta4, setPorta4] = useState<string>("");
+    const [input, setInput] = useState<Array<InputType>>([]);
+
+    const addNewInput = () => {
+        const newInput = (
+            <FormControl style={{ width: "100%", marginTop: "25px" }}>
+                <InputLabel htmlFor="age-simple">Porta 1</InputLabel>
+                <Select
+                    value={porta1}
+                    onChange={e => setPorta1(e.target.value)}
+                    inputProps={{
+                        name: "Porta 1",
+                        id: "porta-1"
+                    }}
+                >
+                    <MenuItem value="">
+                        <em>Nenhuma</em>
+                    </MenuItem>
+                    <MenuItem value={"sensorX"}>
+                        Sensor de Inclinação X
+                    </MenuItem>
+                    <MenuItem value={"sensorY"}>
+                        Sensor de Inclinação Y
+                    </MenuItem>
+                    <MenuItem value={"sensorTensao"}>Sensor de Tensão</MenuItem>
+                </Select>
+            </FormControl>
+        );
+        setInput([...input, newInput]);
+    };
 
     const {
         values,
@@ -181,9 +211,14 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 </Select>
             </FormControl>
 
-            <MiniTitle style={{ marginTop: "25px" }} color="rgb(0, 167, 209)">
+            {input.map((input: any) => input)}
+
+            <Button
+                onClick={() => addNewInput()}
+                style={{ marginTop: "25px", color: "rgb(0, 167, 209)" }}
+            >
                 + Adicionar Porta
-            </MiniTitle>
+            </Button>
 
             <Wrapper style={{ justifyContent: "center", marginTop: "25px" }}>
                 <Button
