@@ -6,7 +6,7 @@ const Sensores = styled.div`
     justify-content: space-between;
     flex-direction: row;
     width: 100%;
-    height: 250px;
+    height: 220px;
 `;
 
 export default Sensores;

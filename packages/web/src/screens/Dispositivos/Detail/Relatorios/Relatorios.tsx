@@ -9,10 +9,10 @@ import Graph from './Graph/Graph';
 
 const Relatorios = ({ history }: any) => {
     const data = [
-        { x: 2, y: 2 },
-        { x: 1, y: 3 },
-        { x: 4, y: 4 },
-        { x: 5, y: 5 }
+        { x: "Jan", y: 2 },
+        { x: "Fev", y: 1 },
+        { x: "Mar", y: 3 },
+        { x: "Abr", y: 6 }
     ];
 
     return (

@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
-const Tip = styled.p`
+interface TipProps {
+    background: string;
+}
+
+const Tip = styled.p<TipProps>`
     width: 100%;
     height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #2ecc71;
     color: white;
+    background: ${props => props.background};
     font-size: 0.8rem;
     font-family: Montserrat;
 `;

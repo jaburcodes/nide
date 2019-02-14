@@ -1,13 +1,12 @@
 import React from "react";
 import { VictoryTheme, VictoryBar, VictoryLine, VictoryChart } from "victory";
-import moment from 'moment';
 
 import Sensor from "../../../../../utils/components/Dispositivos/Detail/Sensor/Sensor";
 
-const lastMonths = moment("07/2017", "MM/YYYY").subtract(1, 'months').format('YYMM');
+import MiniTitle from '../../../../../utils/styles/MiniTitle/MiniTitle'
 
 interface DataType {
-    x: number;
+    x: number | string;
     y: number;
 }
 
@@ -19,6 +18,7 @@ interface GraphProps {
 const Graph: React.FC<GraphProps> = ({ name, data }) => {
     return (
         <Sensor>
+            <MiniTitle color="black">Sensor {name}</MiniTitle>
             <VictoryChart
                 theme={VictoryTheme.material}
                 domainPadding={{ x: 20 }}
@@ -33,7 +33,7 @@ const Graph: React.FC<GraphProps> = ({ name, data }) => {
                         }
                     }}
                     data={data}
-                    labels={(data: any) => data.x}
+                    labels={(data: any) => data.y}
                 />
                 <VictoryLine interpolation="natural" data={data} />
             </VictoryChart>

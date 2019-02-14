@@ -112,7 +112,7 @@ const Alarmes = ({ history }: any) => {
                                     component="th"
                                     scope="row"
                                 >
-                                    <Tip>{row.name}</Tip>
+                                    <Tip background="#2ECC71">{row.name}</Tip>
                                 </TableCell>
                                 <TableCell
                                     style={{
