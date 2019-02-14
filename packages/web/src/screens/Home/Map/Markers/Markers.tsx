@@ -4,12 +4,12 @@ import { MapPin } from "react-feather";
 import * as L from "leaflet";
 import { Children, Marker, Popup } from "react-leaflet";
 
-const iconMarkup = renderToStaticMarkup(
+const redIconMarkup = renderToStaticMarkup(
     <MapPin fill="#FE0000" size={32} stroke="#000000" strokeWidth={1} />
 );
 
-const customMarkerIcon = L.divIcon({
-    html: iconMarkup
+const customRedMarkerIcon = L.divIcon({
+    html: redIconMarkup
 });
 
 interface PopupMarkerProps {
@@ -23,7 +23,7 @@ interface MyMakers extends PopupMarkerProps {
 }
 
 const MyPopupMarker = ({ children, position }: PopupMarkerProps) => (
-    <Marker position={position} icon={customMarkerIcon}>
+    <Marker position={position} icon={customRedMarkerIcon}>
         <Popup>
             <span>{children}</span>
         </Popup>
@@ -47,19 +47,19 @@ const Markers: React.FC = () => {
             key: "marker1",
             position: [51.5, -0.1],
             children: "My first popup",
-            icon: customMarkerIcon
+            icon: customRedMarkerIcon
         },
         {
             key: "marker2",
             position: [51.51, -0.1],
             children: "My second popup",
-            icon: customMarkerIcon
+            icon: customRedMarkerIcon
         },
         {
             key: "marker3",
             position: [51.49, -0.05],
             children: "My third popup",
-            icon: customMarkerIcon
+            icon: customRedMarkerIcon
         }
     ];
 

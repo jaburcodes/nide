@@ -17,7 +17,6 @@ import Dispositivos from "./screens/Dispositivos/Dispositivos";
 import DispositivosDetail from "./screens/Dispositivos/Detail/DispositivosDetail";
 
 import client from "./graphql/client";
-
 import reset from "./constants/reset";
 
 const GlobalStyle = createGlobalStyle`${reset}`;

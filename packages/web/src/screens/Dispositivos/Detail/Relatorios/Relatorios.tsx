@@ -5,18 +5,23 @@ import Sensores from '../../../../utils/components/Dispositivos/Detail/Sensores/
 
 import Title from '../../../../utils/styles/Title/Title';
 
-import X from './X/X';
-import Y from './Y/Y';
-import Tensao from './Tensao/Tensao';
+import Graph from './Graph/Graph';
 
 const Relatorios = ({ history }: any) => {
+    const data = [
+        { x: 2, y: 2 },
+        { x: 1, y: 3 },
+        { x: 4, y: 4 },
+        { x: 5, y: 5 }
+    ];
+
     return (
         <StyledRelatorios>
             <Title color="black">Relatorios</Title>
             <Sensores>
-                <X />
-                <Y />
-                <Tensao />
+                <Graph name={"X"} data={data} />
+                <Graph name={"Y"} data={data} />
+                <Graph name={"Tensao"} data={data} />
             </Sensores>
         </StyledRelatorios>
     );

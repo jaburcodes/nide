@@ -113,9 +113,9 @@ const SignInForm = withFormik<MyFormProps, FormValues>({
 
                 if (loginUser.token) {
                     localStorage.setItem("token", loginUser.token);
-                    return props.history.push("/dispositivos");
                 }
             })
+            .then(() => props.history.push('/dispositivos'))
             .catch((error: string) => {
                 console.log("error", error);
                 setSubmitting(false);
