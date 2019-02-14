@@ -16,7 +16,7 @@ interface Props {
     zoom: number;
 }
 
-const MapHome: React.FC<Props> = (props) => {
+const MapHome: React.FC<Props> = props => {
     const [lat, setLat] = useState<number>(51.505);
     const [lng, setLng] = useState<number>(-0.09);
     const [zoom, setZoom] = useState<number>(13);
@@ -27,7 +27,7 @@ const MapHome: React.FC<Props> = (props) => {
         <StyledHomeWrapper>
             <Intro>
                 <Wrapper>
-                    <Title color="black">
+                    <Title color="black" fontSize={1.4}>
                         Para iniciar, selecione um ponto.
                     </Title>
                 </Wrapper>

@@ -7,6 +7,8 @@ const StyledRelatorios = styled.div`
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    border-bottom: 3px solid #00A7D1;
+    border-bottom-width: 80%;
 `;
 
 export default StyledRelatorios;
