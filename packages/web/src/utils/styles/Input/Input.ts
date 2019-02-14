@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-const Input = styled.input`
-    width: 100%;
+interface InputProps {
+    width?: number;
+}
+
+const Input = styled.input<InputProps>`
+    width: ${props => props.width || 100}%;
     max-width: 440px;
     height: 52px;
     background-color: rgba(246, 246, 246, 0.3);
