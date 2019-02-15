@@ -61,6 +61,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     name="aceitavel.min"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.aceitavel && values.aceitavel.min}
                 />
                 {touched.aceitavel &&
                     touched.aceitavel.min &&
@@ -77,6 +78,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     name="aceitavel.max"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.aceitavel && values.aceitavel.max}
                 />
                 {touched.aceitavel &&
                     touched.aceitavel.max &&
@@ -93,15 +95,16 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     style={{ marginTop: "25px" }}
                     placeholder="Mínimo"
                     type="text"
-                    name="aceitavel.min"
+                    name="emergencial.min"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.emergencial && values.emergencial.min}
                 />
-                {touched.aceitavel &&
-                    touched.aceitavel.min &&
-                    errors.aceitavel &&
-                    errors.aceitavel.min && (
-                        <Error>{errors.aceitavel.min}</Error>
+                {touched.emergencial &&
+                    touched.emergencial.min &&
+                    errors.emergencial &&
+                    errors.emergencial.min && (
+                        <Error>{errors.emergencial.min}</Error>
                     )}
 
                 <Input
@@ -109,15 +112,16 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     style={{ marginTop: "25px" }}
                     placeholder="Máximo"
                     type="text"
-                    name="aceitavel.max"
+                    name="emergencial.max"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.emergencial && values.emergencial.max}
                 />
-                {touched.aceitavel &&
-                    touched.aceitavel.max &&
-                    errors.aceitavel &&
-                    errors.aceitavel.max && (
-                        <Error>{errors.aceitavel.max}</Error>
+                {touched.emergencial &&
+                    touched.emergencial.max &&
+                    errors.emergencial &&
+                    errors.emergencial.max && (
+                        <Error>{errors.emergencial.max}</Error>
                     )}
             </AlarmeWrapper>
 
@@ -128,15 +132,16 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     style={{ marginTop: "25px" }}
                     placeholder="Mínimo"
                     type="text"
-                    name="aceitavel.min"
+                    name="perigoso.min"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.perigoso && values.perigoso.min}
                 />
-                {touched.aceitavel &&
-                    touched.aceitavel.min &&
-                    errors.aceitavel &&
-                    errors.aceitavel.min && (
-                        <Error>{errors.aceitavel.min}</Error>
+                {touched.perigoso &&
+                    touched.perigoso.min &&
+                    errors.perigoso &&
+                    errors.perigoso.min && (
+                        <Error>{errors.perigoso.min}</Error>
                     )}
 
                 <Input
@@ -144,15 +149,16 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     style={{ marginTop: "25px" }}
                     placeholder="Máximo"
                     type="text"
-                    name="aceitavel.max"
+                    name="perigoso.max"
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    value={values.perigoso && values.perigoso.max}
                 />
-                {touched.aceitavel &&
-                    touched.aceitavel.max &&
-                    errors.aceitavel &&
-                    errors.aceitavel.max && (
-                        <Error>{errors.aceitavel.max}</Error>
+                {touched.perigoso &&
+                    touched.perigoso.max &&
+                    errors.perigoso &&
+                    errors.perigoso.max && (
+                        <Error>{errors.perigoso.max}</Error>
                     )}
             </AlarmeWrapper>
             <Wrapper style={{ justifyContent: "center", marginTop: "25px" }}>

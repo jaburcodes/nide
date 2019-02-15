@@ -96,7 +96,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                         fontSize: "0.9rem",
                                         color: "#999999"
                                     }}
-                                    align="right"
                                 >
                                     Latitude
                                 </TableCell>
@@ -107,7 +106,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                         fontSize: "0.9rem",
                                         color: "#999999"
                                     }}
-                                    align="right"
                                 >
                                     Longitude
                                 </TableCell>
@@ -118,7 +116,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                         fontSize: "0.9rem",
                                         color: "#999999"
                                     }}
-                                    align="right"
                                 >
                                     Quantidade de Sensores
                                 </TableCell>
@@ -151,7 +148,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                                 fontWeight: 500,
                                                 color: "black"
                                             }}
-                                            align="right"
                                         >
                                             {row.calories}
                                         </TableCell>
@@ -162,7 +158,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                                 fontWeight: 500,
                                                 color: "black"
                                             }}
-                                            align="right"
                                         >
                                             {row.fat}
                                         </TableCell>
@@ -173,7 +168,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                                 fontWeight: 500,
                                                 color: "black"
                                             }}
-                                            align="right"
                                         >
                                             {row.carbs}
                                         </TableCell>
