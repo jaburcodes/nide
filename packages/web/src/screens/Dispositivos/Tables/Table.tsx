@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
-import { withStyles, Theme } from "@material-ui/core/styles";
+import { Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableFooter from "@material-ui/core/TableFooter";
@@ -11,24 +12,6 @@ import Paper from "@material-ui/core/Paper";
 
 import PaginationWrapped from "./Pagination";
 
-import {
-    tableCellStyle,
-    tableRowStyle
-} from "../../../utils/styles/Table/Table";
-
-// const styles = (theme: Theme) => ({
-//     root: {
-//         width: "100%",
-//         marginTop: theme.spacing.unit * 3
-//     },
-//     table: {
-//         minWidth: 500
-//     },
-//     tableWrapper: {
-//         overflowX: "auto"
-//     }
-// });
-
 interface DispositivoProps {
     classes?: any;
     theme?: Theme;
@@ -37,27 +20,32 @@ interface DispositivoProps {
 
 let counter = 0;
 
-const createData = (name: string, calories: number, fat: number) => {
+const createData = (
+    name: string,
+    calories: number,
+    fat: number,
+    carbs: any
+) => {
     counter += 1;
-    return { id: counter, name, calories, fat };
+    return { id: counter, name, calories, fat, carbs };
 };
 
 class DispositivoTable extends Component<DispositivoProps, {}> {
     state = {
         rows: [
-            createData("Cupcake", 305, 3.7),
-            createData("Donut", 452, 25.0),
-            createData("Eclair", 262, 16.0),
-            createData("Frozen yoghurt", 159, 6.0),
-            createData("Gingerbread", 356, 16.0),
-            createData("Honeycomb", 408, 3.2),
-            createData("Ice cream sandwich", 237, 9.0),
-            createData("Jelly Bean", 375, 0.0),
-            createData("KitKat", 518, 26.0),
-            createData("Lollipop", 392, 0.2),
-            createData("Marshmallow", 318, 0),
-            createData("Nougat", 360, 19.0),
-            createData("Oreo", 437, 18.0)
+            createData("Cupcake", 305, 3.7, 3.7),
+            createData("Donut", 452, 25.0, 3.7),
+            createData("Eclair", 262, 16.0, 3.7),
+            createData("Frozen yoghurt", 159, 6.0, 3.7),
+            createData("Gingerbread", 356, 16, 3.7),
+            createData("Honeycomb", 408, 3.2, 3.7),
+            createData("Ice cream sandwich", 237, 9.0, 3.7),
+            createData("Jelly Bean", 375, 0.0, 3.7),
+            createData("KitKat", 518, 26.0, 3.7),
+            createData("Lollipop", 392, 0.2, 3.7),
+            createData("Marshmallow", 318, 0, 3.7),
+            createData("Nougat", 360, 19.0, 3.7),
+            createData("Oreo", 437, 18.0, 3.7)
         ].sort((a, b) => (a.calories < b.calories ? -1 : 1)),
         page: 0,
         rowsPerPage: 10
@@ -89,6 +77,53 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
             >
                 <div>
                     <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontFamily: "Montserrat",
+                                        fontSize: "0.9rem",
+                                        color: "#999999"
+                                    }}
+                                >
+                                    Nome do Dispositivo
+                                </TableCell>
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontFamily: "Montserrat",
+                                        fontSize: "0.9rem",
+                                        color: "#999999"
+                                    }}
+                                    align="right"
+                                >
+                                    Latitude
+                                </TableCell>
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontFamily: "Montserrat",
+                                        fontSize: "0.9rem",
+                                        color: "#999999"
+                                    }}
+                                    align="right"
+                                >
+                                    Longitude
+                                </TableCell>
+                                <TableCell
+                                    style={{
+                                        textAlign: "start",
+                                        fontFamily: "Montserrat",
+                                        fontSize: "0.9rem",
+                                        color: "#999999"
+                                    }}
+                                    align="right"
+                                >
+                                    Quantidade de Sensores
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
                         <TableBody>
                             {rows
                                 .slice(
@@ -112,9 +147,9 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                         <TableCell
                                             style={{
                                                 textAlign: "start",
-                                                fontFamily: "Montserrat",
                                                 fontSize: "0.9rem",
-                                                color: "#999999"
+                                                fontWeight: 500,
+                                                color: "black"
                                             }}
                                             align="right"
                                         >
@@ -123,13 +158,24 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                         <TableCell
                                             style={{
                                                 textAlign: "start",
-                                                fontFamily: "Montserrat",
                                                 fontSize: "0.9rem",
-                                                color: "#999999"
+                                                fontWeight: 500,
+                                                color: "black"
                                             }}
                                             align="right"
                                         >
                                             {row.fat}
+                                        </TableCell>
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontSize: "0.9rem",
+                                                fontWeight: 500,
+                                                color: "black"
+                                            }}
+                                            align="right"
+                                        >
+                                            {row.carbs}
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -165,5 +211,4 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
     }
 }
 
-// export default withStyles(styles)(DispositivoTable);
 export default DispositivoTable;
