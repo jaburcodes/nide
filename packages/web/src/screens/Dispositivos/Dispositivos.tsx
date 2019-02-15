@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 
-import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Modal from "react-modal";
 
 import StyledDispositivos from "../../utils/components/Dispositivos/Dispositivos";
 import Wrapper from "../../utils/components/Dispositivos/Wrapper/Wrapper";
-import TableWrapper from "./Table/Table";
 import AddDispositivoForm from "./AddDispositivo/AddDispositivo";
 
-import DispositivoTable from './Tables/Table';
+import DispositivoTable from "./Tables/Table";
 
 import Title from "../../utils/styles/Title/Title";
 
@@ -60,7 +58,7 @@ const Home = ({ history }: any) => {
                 <Title style={{ alignSelf: "center" }} color="black">
                     Dispositivos
                 </Title>
-               <DispositivoTable />
+                <DispositivoTable />
                 <Fab
                     onClick={() => handleOpen()}
                     style={{

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from "history";
 
 import HomeWrapper from "./screens/Home/HomeWrapper";
 

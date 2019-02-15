@@ -11,6 +11,11 @@ import Paper from "@material-ui/core/Paper";
 
 import PaginationWrapped from "./Pagination";
 
+import {
+    tableCellStyle,
+    tableRowStyle
+} from "../../../utils/styles/Table/Table";
+
 // const styles = (theme: Theme) => ({
 //     root: {
 //         width: "100%",
@@ -27,6 +32,7 @@ import PaginationWrapped from "./Pagination";
 interface DispositivoProps {
     classes?: any;
     theme?: Theme;
+    style?: React.CSSProperties;
 }
 
 let counter = 0;
@@ -54,7 +60,7 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
             createData("Oreo", 437, 18.0)
         ].sort((a, b) => (a.calories < b.calories ? -1 : 1)),
         page: 0,
-        rowsPerPage: 5
+        rowsPerPage: 10
     };
 
     handleChangePage = (event: any, page: any) => {
@@ -66,7 +72,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
     };
 
     render() {
-        const { classes } = this.props;
         const { rows, rowsPerPage, page } = this.state;
         const emptyRows =
             rowsPerPage -
@@ -92,13 +97,38 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                 )
                                 .map(row => (
                                     <TableRow key={row.id}>
-                                        <TableCell component="th" scope="row">
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontSize: "0.9rem",
+                                                fontWeight: 500,
+                                                color: "black"
+                                            }}
+                                            component="th"
+                                            scope="row"
+                                        >
                                             {row.name}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontFamily: "Montserrat",
+                                                fontSize: "0.9rem",
+                                                color: "#999999"
+                                            }}
+                                            align="right"
+                                        >
                                             {row.calories}
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontFamily: "Montserrat",
+                                                fontSize: "0.9rem",
+                                                color: "#999999"
+                                            }}
+                                            align="right"
+                                        >
                                             {row.fat}
                                         </TableCell>
                                     </TableRow>
@@ -112,7 +142,7 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                         <TableFooter>
                             <TableRow>
                                 <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25]}
+                                    rowsPerPageOptions={[5, 10]}
                                     colSpan={3}
                                     count={rows.length}
                                     rowsPerPage={rowsPerPage}
