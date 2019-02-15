@@ -10,6 +10,8 @@ import Wrapper from "../../utils/components/Dispositivos/Wrapper/Wrapper";
 import TableWrapper from "./Table/Table";
 import AddDispositivoForm from "./AddDispositivo/AddDispositivo";
 
+import DispositivoTable from './Tables/Table';
+
 import Title from "../../utils/styles/Title/Title";
 
 const customStyles = {
@@ -58,17 +60,7 @@ const Home = ({ history }: any) => {
                 <Title style={{ alignSelf: "center" }} color="black">
                     Dispositivos
                 </Title>
-                <Paper
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        gridRow: "2 / 3",
-                        boxShadow: "0",
-                        borderRadius: "0"
-                    }}
-                >
-                    <TableWrapper rows={rows} />
-                </Paper>
+               <DispositivoTable />
                 <Fab
                     onClick={() => handleOpen()}
                     style={{
