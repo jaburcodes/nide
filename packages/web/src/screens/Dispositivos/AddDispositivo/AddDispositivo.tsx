@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 
@@ -91,7 +91,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 onBlur={handleBlur}
                 value={values.alarme}
             />
-            {touched.alarme && errors.alarme && <Error>{errors.alarme}</Error>}
+            {touched.alarme && errors.alarme && <Error>Alarme inválido.</Error>}
 
             <Input
                 style={{ marginTop: "25px" }}
@@ -103,7 +103,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 value={values.latitude}
             />
             {touched.latitude && errors.latitude && (
-                <Error>{errors.latitude}</Error>
+                <Error>Latitude inválida.</Error>
             )}
 
             <Input
@@ -116,7 +116,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 value={values.longitude}
             />
             {touched.longitude && errors.longitude && (
-                <Error>{errors.longitude}</Error>
+                <Error>Longitude inválida.</Error>
             )}
 
             <FormControl style={{ width: "100%" }}>
