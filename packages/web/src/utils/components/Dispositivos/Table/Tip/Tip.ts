@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 interface TipProps {
-    background: string;
+    background?: string;
+    width?: number;
 }
 
 const Tip = styled.p<TipProps>`
-    width: 100%;
+    width: ${props => props.width || 100}%;
     height: 24px;
     display: flex;
     align-items: center;

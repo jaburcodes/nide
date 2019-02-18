@@ -56,7 +56,9 @@ const MapDetail: React.FC<DetailProps> = ({
 
         <Wrapper>
             <Title color="black">Nível de Alarme</Title>
-            <Tip background="#2ECC71">{pointNivel}</Tip>
+            <Tip background="#2ECC71" width={60}>
+                {pointNivel}
+            </Tip>
         </Wrapper>
 
         <Wrapper>
