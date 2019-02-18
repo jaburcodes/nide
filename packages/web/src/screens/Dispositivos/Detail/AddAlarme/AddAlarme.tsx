@@ -66,9 +66,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 {touched.aceitavel &&
                     touched.aceitavel.min &&
                     errors.aceitavel &&
-                    errors.aceitavel.min && (
-                        <Error>Mínimo inválido.</Error>
-                    )}
+                    errors.aceitavel.min && <Error>Mínimo inválido.</Error>}
 
                 <Input
                     width={45}
@@ -83,9 +81,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 {touched.aceitavel &&
                     touched.aceitavel.max &&
                     errors.aceitavel &&
-                    errors.aceitavel.max && (
-                        <Error>Máximo inválido.</Error>
-                    )}
+                    errors.aceitavel.max && <Error>Máximo inválido.</Error>}
             </AlarmeWrapper>
 
             <Label>Nível Emergencial</Label>
@@ -103,9 +99,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 {touched.emergencial &&
                     touched.emergencial.min &&
                     errors.emergencial &&
-                    errors.emergencial.min && (
-                        <Error>Mínimo inválido.</Error>
-                    )}
+                    errors.emergencial.min && <Error>Mínimo inválido.</Error>}
 
                 <Input
                     width={45}
@@ -120,9 +114,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 {touched.emergencial &&
                     touched.emergencial.max &&
                     errors.emergencial &&
-                    errors.emergencial.max && (
-                        <Error>Máximo inválido.</Error>
-                    )}
+                    errors.emergencial.max && <Error>Máximo inválido.</Error>}
             </AlarmeWrapper>
 
             <Label>Nível Perigoso</Label>
@@ -140,9 +132,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 {touched.perigoso &&
                     touched.perigoso.min &&
                     errors.perigoso &&
-                    errors.perigoso.min && (
-                        <Error>Mínimo inválido.</Error>
-                    )}
+                    errors.perigoso.min && <Error>Mínimo inválido.</Error>}
 
                 <Input
                     width={45}
@@ -157,9 +147,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 {touched.perigoso &&
                     touched.perigoso.max &&
                     errors.perigoso &&
-                    errors.perigoso.max && (
-                        <Error>Máximo inválido.</Error>
-                    )}
+                    errors.perigoso.max && <Error>Máximo inválido.</Error>}
             </AlarmeWrapper>
             <Wrapper style={{ justifyContent: "center", marginTop: "25px" }}>
                 <Button

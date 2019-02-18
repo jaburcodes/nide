@@ -6,9 +6,8 @@ import StyledHomeWrapper from "../../../utils/components/Home/Home";
 import Intro from "../../../utils/components/Home/Map/Intro/Intro";
 import Wrapper from "../../../utils/components/Home/Map/Wrapper/Wrapper";
 
-import Title from "../../../utils/styles/Title/Title";
-
 import Markers from "./Markers/Markers";
+import MapDetail from "./MapDetail";
 
 interface Props {
     lat: number;
@@ -27,9 +26,13 @@ const MapHome: React.FC<Props> = props => {
         <StyledHomeWrapper>
             <Intro>
                 <Wrapper>
-                    <Title color="black" fontSize={1.4}>
-                        Para iniciar, selecione um ponto.
-                    </Title>
+                    <MapDetail
+                        pointName="Ponto ACME Ltda."
+                        pointAddress="Av. Dr. Guilherme Jabur"
+                        pointNivel="Aceitável"
+                        pointX={0.394}
+                        pointY={0.452}
+                    />
                 </Wrapper>
             </Intro>
             <Map center={center} zoom={zoom}>
