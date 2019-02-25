@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.ts",
     "scripts": {
-        "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts"
+        "start": "ts-node ./src/index.ts",
+        "dev": "nodemon"
     },
     "author": "",
     "license": "ISC",
@@ -15,7 +16,9 @@
         "graphql": "^14.0.2",
         "jsonwebtoken": "^8.4.0",
         "mongoose": "^5.4.4",
-        "ts-node": "^7.0.1",
+        "mysql": "^2.16.0",
+        "nodemon": "^1.18.10",
+        "ts-node": "^8.0.2",
         "typescript": "^3.2.2"
     },
     "devDependencies": {

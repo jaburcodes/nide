@@ -1,6 +1,7 @@
 import { ApolloServer, PubSub } from "apollo-server";
 import { GraphQLSchema, GraphQLObjectType, GraphQLString } from "graphql";
 import * as dotenv from "dotenv";
+import mysql from "mysql";
 
 import rootQuery from "./modules/rootQuery";
 import rootMutation from "./modules/rootMutation";
@@ -12,7 +13,29 @@ const pubsub = new PubSub();
 
 dotenv.config();
 
-connectToMongo();
+// connectToMongo();
+
+var connection = mysql.createConnection({
+    host: "18.231.168.31",
+    port: "3306",
+    user: "root",
+    password: "Vini15964730!",
+    database: "scada"
+});
+
+connection.connect(function(err) {
+    if (err) {
+        console.error("Erro ao conectar: " + err.stack);
+        return;
+    }
+
+    console.log("Conectado!!!!!!! at " + connection.threadId);
+});
+
+connection.query("SHOW TABLES", function(error, results, fields) {
+    if (error) throw error;
+    console.log("The solution is: ", results[0].solution);
+});
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
