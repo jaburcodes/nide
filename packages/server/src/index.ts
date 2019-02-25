@@ -13,7 +13,7 @@ const pubsub = new PubSub();
 
 dotenv.config();
 
-// connectToMongo();
+connectToMongo();
 
 var connection = mysql.createConnection({
     host: "18.231.168.31",
@@ -29,13 +29,46 @@ connection.connect(function(err) {
         return;
     }
 
-    console.log("Conectado!!!!!!! at " + connection.threadId);
+    console.log("MySQL connected at " + connection.threadId);
 });
 
-connection.query("SHOW TABLES", function(error, results, fields) {
+// Mostra todos dispositivos disponíveis.
+connection.query("SELECT * FROM datasources", (error, results, fields) => {
     if (error) throw error;
-    console.log("The solution is: ", results[0].solution);
+    console.log(
+        "Dispositivos -> ",
+        results.map(({ id, xid, name, dataSourceType }) => {
+            return {
+                id,
+                xid,
+                name,
+                dataSourceType
+            };
+        })
+    );
 });
+
+// Mostrar todos os sensores do dispositivo.
+connection.query("SELECT * FROM datapoints", (error, results, fields) => {
+    if (error) throw error;
+    console.log(
+        "Sensores dos dispositivos -> ",
+        results.map(({ id, xid, dataSourceId }) => {
+            return {
+                id,
+                xid,
+                dataSourceId
+            };
+        })
+    );
+});
+
+// // Lê os valores dos sensores.
+// // Ele cria um novo campo toda vez que é transmitido.
+// connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
+//     if (error) throw error;
+//     console.log("The solution is: ", results);
+// });
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
