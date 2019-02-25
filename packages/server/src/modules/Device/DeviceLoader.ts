@@ -1,4 +1,3 @@
 import DeviceModel from "./DeviceModel";
 
-export const Devices = (object, args, ctx) =>
-    DeviceModel.findOne({ id: args.id });
+export const Devices = (object, { id }, ctx) => DeviceModel.findOne({ id });
