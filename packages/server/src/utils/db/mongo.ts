@@ -19,6 +19,7 @@ const OPTS = {
 export const connectToMongo = async () => {
     if (!GLOBAL_CONN) {
         if (!MONGOURL) throw new Error("[mongo.ts] No URL provided.");
+        mongoose.set('useCreateIndex', true)
         GLOBAL_CONN = await mongoose.connect(MONGOURL, OPTS);
         console.info("[mongo] New connection created.");
     } else {

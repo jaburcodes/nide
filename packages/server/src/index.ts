@@ -23,11 +23,8 @@ var connection = mysql.createConnection({
     database: "scada"
 });
 
-connection.connect(function(err) {
-    if (err) {
-        console.error("Erro ao conectar: " + err.stack);
-        return;
-    }
+connection.connect(err => {
+    if (err) console.error("Erro ao conectar: " + err.stack);
 
     console.log("MySQL connected at " + connection.threadId);
 });
