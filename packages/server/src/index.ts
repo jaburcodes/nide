@@ -1,5 +1,5 @@
 import { ApolloServer, PubSub } from "apollo-server";
-import { GraphQLSchema, GraphQLObjectType, GraphQLString } from "graphql";
+import { GraphQLSchema, GraphQLObjectType } from "graphql";
 import * as dotenv from "dotenv";
 import mysql from "mysql";
 
@@ -10,6 +10,7 @@ import { connectToMongo } from "./utils/db/mongo";
 import { getUser } from "./utils/auth/authMethods";
 
 import DeviceModel from "./modules/Device/DeviceModel";
+import SensorModel from "./modules/Sensor/SensorModel";
 
 const pubsub = new PubSub();
 
@@ -54,16 +55,16 @@ connection.query("SELECT * FROM datasources", (error, results, fields) => {
 // Mostrar todos os sensores do dispositivo.
 connection.query("SELECT * FROM datapoints", (error, results, fields) => {
     if (error) throw error;
-    console.log(
-        "Sensores dos dispositivos -> ",
-        results.map(({ id, xid, dataSourceId }) => {
-            return {
-                id,
-                xid,
-                dataSourceId
-            };
-        })
-    );
+    results.map(({ xid, dataSourceId }) => {
+        const newSensor = new SensorModel({
+            xid,
+            dataSourceId
+        });
+
+        newSensor.save((err, res) => {
+            err ? err : console.log("SUCCESS", res);
+        });
+    });
 });
 
 // // Lê os valores dos sensores.
