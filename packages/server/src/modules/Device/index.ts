@@ -10,7 +10,7 @@ import DeviceType from "./DeviceType";
 import * as Loader from "./DeviceLoader";
 
 export const queries = {
-    devices: {
+    device: {
         type: DeviceType,
         args: {
             id: {
@@ -18,5 +18,5 @@ export const queries = {
             }
         },
         resolve: Loader.Device
-    },
+    }
 };

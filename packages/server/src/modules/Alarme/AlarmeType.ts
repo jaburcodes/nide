@@ -19,7 +19,7 @@ const AlarmeType = new GraphQLObjectType({
             max: {
                 type: GraphQLInt,
                 resolve: o => o.max
-            }            
+            }
         },
         emergencial: {
             type: GraphQLInt,
@@ -30,7 +30,7 @@ const AlarmeType = new GraphQLObjectType({
             max: {
                 type: GraphQLInt,
                 resolve: o => o.max
-            }            
+            }
         },
         perigoso: {
             type: GraphQLInt,
@@ -41,7 +41,7 @@ const AlarmeType = new GraphQLObjectType({
             max: {
                 type: GraphQLInt,
                 resolve: o => o.max
-            }            
+            }
         }
     }
 });

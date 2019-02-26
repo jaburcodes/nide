@@ -6,17 +6,17 @@ import {
     GraphQLInputObjectType
 } from "graphql";
 
-import DeviceType from "./AlarmeType";
+import AlarmeType from "./AlarmeType";
 import * as Loader from "./AlarmeLoader";
 
 export const queries = {
-    devices: {
-        type: DeviceType,
+    alarme: {
+        type: AlarmeType,
         args: {
             id: {
                 type: GraphQLNonNull(GraphQLID)
             }
         },
-        resolve: Loader.Device
-    },
+        resolve: Loader.Alarme
+    }
 };

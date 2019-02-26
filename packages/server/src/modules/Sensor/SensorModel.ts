@@ -13,6 +13,10 @@ const schema = new Schema({
     dataSourceId: {
         type: Schema.Types.ObjectId,
         ref: "Device"
+    },
+    alarme: {
+        type: Schema.Types.ObjectId,
+        ref: "Alarme"
     }
 });
 
