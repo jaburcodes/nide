@@ -2,6 +2,7 @@ import {
     GraphQLNonNull,
     GraphQLID,
     GraphQLInt,
+    GraphQLList,
     GraphQLString,
     GraphQLInputObjectType
 } from "graphql";
@@ -18,5 +19,9 @@ export const queries = {
             }
         },
         resolve: Loader.Sensor
+    },
+    sensores: {
+        type: GraphQLList(SensorType),
+        resolve: Loader.Sensores
     }
 };

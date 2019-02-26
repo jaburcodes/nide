@@ -1,5 +1,4 @@
 import {
-    GraphQLID,
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
@@ -35,9 +34,9 @@ const DeviceType = new GraphQLObjectType({
             type: GraphQLInt,
             resolve: o => o.longitude
         },
-        sensor: {
+        sensores: {
             type: GraphQLList(SensorType),
-            resolve: o => o.sensor
+            resolve: o => o.sensores
         }
     }
 });

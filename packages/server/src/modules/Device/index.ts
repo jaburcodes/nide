@@ -2,6 +2,7 @@ import {
     GraphQLNonNull,
     GraphQLID,
     GraphQLInt,
+    GraphQLList,
     GraphQLString,
     GraphQLInputObjectType
 } from "graphql";
@@ -20,7 +21,7 @@ export const queries = {
         resolve: Loader.Device
     },
     devices: {
-        type: DeviceType,
+        type: GraphQLList(DeviceType),
         resolve: Loader.Devices
     }
 };

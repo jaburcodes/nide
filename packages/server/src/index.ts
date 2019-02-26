@@ -41,11 +41,13 @@ connection.query("SELECT * FROM datasources", (error, results, fields) => {
             dataSourceType
         });
 
-        return new Promise((resolve, reject) => {
+        if (DeviceModel.findOne({ xid })) {
+            console.log("Device already exists");
+        } else {
             newDevice.save((err, res) => {
-                err ? reject(err) : resolve(res);
+                err ? err : res;
             });
-        });
+        }
     });
 });
 
@@ -74,6 +76,7 @@ connection.query("SELECT * FROM datapoints", (error, results, fields) => {
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: "RootQueryType",
+        // @ts-ignore
         fields: {
             ...rootQuery
         }
