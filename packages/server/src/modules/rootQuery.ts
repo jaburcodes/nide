@@ -6,5 +6,6 @@ import * as Alarme from "./Alarme/index";
 export default {
     ...User.queries,
     ...Device.queries,
-    ...Sensor.queries
+    ...Sensor.queries,
+    ...Alarme.queries
 };

@@ -12,7 +12,7 @@ const SensorType = new GraphQLObjectType({
     fields: {
         _id: {
             type: GraphQLString,
-            resolve: o => o.id
+            resolve: o => o._id
         },
         xid: {
             type: GraphQLString,

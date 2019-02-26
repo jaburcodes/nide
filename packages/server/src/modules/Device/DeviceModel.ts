@@ -14,16 +14,22 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    dataSourceType: {
+        type: Number,
+        required: true
+    },
     latitude: {
         type: Number
     },
     longitude: {
         type: Number
     },
-    dataSourceType: {
-        type: Number,
-        required: true
-    }
+    sensores: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Sensor"
+        }
+    ]
 });
 
 const DeviceModel = model("Device", schema);
