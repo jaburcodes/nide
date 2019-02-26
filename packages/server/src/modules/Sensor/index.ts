@@ -13,8 +13,8 @@ export const queries = {
     sensor: {
         type: SensorType,
         args: {
-            id: {
-                type: GraphQLNonNull(GraphQLID)
+            _id: {
+                type: GraphQLString
             }
         },
         resolve: Loader.Sensor

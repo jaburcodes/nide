@@ -9,6 +9,8 @@ import rootMutation from "./modules/rootMutation";
 import { connectToMongo } from "./utils/db/mongo";
 import { getUser } from "./utils/auth/authMethods";
 
+import DeviceModel from "./modules/Device/DeviceModel";
+
 const pubsub = new PubSub();
 
 dotenv.config();
@@ -32,17 +34,19 @@ connection.connect(err => {
 // Mostra todos dispositivos disponíveis.
 connection.query("SELECT * FROM datasources", (error, results, fields) => {
     if (error) throw error;
-    console.log(
-        "Dispositivos -> ",
-        results.map(({ id, xid, name, dataSourceType }) => {
-            return {
-                id,
-                xid,
-                name,
-                dataSourceType
-            };
-        })
-    );
+    results.map(({ xid, name, dataSourceType }) => {
+        const newDevice = new DeviceModel({
+            xid,
+            name,
+            dataSourceType
+        });
+
+        return new Promise((resolve, reject) => {
+            newDevice.save((err, res) => {
+                err ? reject(err) : resolve(res);
+            });
+        });
+    });
 });
 
 // Mostrar todos os sensores do dispositivo.

@@ -10,8 +10,8 @@ import AlarmeType from "../Alarme/AlarmeType";
 const SensorType = new GraphQLObjectType({
     name: "SensorType",
     fields: {
-        id: {
-            type: GraphQLID,
+        _id: {
+            type: GraphQLString,
             resolve: o => o.id
         },
         xid: {

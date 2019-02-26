@@ -13,10 +13,14 @@ export const queries = {
     device: {
         type: DeviceType,
         args: {
-            id: {
-                type: GraphQLNonNull(GraphQLID)
+            _id: {
+                type: GraphQLString
             }
         },
         resolve: Loader.Device
+    },
+    devices: {
+        type: DeviceType,
+        resolve: Loader.Devices
     }
 };

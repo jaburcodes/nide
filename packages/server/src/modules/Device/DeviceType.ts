@@ -8,9 +8,9 @@ import {
 const DeviceType = new GraphQLObjectType({
     name: "DeviceType",
     fields: {
-        id: {
-            type: GraphQLID,
-            resolve: o => o.id
+        _id: {
+            type: GraphQLString,
+            resolve: o => o._id
         },
         xid: {
             type: GraphQLString,

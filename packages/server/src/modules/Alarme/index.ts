@@ -13,10 +13,14 @@ export const queries = {
     alarme: {
         type: AlarmeType,
         args: {
-            id: {
-                type: GraphQLNonNull(GraphQLID)
+            _id: {
+                type: GraphQLString
             }
         },
         resolve: Loader.Alarme
+    },
+    alarmes: {
+        type: AlarmeType,
+        resolve: Loader.Alarmes
     }
 };
