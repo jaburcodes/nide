@@ -6,8 +6,8 @@ import {
     GraphQLInputObjectType
 } from "graphql";
 
-import DeviceType from "./DeviceType";
-import * as Loader from "./DeviceLoader";
+import DeviceType from "./AlarmeType";
+import * as Loader from "./AlarmeLoader";
 
 export const queries = {
     devices: {

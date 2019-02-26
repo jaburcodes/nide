@@ -6,10 +6,6 @@ ObjectID.prototype.valueOf = function() {
 };
 
 const schema = new Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     xid: {
         type: String,
         required: true

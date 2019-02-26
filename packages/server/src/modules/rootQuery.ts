@@ -1,7 +1,8 @@
-import * as User from "./User/index";
+import * as User from "./user/index";
 import * as Device from "./Device/index";
 import * as Sensor from "./Sensor/index";
 
 export default {
-    ...User.queries
+    ...User.queries,
+    ...Device.queries
 };

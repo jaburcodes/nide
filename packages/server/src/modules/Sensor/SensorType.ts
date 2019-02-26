@@ -17,7 +17,7 @@ const SensorType = new GraphQLObjectType({
             resolve: o => o.xid
         },
         dataSourceId: {
-            type: GraphQLInt,
+            type: GraphQLID,
             resolve: o => o.dataSourceId
         }
     }

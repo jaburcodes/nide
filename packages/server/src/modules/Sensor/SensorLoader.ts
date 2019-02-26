@@ -1,3 +1,3 @@
 import SensorModel from "./SensorModel";
 
-export const Sensor = (object, { id }, ctx) => SensorModel.findOne({ id });
+export const Sensor = (object, args, ctx) => SensorModel.findOne({ id: args.id });

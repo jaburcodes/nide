@@ -1,7 +1,11 @@
-import * as mongoose from "mongoose";
-// import * as bcrypt from 'bcryptjs';
+import { Schema, model } from "mongoose";
+import { ObjectID } from "mongodb";
 
-const schema = new mongoose.Schema(
+ObjectID.prototype.valueOf = function() {
+    return this.toString();
+};
+
+const schema = new Schema(
     {
         name: {
             type: String,
@@ -26,6 +30,6 @@ const schema = new mongoose.Schema(
     }
 );
 
-const UserModel = mongoose.model("User", schema);
+const UserModel = model("User", schema);
 
 export default UserModel;
