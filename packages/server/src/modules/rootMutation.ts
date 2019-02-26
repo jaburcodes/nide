@@ -1,4 +1,4 @@
-import * as User from "./user/index";
+import * as User from "./User/index";
 
 export default {
     ...User.mutations
