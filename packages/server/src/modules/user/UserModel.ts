@@ -1,11 +1,13 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
+
+const Schema = mongoose.Schema;
 
 ObjectID.prototype.valueOf = function() {
     return this.toString();
 };
 
-const schema = new Schema(
+const UserSchema = new Schema(
     {
         name: {
             type: String,
@@ -30,6 +32,6 @@ const schema = new Schema(
     }
 );
 
-const UserModel = model("User", schema);
+const UserModel = mongoose.model("User", UserSchema);
 
 export default UserModel;

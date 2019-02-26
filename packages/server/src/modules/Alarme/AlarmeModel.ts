@@ -1,11 +1,13 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
+
+const Schema = mongoose.Schema;
 
 ObjectID.prototype.valueOf = function() {
     return this.toString();
 };
 
-const schema = new Schema({
+const AlarmeSchema = new Schema({
     aceitavel: {
         min: {
             type: Number
@@ -32,6 +34,6 @@ const schema = new Schema({
     }
 });
 
-const AlarmeModel = model("Alarme", schema);
+const AlarmeModel = mongoose.model("Alarme", AlarmeSchema);
 
 export default AlarmeModel;

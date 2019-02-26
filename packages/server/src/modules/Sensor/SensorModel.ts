@@ -1,11 +1,13 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
+
+const Schema = mongoose.Schema;
 
 ObjectID.prototype.valueOf = function() {
     return this.toString();
 };
 
-const schema = new Schema({
+const SensorSchema = new Schema({
     xid: {
         type: String,
         required: true
@@ -20,6 +22,6 @@ const schema = new Schema({
     }
 });
 
-const SensorModel = model("Sensor", schema);
+const SensorModel = mongoose.model("Sensor", SensorSchema);
 
 export default SensorModel;
