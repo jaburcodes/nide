@@ -42,5 +42,20 @@ export const mutations = {
             }
         },
         resolve: Loader.addDevice
+    },
+    updateDevice: {
+        type: DeviceType,
+        args: {
+            name: {
+                type: GraphQLString
+            },
+            latitude: {
+                type: GraphQLFloat
+            },
+            longitude: {
+                type: GraphQLFloat
+            }
+        },
+        resolve: Loader.addDevice
     }
 };

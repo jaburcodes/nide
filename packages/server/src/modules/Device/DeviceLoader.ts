@@ -15,3 +15,11 @@ export const addDevice = (object, { name, latitude, longitude }, ctx) => {
         { new: true }
     ).exec();
 };
+
+export const updateDevice = (object, { name, latitude, longitude }, ctx) => {
+    DeviceModel.findOneAndUpdate(
+        name,
+        { $set: { latitude, longitude } },
+        { new: true }
+    ).exec();
+};
