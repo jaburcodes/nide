@@ -11,6 +11,7 @@ const { MONGOURL } = process.env;
 // disconnected from MongoDB and send them when it reconnects.
 // With serverless, better to fail fast if not connected.
 const OPTS = {
+    useCreateIndex: true,
     useNewUrlParser: true, // New parser required
     bufferCommands: false, // Disable mongoose buffering
     bufferMaxEntries: 0 // Disable MongoDB driver buffering
@@ -19,7 +20,6 @@ const OPTS = {
 export const connectToMongo = async () => {
     if (!GLOBAL_CONN) {
         if (!MONGOURL) throw new Error("[mongo.ts] No URL provided.");
-        mongoose.set('useCreateIndex', true)
         GLOBAL_CONN = await mongoose.connect(MONGOURL, OPTS);
         console.info("[mongo] New connection created.");
     } else {
