@@ -2,7 +2,8 @@ import {
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLFloat
 } from "graphql";
 
 import SensorType from "../Sensor/SensorType";
@@ -27,11 +28,11 @@ const DeviceType = new GraphQLObjectType({
             resolve: o => o.dataSourceType
         },
         latitude: {
-            type: GraphQLInt,
+            type: GraphQLFloat,
             resolve: o => o.latitude
         },
         longitude: {
-            type: GraphQLInt,
+            type: GraphQLFloat,
             resolve: o => o.longitude
         },
         sensores: {

@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
+import Float from "mongoose-float";
+
+Float.loadType(mongoose);
 
 const Schema = mongoose.Schema;
 
@@ -21,10 +24,10 @@ const DeviceSchema = new Schema({
         required: true
     },
     latitude: {
-        type: Number
+        type: Float
     },
     longitude: {
-        type: Number
+        type: Float
     },
     sensores: [
         {

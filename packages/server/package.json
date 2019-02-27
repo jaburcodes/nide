@@ -17,6 +17,7 @@
         "jsonwebtoken": "^8.4.0",
         "mongodb": "^3.1.13",
         "mongoose": "^5.4.4",
+        "mongoose-float": "^1.0.3",
         "mysql": "^2.16.0",
         "nodemon": "^1.18.10",
         "ts-node": "^8.0.2",

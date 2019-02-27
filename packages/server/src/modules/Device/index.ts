@@ -2,6 +2,7 @@ import {
     GraphQLNonNull,
     GraphQLID,
     GraphQLInt,
+    GraphQLFloat,
     GraphQLList,
     GraphQLString,
     GraphQLInputObjectType
@@ -23,5 +24,23 @@ export const queries = {
     devices: {
         type: GraphQLList(DeviceType),
         resolve: Loader.Devices
+    }
+};
+
+export const mutations = {
+    addDevice: {
+        type: DeviceType,
+        args: {
+            name: {
+                type: GraphQLString
+            },
+            latitude: {
+                type: GraphQLFloat
+            },
+            longitude: {
+                type: GraphQLFloat
+            }
+        },
+        resolve: Loader.addDevice
     }
 };

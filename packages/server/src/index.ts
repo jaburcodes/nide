@@ -62,7 +62,7 @@ connection.query("SELECT * FROM datapoints", (error, results, fields) => {
         });
 
         newSensor.save((err, res) => {
-            err ? err : console.log("SUCCESS", res);
+            err ? err : res;
         });
     });
 });
@@ -84,6 +84,7 @@ const schema = new GraphQLSchema({
     }),
     mutation: new GraphQLObjectType({
         name: "RootMutationType",
+        // @ts-ignore
         fields: {
             ...rootMutation
         }

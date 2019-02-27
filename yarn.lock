@@ -7997,6 +7997,11 @@ mongodb@3.1.13, mongodb@^3.1.13:
     mongodb-core "3.1.11"
     safe-buffer "^5.1.2"
 
+mongoose-float@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/mongoose-float/-/mongoose-float-1.0.3.tgz#cc7bf6aad46014cbf5b49360fb3103e1a9c37325"
+  integrity sha512-LEUOlCHRKmLi7McP3CJsSjxeLMdQxGD7KZE/IuwXWArUNjlGDDcivo3kPBpH9q9M7hGhJW6pD8vVZS8lYExklg==
+
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
