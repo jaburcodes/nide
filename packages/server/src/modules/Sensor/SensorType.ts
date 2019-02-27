@@ -1,9 +1,12 @@
 import {
     GraphQLID,
+    GraphQLList,
     GraphQLObjectType,
     GraphQLString,
     GraphQLInt
 } from "graphql";
+
+import AlarmeType from "../Alarme/AlarmeType";
 
 const SensorType = new GraphQLObjectType({
     name: "SensorType",
@@ -20,8 +23,8 @@ const SensorType = new GraphQLObjectType({
             type: GraphQLID,
             resolve: o => o.dataSourceId
         },
-        alarme: {
-            type: GraphQLString,
+        alarmes: {
+            type: GraphQLList(AlarmeType),
             resolve: o => o.alarme
         }
     }

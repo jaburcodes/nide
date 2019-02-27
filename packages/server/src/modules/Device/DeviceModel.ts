@@ -7,9 +7,9 @@ Float.loadType(mongoose);
 
 const Schema = mongoose.Schema;
 
-ObjectID.prototype.valueOf = function() {
-    return this.toString();
-};
+// ObjectID.prototype.valueOf = function() {
+//     return this.toString();
+// };
 
 const DeviceSchema = new Schema(
     {

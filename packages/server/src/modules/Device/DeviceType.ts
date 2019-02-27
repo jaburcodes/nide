@@ -2,6 +2,7 @@ import {
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
+    GraphQLID,
     GraphQLInt,
     GraphQLFloat
 } from "graphql";
@@ -12,7 +13,7 @@ const DeviceType = new GraphQLObjectType({
     name: "DeviceType",
     fields: {
         _id: {
-            type: GraphQLString,
+            type: GraphQLID,
             resolve: o => o._id
         },
         xid: {

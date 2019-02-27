@@ -13,13 +13,15 @@ const SensorSchema = new Schema({
         required: true
     },
     dataSourceId: {
-        type: Schema.Types.ObjectId,
+        type: Number,
         ref: "Device"
     },
-    alarme: {
-        type: Schema.Types.ObjectId,
-        ref: "Alarme"
-    }
+    alarmes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Alarme"
+        }
+    ]
 });
 
 const SensorModel = mongoose.model("Sensor", SensorSchema);

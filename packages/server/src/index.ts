@@ -43,7 +43,7 @@ connection.query("SELECT * FROM datasources", (error, results, fields) => {
         });
 
         if (DeviceModel.findOne({ xid })) {
-            console.log("Device already exists");
+            console.log("Devices already exists");
         } else {
             newDevice.save((err, res) => {
                 err ? err : res;
@@ -62,9 +62,13 @@ connection.query("SELECT * FROM datapoints", (error, results, fields) => {
             dataSourceId
         });
 
-        newSensor.save((err, res) => {
-            err ? err : res;
-        });
+        if (SensorModel.findOne({ xid })) {
+            console.log("Sensors already exists");
+        } else {
+            newSensor.save((err, res) => {
+                err ? err : res;
+            });
+        }
     });
 });
 
