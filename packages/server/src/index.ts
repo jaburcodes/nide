@@ -55,6 +55,7 @@ connection.query("SELECT * FROM datasources", (error, results, fields) => {
 // Mostrar todos os sensores do dispositivo.
 connection.query("SELECT * FROM datapoints", (error, results, fields) => {
     if (error) throw error;
+    console.log(results);
     results.map(({ xid, dataSourceId }) => {
         const newSensor = new SensorModel({
             xid,
