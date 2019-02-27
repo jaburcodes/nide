@@ -12,6 +12,7 @@ import { getUser } from "./utils/auth/authMethods";
 
 import DeviceModel from "./modules/Device/DeviceModel";
 import SensorModel from "./modules/Sensor/SensorModel";
+import { Sensor } from "./modules/Sensor/SensorLoader";
 
 const pubsub = new PubSub();
 
@@ -78,10 +79,17 @@ connection.query("SELECT * FROM datapoints", (error, results, fields) => {
 connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
     if (error) throw error;
     // console.log(results);
-    results.map(({ dataPointId, dataType, pointValue, ts }) => {
-        const date = moment(ts).format("DD/MM/YYYY");
-        console.log({ dataPointId, dataType, pointValue, date });
-    });
+    const lastElement = results.pop();
+    console.log(lastElement);
+
+    const { dataPointId, dataType, pointValue, ts } = lastElement;
+    const date = moment(ts).format("DD/MM/YYYY");
+
+    SensorModel.findOneAndUpdate(
+        { dataSourceId: dataPointId },
+        { $set: { dataType, pointValue, date } },
+        { new: true }
+    ).exec();
 });
 
 const schema = new GraphQLSchema({

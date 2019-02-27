@@ -19,6 +19,18 @@ const SensorType = new GraphQLObjectType({
             type: GraphQLString,
             resolve: o => o.xid
         },
+        pointValue: {
+            type: GraphQLInt,
+            resolve: o => o.pointValue
+        },
+        date: {
+            type: GraphQLString,
+            resolve: o => o.date
+        },
+        dataType: {
+            type: GraphQLInt,
+            resolve: o => o.dataType
+        },
         dataSourceId: {
             type: GraphQLID,
             resolve: o => o.dataSourceId

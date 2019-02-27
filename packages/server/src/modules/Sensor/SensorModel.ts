@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
+import { number } from "prop-types";
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +12,15 @@ const SensorSchema = new Schema({
     xid: {
         type: String,
         required: true
+    },
+    pointValue: {
+        type: Number
+    },
+    date: {
+        type: String
+    },
+    dataType: {
+        type: Number
     },
     dataSourceId: {
         type: Number,
