@@ -1,4 +1,5 @@
 import DeviceModel from "./DeviceModel";
+import SensorModel from "../Sensor/SensorModel";
 
 export const Device = (object, { _id }, ctx) => DeviceModel.findById(_id);
 
@@ -23,3 +24,6 @@ export const updateDevice = (object, { name, latitude, longitude }, ctx) => {
         { new: true }
     ).exec();
 };
+
+export const Sensores = (object, { _id }, ctx) =>
+    SensorModel.find({ dataSourceId: _id });

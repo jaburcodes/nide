@@ -9,6 +9,7 @@ import {
 } from "graphql";
 
 import DeviceType from "./DeviceType";
+import SensorType from "../Sensor/SensorType";
 import * as Loader from "./DeviceLoader";
 
 export const queries = {
@@ -24,6 +25,15 @@ export const queries = {
     devices: {
         type: GraphQLList(DeviceType),
         resolve: Loader.Devices
+    },
+    deviceSensors: {
+        type: GraphQLList(SensorType),
+        args: {
+            _id: {
+                type: GraphQLString
+            }
+        },
+        resolve: Loader.Sensores
     }
 };
 

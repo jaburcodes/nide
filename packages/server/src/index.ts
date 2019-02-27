@@ -75,14 +75,14 @@ connection.query("SELECT * FROM datapoints", (error, results, fields) => {
 
 // Lê os valores dos sensores.
 // Ele cria um novo campo toda vez que é transmitido.
-connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
-    if (error) throw error;
-    console.log(results);
-    // results.map(({ dataPointId, dataType, pointValue, ts }) => {
-    //     const date = moment(ts).format("DD/MM/YYYY");
-    //     console.log({ dataPointId, dataType, pointValue, date });
-    // });
-});
+// connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
+//     if (error) throw error;
+//     console.log(results);
+//     // results.map(({ dataPointId, dataType, pointValue, ts }) => {
+//     //     const date = moment(ts).format("DD/MM/YYYY");
+//     //     console.log({ dataPointId, dataType, pointValue, date });
+//     // });
+// });
 
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({

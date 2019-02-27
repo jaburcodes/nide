@@ -8,6 +8,7 @@ import {
 } from "graphql";
 
 import SensorType from "../Sensor/SensorType";
+import * as Loader from "./DeviceLoader";
 
 const DeviceType = new GraphQLObjectType({
     name: "DeviceType",
@@ -35,10 +36,6 @@ const DeviceType = new GraphQLObjectType({
         longitude: {
             type: GraphQLFloat,
             resolve: o => o.longitude
-        },
-        sensores: {
-            type: GraphQLList(SensorType),
-            resolve: o => o.sensores
         }
     }
 });
