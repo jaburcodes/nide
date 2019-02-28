@@ -10,7 +10,7 @@ export const loginUser = gql`
 `;
 
 export const updateDevice = gql`
-    mutation updateDevice($name: String!, $latitude: Number!, $longitude: Number!) {
+    mutation updateDevice($name: String!, $latitude: String!, $longitude: String!) {
         updateDevice(name: $name, latitude: $latitude, longitude: $longitude) {
             _id
             xid

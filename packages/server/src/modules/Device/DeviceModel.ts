@@ -29,10 +29,10 @@ const DeviceSchema = new Schema(
             required: true
         },
         latitude: {
-            type: Number
+            type: String
         },
         longitude: {
-            type: Number
+            type: String
         },
         sensores: [
             {

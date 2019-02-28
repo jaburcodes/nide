@@ -20,8 +20,8 @@ import { updateDevice } from "../../../graphql/mutations";
 
 interface FormValues {
     name: string;
-    latitude: number;
-    longitude: number;
+    latitude: string;
+    longitude: string;
 }
 
 interface OtherProps {
@@ -142,8 +142,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
     validationSchema: Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
-        latitude: Yup.number().required("Latitude obrigatória"),
-        longitude: Yup.number().required("Longitude obrigatória")
+        latitude: Yup.string().required("Latitude obrigatória"),
+        longitude: Yup.string().required("Longitude obrigatória")
     }),
 
     handleSubmit(
@@ -159,8 +159,7 @@ const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
                 props.history.push("/dispositivos");
             })
             .catch((e: any) => {
-                const errors = e.graphQLErrors.map((err: any) => err.message);
-                console.log("error", errors);
+                // const errors = e.graphQLErrors.map((err: any) => err.message);
                 setSubmitting(false);
                 setErrors({ name: "", latitude: "", longitude: "" });
             });
