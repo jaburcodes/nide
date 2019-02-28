@@ -142,8 +142,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
     validationSchema: Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
-        latitude: Yup.string().required("Latitude obrigatória"),
-        longitude: Yup.string().required("Longitude obrigatória")
+        latitude: Yup.number().required("Latitude obrigatória"),
+        longitude: Yup.number().required("Longitude obrigatória")
     }),
 
     handleSubmit(
@@ -156,10 +156,9 @@ const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
             .updateDevice({ variables: { name, latitude, longitude } })
             .then((response: any) => {
                 console.log("SUCCESS BITCHh!!!!");
-                props.history.push("/dispositivos");
+                props.history.redirect("/dispositivos");
             })
             .catch((e: any) => {
-                // const errors = e.graphQLErrors.map((err: any) => err.message);
                 setSubmitting(false);
                 setErrors({ name: "", latitude: "", longitude: "" });
             });
