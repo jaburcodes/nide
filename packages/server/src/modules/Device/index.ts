@@ -45,10 +45,10 @@ export const mutations = {
                 type: GraphQLString
             },
             latitude: {
-                type: GraphQLFloat
+                type: GraphQLInt
             },
             longitude: {
-                type: GraphQLFloat
+                type: GraphQLInt
             }
         },
         resolve: Loader.updateDevice

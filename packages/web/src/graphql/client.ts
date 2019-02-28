@@ -6,7 +6,7 @@ import { createHttpLink } from "apollo-link-http";
 const cache = new InMemoryCache();
 
 const httpLink = createHttpLink({
-    uri: "http://localhost:4000/playground"
+    uri: "http://localhost:4000/graphql"
 });
 
 const authLink = setContext(async (_, { headers }) => {

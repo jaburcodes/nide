@@ -30,11 +30,11 @@ const DeviceType = new GraphQLObjectType({
             resolve: o => o.dataSourceType
         },
         latitude: {
-            type: GraphQLFloat,
+            type: GraphQLString,
             resolve: o => o.latitude
         },
         longitude: {
-            type: GraphQLFloat,
+            type: GraphQLString,
             resolve: o => o.longitude
         }
     }
