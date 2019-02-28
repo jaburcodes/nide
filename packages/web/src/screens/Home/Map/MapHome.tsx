@@ -16,8 +16,8 @@ interface Props {
 }
 
 const MapHome: React.FC<Props> = props => {
-    const [lat, setLat] = useState<number>(51.505);
-    const [lng, setLng] = useState<number>(-0.09);
+    const [lat, setLat] = useState<number>(-25.4809);
+    const [lng, setLng] = useState<number>(-49.3044);
     const [zoom, setZoom] = useState<number>(13);
 
     const center: L.LatLngExpression = [lat, lng];

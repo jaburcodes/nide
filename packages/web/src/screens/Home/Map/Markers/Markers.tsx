@@ -45,19 +45,19 @@ const Markers: React.FC = () => {
     const markers: MyMakers[] = [
         {
             key: "marker1",
-            position: [51.5, -0.1],
+            position: [-25.4825, -49.3042],
             children: "My first popup",
             icon: customRedMarkerIcon
         },
         {
             key: "marker2",
-            position: [51.51, -0.1],
+            position: [-25.4801, -49.3049],
             children: "My second popup",
             icon: customRedMarkerIcon
         },
         {
             key: "marker3",
-            position: [51.49, -0.05],
+            position: [-25.4816, -49.3040],
             children: "My third popup",
             icon: customRedMarkerIcon
         }
