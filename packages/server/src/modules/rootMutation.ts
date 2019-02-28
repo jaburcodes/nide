@@ -4,5 +4,6 @@ import * as Alarme from "./Alarme/index";
 
 export default {
     ...User.mutations,
-    ...Device.mutations
+    ...Device.mutations,
+    ...Alarme.mutations
 };
