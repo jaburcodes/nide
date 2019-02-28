@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
+import { graphql, compose } from "react-apollo";
 
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
@@ -15,8 +16,10 @@ import Input from "../../../utils/styles/Input/Input";
 import Title from "../../../utils/styles/Title/Title";
 import Error from "../../../utils/styles/Error/Error";
 
+import { updateDevice } from "../../../graphql/mutations";
+
 interface FormValues {
-    alarme: string;
+    name: string;
     latitude: number;
     longitude: number;
 }
@@ -30,15 +33,13 @@ interface OtherProps {
 interface MyFormProps {
     mutate?: any;
     history?: any;
+    updateDevice: (variables: any) => any;
 }
 
 interface InputType {}
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     const [porta1, setPorta1] = useState<string>("");
-    const [porta2, setPorta2] = useState<string>("");
-    const [porta3, setPorta3] = useState<string>("");
-    const [porta4, setPorta4] = useState<string>("");
     const [input, setInput] = useState<Array<InputType>>([]);
 
     const addNewInput = () => {
@@ -81,17 +82,17 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Title>Adicionar Dispositivo</Title>
+            <Title>Atualizar</Title>
             <Input
                 style={{ marginTop: "25px" }}
-                placeholder="Nome do Alarme"
+                placeholder="Nome"
                 type="text"
-                name="alarme"
+                name="name"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.alarme}
+                value={values.name}
             />
-            {touched.alarme && errors.alarme && <Error>Alarme inválido.</Error>}
+            {touched.name && errors.name && <Error>Nome inválido.</Error>}
 
             <Input
                 style={{ marginTop: "25px" }}
@@ -119,119 +120,18 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <Error>Longitude inválida.</Error>
             )}
 
-            <FormControl style={{ width: "100%" }}>
-                <InputLabel htmlFor="age-simple">Porta 1</InputLabel>
-                <Select
-                    value={porta1}
-                    onChange={e => setPorta1(e.target.value)}
-                    inputProps={{
-                        name: "Porta 1",
-                        id: "porta-1"
-                    }}
-                >
-                    <MenuItem value="">
-                        <em>Nenhuma</em>
-                    </MenuItem>
-                    <MenuItem value={"sensorX"}>
-                        Sensor de Inclinação X
-                    </MenuItem>
-                    <MenuItem value={"sensorY"}>
-                        Sensor de Inclinação Y
-                    </MenuItem>
-                    <MenuItem value={"sensorTensao"}>Sensor de Tensão</MenuItem>
-                </Select>
-            </FormControl>
-
-            <FormControl style={{ width: "100%", marginTop: "25px" }}>
-                <InputLabel htmlFor="age-simple">Porta 2</InputLabel>
-                <Select
-                    value={porta2}
-                    onChange={e => setPorta2(e.target.value)}
-                    inputProps={{
-                        name: "Porta 2",
-                        id: "porta-2"
-                    }}
-                >
-                    <MenuItem value="">
-                        <em>Nenhuma</em>
-                    </MenuItem>
-                    <MenuItem value={"sensorX"}>
-                        Sensor de Inclinação X
-                    </MenuItem>
-                    <MenuItem value={"sensorY"}>
-                        Sensor de Inclinação Y
-                    </MenuItem>
-                    <MenuItem value={"sensorTensao"}>Sensor de Tensão</MenuItem>
-                </Select>
-            </FormControl>
-
-            <FormControl style={{ width: "100%", marginTop: "25px" }}>
-                <InputLabel htmlFor="age-simple">Porta 3</InputLabel>
-                <Select
-                    value={porta3}
-                    onChange={e => setPorta3(e.target.value)}
-                    inputProps={{
-                        name: "Porta 3",
-                        id: "porta-3"
-                    }}
-                >
-                    <MenuItem value="">
-                        <em>Nenhuma</em>
-                    </MenuItem>
-                    <MenuItem value={"sensorX"}>
-                        Sensor de Inclinação X
-                    </MenuItem>
-                    <MenuItem value={"sensorY"}>
-                        Sensor de Inclinação Y
-                    </MenuItem>
-                    <MenuItem value={"sensorTensao"}>Sensor de Tensão</MenuItem>
-                </Select>
-            </FormControl>
-
-            <FormControl style={{ width: "100%", marginTop: "25px" }}>
-                <InputLabel htmlFor="age-simple">Porta 4</InputLabel>
-                <Select
-                    value={porta4}
-                    onChange={e => setPorta4(e.target.value)}
-                    inputProps={{
-                        name: "Porta 4",
-                        id: "porta-4"
-                    }}
-                >
-                    <MenuItem value="">
-                        <em>Nenhuma</em>
-                    </MenuItem>
-                    <MenuItem value={"sensorX"}>
-                        Sensor de Inclinação X
-                    </MenuItem>
-                    <MenuItem value={"sensorY"}>
-                        Sensor de Inclinação Y
-                    </MenuItem>
-                    <MenuItem value={"sensorTensao"}>Sensor de Tensão</MenuItem>
-                </Select>
-            </FormControl>
-
-            {input.map((input: any) => input)}
-
-            <Button
-                onClick={() => addNewInput()}
-                style={{ marginTop: "25px", color: "rgb(0, 167, 209)" }}
-            >
-                + Adicionar Porta
-            </Button>
-
             <Wrapper style={{ justifyContent: "center", marginTop: "25px" }}>
                 <Button
                     style={addDispositivoFormButton}
                     type="submit"
                     disabled={
                         isSubmitting ||
-                        !!(errors.alarme && touched.alarme) ||
+                        !!(errors.name && touched.name) ||
                         !!(errors.latitude && touched.latitude) ||
                         !!(errors.longitude && touched.longitude)
                     }
                 >
-                    Entrar
+                    Atualizar
                 </Button>
             </Wrapper>
         </Form>
@@ -241,18 +141,33 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 // Wrap our form with the using withFormik HoC
 const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
     validationSchema: Yup.object().shape({
-        alarme: Yup.string().required("Alarme is required"),
-        latitude: Yup.number().required("Latitude is required"),
-        longitude: Yup.number().required("Longitude is required")
+        name: Yup.string().required("Nome é obrigatório"),
+        latitude: Yup.number().required("Latitude obrigatória"),
+        longitude: Yup.number().required("Longitude obrigatória")
     }),
 
     handleSubmit(
-        { alarme, latitude, longitude }: FormValues,
+        { name, latitude, longitude }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
-        console.log(alarme, latitude, longitude);
+        console.log(name, latitude, longitude);
+
+        props
+            .updateDevice({ variables: { name, latitude, longitude } })
+            .then((response: any) => {
+                console.log("SUCCESS BITCHh!!!!");
+                props.history.push("/dispositivos");
+            })
+            .catch((e: any) => {
+                const errors = e.graphQLErrors.map((err: any) => err.message);
+                console.log("error", errors);
+                setSubmitting(false);
+                setErrors({ name: "", latitude: "", longitude: "" });
+            });
     },
     displayName: "FormEnhancer"
 })(InnerForm);
 
-export default AddDispositivoForm;
+export default compose(graphql(updateDevice, { name: "updateDevice" }))(
+    AddDispositivoForm
+);
