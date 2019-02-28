@@ -38,21 +38,6 @@ export const queries = {
 };
 
 export const mutations = {
-    addDevice: {
-        type: DeviceType,
-        args: {
-            name: {
-                type: GraphQLString
-            },
-            latitude: {
-                type: GraphQLFloat
-            },
-            longitude: {
-                type: GraphQLFloat
-            }
-        },
-        resolve: Loader.addDevice
-    },
     updateDevice: {
         type: DeviceType,
         args: {
@@ -66,6 +51,6 @@ export const mutations = {
                 type: GraphQLFloat
             }
         },
-        resolve: Loader.addDevice
+        resolve: Loader.updateDevice
     }
 };

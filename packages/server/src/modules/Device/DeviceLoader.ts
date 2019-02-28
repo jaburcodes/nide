@@ -9,14 +9,6 @@ export const Devices = (object, args, ctx) =>
         .then(posts => posts)
         .catch(err => err);
 
-export const addDevice = (object, { name, latitude, longitude }, ctx) => {
-    DeviceModel.findOneAndUpdate(
-        name,
-        { $set: { latitude, longitude } },
-        { new: true }
-    ).exec();
-};
-
 export const updateDevice = (object, { name, latitude, longitude }, ctx) => {
     DeviceModel.findOneAndUpdate(
         name,
