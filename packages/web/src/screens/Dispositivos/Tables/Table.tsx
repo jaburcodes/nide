@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { graphql, Query } from "react-apollo";
 
 import { Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -11,6 +12,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 import PaginationWrapped from "./Pagination";
+
+import { devices } from "../../../graphql/queries";
 
 interface DispositivoProps {
     classes?: any;
@@ -66,141 +69,204 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
             Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
         return (
-            <Paper
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    gridRow: "2 / 3",
-                    boxShadow: "0",
-                    borderRadius: "0"
+            <Query query={devices}>
+                {({ loading, error, data }) => {
+                    if (loading) return "Loading...";
+                    if (error) return `Error! ${error.message}`;
+
+                    return (
+                        <Paper
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                gridRow: "2 / 3",
+                                boxShadow: "0",
+                                borderRadius: "0"
+                            }}
+                        >
+                            <div>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell
+                                                style={{
+                                                    textAlign: "start",
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: "0.9rem",
+                                                    color: "#999999"
+                                                }}
+                                            >
+                                                Nome do Dispositivo
+                                            </TableCell>
+                                            <TableCell
+                                                style={{
+                                                    textAlign: "start",
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: "0.9rem",
+                                                    color: "#999999"
+                                                }}
+                                            >
+                                                Latitude
+                                            </TableCell>
+                                            <TableCell
+                                                style={{
+                                                    textAlign: "start",
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: "0.9rem",
+                                                    color: "#999999"
+                                                }}
+                                            >
+                                                Longitude
+                                            </TableCell>
+                                            <TableCell
+                                                style={{
+                                                    textAlign: "start",
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: "0.9rem",
+                                                    color: "#999999"
+                                                }}
+                                            >
+                                                Quantidade de Sensores
+                                            </TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {data.devices.map((device: any) => (
+                                            <TableRow key={device._id}>
+                                                <TableCell
+                                                    style={{
+                                                        textAlign: "start",
+                                                        fontSize: "0.9rem",
+                                                        fontWeight: 500,
+                                                        color: "black"
+                                                    }}
+                                                    component="th"
+                                                    scope="row"
+                                                >
+                                                    {device.name}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        textAlign: "start",
+                                                        fontSize: "0.9rem",
+                                                        fontWeight: 500,
+                                                        color: "black"
+                                                    }}
+                                                >
+                                                    {device.latitude}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        textAlign: "start",
+                                                        fontSize: "0.9rem",
+                                                        fontWeight: 500,
+                                                        color: "black"
+                                                    }}
+                                                >
+                                                    {device.longitude}
+                                                </TableCell>
+                                                <TableCell
+                                                    style={{
+                                                        textAlign: "start",
+                                                        fontSize: "0.9rem",
+                                                        fontWeight: 500,
+                                                        color: "black"
+                                                    }}
+                                                >
+                                                    {device.name}
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                        {/* {rows
+                                            .slice(
+                                                page * rowsPerPage,
+                                                page * rowsPerPage + rowsPerPage
+                                            )
+                                            .map(row => (
+                                                <TableRow key={row.id}>
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign: "start",
+                                                            fontSize: "0.9rem",
+                                                            fontWeight: 500,
+                                                            color: "black"
+                                                        }}
+                                                        component="th"
+                                                        scope="row"
+                                                    >
+                                                        {row.name}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign: "start",
+                                                            fontSize: "0.9rem",
+                                                            fontWeight: 500,
+                                                            color: "black"
+                                                        }}
+                                                    >
+                                                        {row.calories}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign: "start",
+                                                            fontSize: "0.9rem",
+                                                            fontWeight: 500,
+                                                            color: "black"
+                                                        }}
+                                                    >
+                                                        {row.fat}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign: "start",
+                                                            fontSize: "0.9rem",
+                                                            fontWeight: 500,
+                                                            color: "black"
+                                                        }}
+                                                    >
+                                                        {row.carbs}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                        {emptyRows > 0 && (
+                                            <TableRow
+                                                style={{
+                                                    height: 48 * emptyRows
+                                                }}
+                                            >
+                                                <TableCell colSpan={6} />
+                                            </TableRow>
+                                        )} */}
+                                    </TableBody>
+                                    <TableFooter>
+                                        <TableRow>
+                                            <TablePagination
+                                                rowsPerPageOptions={[5, 10]}
+                                                colSpan={3}
+                                                count={rows.length}
+                                                rowsPerPage={rowsPerPage}
+                                                page={page}
+                                                SelectProps={{
+                                                    native: true
+                                                }}
+                                                onChangePage={
+                                                    this.handleChangePage
+                                                }
+                                                onChangeRowsPerPage={
+                                                    this.handleChangeRowsPerPage
+                                                }
+                                                ActionsComponent={
+                                                    PaginationWrapped
+                                                }
+                                            />
+                                        </TableRow>
+                                    </TableFooter>
+                                </Table>
+                            </div>
+                        </Paper>
+                    );
                 }}
-            >
-                <div>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontFamily: "Montserrat",
-                                        fontSize: "0.9rem",
-                                        color: "#999999"
-                                    }}
-                                >
-                                    Nome do Dispositivo
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontFamily: "Montserrat",
-                                        fontSize: "0.9rem",
-                                        color: "#999999"
-                                    }}
-                                >
-                                    Latitude
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontFamily: "Montserrat",
-                                        fontSize: "0.9rem",
-                                        color: "#999999"
-                                    }}
-                                >
-                                    Longitude
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontFamily: "Montserrat",
-                                        fontSize: "0.9rem",
-                                        color: "#999999"
-                                    }}
-                                >
-                                    Quantidade de Sensores
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows
-                                .slice(
-                                    page * rowsPerPage,
-                                    page * rowsPerPage + rowsPerPage
-                                )
-                                .map(row => (
-                                    <TableRow key={row.id}>
-                                        <TableCell
-                                            style={{
-                                                textAlign: "start",
-                                                fontSize: "0.9rem",
-                                                fontWeight: 500,
-                                                color: "black"
-                                            }}
-                                            component="th"
-                                            scope="row"
-                                        >
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell
-                                            style={{
-                                                textAlign: "start",
-                                                fontSize: "0.9rem",
-                                                fontWeight: 500,
-                                                color: "black"
-                                            }}
-                                        >
-                                            {row.calories}
-                                        </TableCell>
-                                        <TableCell
-                                            style={{
-                                                textAlign: "start",
-                                                fontSize: "0.9rem",
-                                                fontWeight: 500,
-                                                color: "black"
-                                            }}
-                                        >
-                                            {row.fat}
-                                        </TableCell>
-                                        <TableCell
-                                            style={{
-                                                textAlign: "start",
-                                                fontSize: "0.9rem",
-                                                fontWeight: 500,
-                                                color: "black"
-                                            }}
-                                        >
-                                            {row.carbs}
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: 48 * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TablePagination
-                                    rowsPerPageOptions={[5, 10]}
-                                    colSpan={3}
-                                    count={rows.length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    SelectProps={{
-                                        native: true
-                                    }}
-                                    onChangePage={this.handleChangePage}
-                                    onChangeRowsPerPage={
-                                        this.handleChangeRowsPerPage
-                                    }
-                                    ActionsComponent={PaginationWrapped}
-                                />
-                            </TableRow>
-                        </TableFooter>
-                    </Table>
-                </div>
-            </Paper>
+            </Query>
         );
     }
 }
