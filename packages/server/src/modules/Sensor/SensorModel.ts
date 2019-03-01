@@ -12,9 +12,7 @@ const SensorSchema = new Schema({
         type: String,
         required: true
     },
-    pointValue: {
-        type: Number
-    },
+    pointValue: [Number],
     date: {
         type: String
     },
