@@ -8,6 +8,10 @@ ObjectID.prototype.valueOf = function() {
 };
 
 const AlarmeSchema = new Schema({
+    sensor: {
+        type: Schema.Types.ObjectId,
+        ref: "Sensor"
+    },
     aceitavel: {
         min: {
             type: Number

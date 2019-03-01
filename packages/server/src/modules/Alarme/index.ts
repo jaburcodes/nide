@@ -8,6 +8,7 @@ import {
 
 import AlarmeType from "./AlarmeType";
 import MinMaxType from "./MinMaxType";
+import MinMaxInputType from "./MinMaxInputType";
 
 import * as Loader from "./AlarmeLoader";
 
@@ -31,14 +32,17 @@ export const mutations = {
     createAlarme: {
         type: AlarmeType,
         args: {
+            sensor: {
+                type: GraphQLString
+            },
             aceitavel: {
-                type: MinMaxType
+                type: MinMaxInputType
             },
             emergencial: {
-                type: MinMaxType
+                type: MinMaxInputType
             },
             perigoso: {
-                type: MinMaxType
+                type: MinMaxInputType
             }
         },
         resolve: Loader.CreateAlarme
