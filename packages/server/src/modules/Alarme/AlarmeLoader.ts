@@ -29,3 +29,5 @@ export const CreateAlarme = (
         });
     }
 };
+
+export const Sensor = (object, { _id }, ctx) => SensorModel.findById(_id);

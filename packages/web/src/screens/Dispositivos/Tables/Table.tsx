@@ -177,66 +177,6 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                                 </TableCell>
                                             </TableRow>
                                         ))}
-                                        {/* {rows
-                                            .slice(
-                                                page * rowsPerPage,
-                                                page * rowsPerPage + rowsPerPage
-                                            )
-                                            .map(row => (
-                                                <TableRow key={row.id}>
-                                                    <TableCell
-                                                        style={{
-                                                            textAlign: "start",
-                                                            fontSize: "0.9rem",
-                                                            fontWeight: 500,
-                                                            color: "black"
-                                                        }}
-                                                        component="th"
-                                                        scope="row"
-                                                    >
-                                                        {row.name}
-                                                    </TableCell>
-                                                    <TableCell
-                                                        style={{
-                                                            textAlign: "start",
-                                                            fontSize: "0.9rem",
-                                                            fontWeight: 500,
-                                                            color: "black"
-                                                        }}
-                                                    >
-                                                        {row.calories}
-                                                    </TableCell>
-                                                    <TableCell
-                                                        style={{
-                                                            textAlign: "start",
-                                                            fontSize: "0.9rem",
-                                                            fontWeight: 500,
-                                                            color: "black"
-                                                        }}
-                                                    >
-                                                        {row.fat}
-                                                    </TableCell>
-                                                    <TableCell
-                                                        style={{
-                                                            textAlign: "start",
-                                                            fontSize: "0.9rem",
-                                                            fontWeight: 500,
-                                                            color: "black"
-                                                        }}
-                                                    >
-                                                        {row.carbs}
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                        {emptyRows > 0 && (
-                                            <TableRow
-                                                style={{
-                                                    height: 48 * emptyRows
-                                                }}
-                                            >
-                                                <TableCell colSpan={6} />
-                                            </TableRow>
-                                        )} */}
                                     </TableBody>
                                     <TableFooter>
                                         <TableRow>

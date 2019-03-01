@@ -78,18 +78,18 @@ connection.query("SELECT * FROM datapoints", (error, results, fields) => {
 // Ele cria um novo campo toda vez que é transmitido.
 connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
     if (error) throw error;
-    // console.log(results);
-    const lastElement = results.pop();
-    console.log(lastElement);
+    // console.log(results.slice(Math.max(results.length - 5, 1)));
+    // const lastElement = results.pop();
+    // console.log(lastElement);
 
-    const { dataPointId, dataType, pointValue, ts } = lastElement;
-    const date = moment(ts).format("DD/MM/YYYY");
+    // const { dataPointId, dataType, pointValue, ts } = lastElement;
+    // const date = moment(ts).format("DD/MM/YYYY");
 
-    SensorModel.findOneAndUpdate(
-        { dataSourceId: dataPointId },
-        { $set: { dataType, pointValue, date } },
-        { new: true }
-    ).exec();
+    // SensorModel.findOneAndUpdate(
+    //     { dataSourceId: dataPointId },
+    //     { $set: { dataType, pointValue, date } },
+    //     { new: true }
+    // ).exec();
 });
 
 const schema = new GraphQLSchema({

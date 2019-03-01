@@ -1,4 +1,4 @@
-import { GraphQLObjectType } from "graphql";
+import { GraphQLObjectType, GraphQLString } from "graphql";
 
 import SensorType from "../Sensor/SensorType";
 import MinMaxType from "./MinMaxType";
@@ -6,6 +6,10 @@ import MinMaxType from "./MinMaxType";
 const AlarmeType = new GraphQLObjectType({
     name: "AlarmeType",
     fields: () => ({
+        _id: {
+            type: GraphQLString,
+            resolve: o => o._id
+        },
         sensor: {
             type: SensorType,
             resolve: o => o.sensor
