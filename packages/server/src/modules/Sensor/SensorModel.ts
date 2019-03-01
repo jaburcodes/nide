@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
-import { number } from "prop-types";
 
 const Schema = mongoose.Schema;
 
@@ -26,7 +25,7 @@ const SensorSchema = new Schema({
         type: Number,
         ref: "Device"
     },
-    alarmes: {
+    alarme: {
         type: Schema.Types.ObjectId,
         ref: "Alarme"
     }

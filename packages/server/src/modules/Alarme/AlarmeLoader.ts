@@ -1,6 +1,5 @@
 import AlarmeModel from "./AlarmeModel";
 import SensorModel from "../Sensor/SensorModel";
-import { Sensor } from "../Sensor/SensorLoader";
 
 export const Alarme = (object, { _id }, ctx) => AlarmeModel.findById(_id);
 
