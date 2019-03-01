@@ -25,6 +25,10 @@ const AlarmeType = new GraphQLObjectType({
         perigoso: {
             type: MinMaxType,
             resolve: o => o.perigoso
+        },
+        createdAt: {
+            type: GraphQLString,
+            resolve: o => o.createdAt
         }
     })
 });

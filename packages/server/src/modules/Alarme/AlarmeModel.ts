@@ -35,6 +35,10 @@ const AlarmeSchema = new Schema({
         max: {
             type: Number
         }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 
