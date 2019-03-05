@@ -13,6 +13,7 @@ import { getUser } from "./utils/auth/authMethods";
 import DeviceModel from "./modules/Device/DeviceModel";
 import SensorModel from "./modules/Sensor/SensorModel";
 import { Sensor } from "./modules/Sensor/SensorLoader";
+import { point } from "leaflet";
 
 const pubsub = new PubSub();
 
@@ -81,7 +82,11 @@ connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
 
     const lastValues = results.slice(Math.max(results.length - 5, 1));
 
-    console.log(lastValues);
+    const newPointValues = lastValues.map(({ pointValue }) => pointValue);
+
+    //console.log(newPointValues);
+
+    //console.log(lastValues);
 
     // lastValues.map(({ dataPointId, dataType, pointValue, ts }) => {
     //     const date = moment(ts).format("DD/MM/YYYY");
