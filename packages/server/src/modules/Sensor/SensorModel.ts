@@ -8,6 +8,10 @@ ObjectID.prototype.valueOf = function() {
 };
 
 const SensorSchema = new Schema({
+    _id: {
+        type: String,
+        required: true
+    },
     xid: {
         type: String,
         required: true

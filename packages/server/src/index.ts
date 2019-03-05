@@ -1,6 +1,6 @@
 import { ApolloServer, PubSub } from "apollo-server";
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
-import moment from "moment";
+import moment, { isDate } from "moment";
 import * as dotenv from "dotenv";
 import mysql from "mysql";
 
@@ -58,16 +58,17 @@ connection.query("SELECT * FROM datasources", (error, results, fields) => {
 // Mostrar todos os sensores do dispositivo.
 connection.query("SELECT * FROM datapoints", (error, results, fields) => {
     if (error) throw error;
-    //console.log(results);
-    results.map(({ xid, dataSourceId }) => {
-        const newSensor = new SensorModel({
-            xid,
-            dataSourceId
-        });
 
-        if (SensorModel.findOne({ xid })) {
-            console.log("Sensors already exists");
+    results.map(({ id, xid, dataSourceId }) => {
+        if (SensorModel.findOne({ _id: id })) {
+            console.log("Sensor already exists");
         } else {
+            const newSensor = new SensorModel({
+                _id: id,
+                xid,
+                dataSourceId
+            });
+
             newSensor.save((err, res) => {
                 err ? err : res;
             });
@@ -82,23 +83,22 @@ connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
 
     const lastValues = results.slice(Math.max(results.length - 5, 1));
 
-    const newPointValues = lastValues.map(({ pointValue }) => pointValue);
+    const newPointValue = lastValues.map(({ pointValue }) => pointValue);
 
-    //console.log(newPointValues);
+    console.log(lastValues);
 
-    //console.log(lastValues);
+    setInterval(() => {
+        lastValues.map(({ dataPointId, dataType, ts }) => {
+            const date = moment(ts).format("DD/MM");
+            console.log(date);
 
-    // lastValues.map(({ dataPointId, dataType, pointValue, ts }) => {
-    //     const date = moment(ts).format("DD/MM/YYYY");
-    //     const value = { dataPointId, dataType, pointValue, date };
-    //     console.log(value);
-
-    //     // SensorModel.findOneAndUpdate(
-    //     //     { dataSourceId: dataPointId },
-    //     //     { $set: { dataType, pointValue, date } },
-    //     //     { new: true }
-    //     // ).exec();
-    // });
+            SensorModel.findOneAndUpdate(
+                { _id: dataPointId },
+                { $set: { dataType, pointValue: newPointValue, date } },
+                { new: true }
+            ).exec();
+        });
+    }, 50000);
 });
 
 const schema = new GraphQLSchema({
