@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 import { graphql } from "react-apollo";
