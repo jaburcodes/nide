@@ -1,17 +1,16 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
 import { createBrowserHistory } from "history";
+
+import PublicRoute from "./routes/Public";
+import PrivateRoute from "./routes/Private";
 
 import HomeWrapper from "./screens/Home/HomeWrapper";
 
 import MapHome from "./screens/Home/Map/MapHome";
 import MapDetail from "./screens/Home/Map/MapDetail";
-
-import Users from "./screens/Users";
-import Signup from "./screens/Signup";
-import Signin from "./screens/Signin";
 
 import Dispositivos from "./screens/Dispositivos/Dispositivos";
 import DispositivosDetail from "./screens/Dispositivos/Detail/DispositivosDetail";
@@ -33,112 +32,48 @@ const Wrapper = styled.div`
     background-color: rgba(0, 0, 0, 0.8);
 `;
 
-class App extends Component {
-    render() {
-        return (
-            <Fragment>
-                <Wrapper>
-                    <ApolloProvider client={client}>
-                        <BrowserRouter>
-                            <Switch>
-                                <PublicRoute
-                                    exact
-                                    path="/"
-                                    component={HomeWrapper}
-                                    history={history}
-                                />
-                                <PublicRoute
-                                    exact
-                                    path="/visualizar"
-                                    component={MapHome}
-                                    history={history}
-                                />
-                                <PublicRoute
-                                    exact
-                                    path="/visualizar/detail"
-                                    component={MapDetail}
-                                    history={history}
-                                />
-                                <PrivateRoute
-                                    exact
-                                    path="/dispositivos"
-                                    component={Dispositivos}
-                                    history={history}
-                                />
-                                <PrivateRoute
-                                    exact
-                                    path="/dispositivos/detail"
-                                    component={DispositivosDetail}
-                                    history={history}
-                                />
-                                <PrivateRoute
-                                    exact
-                                    path="/users"
-                                    component={Users}
-                                    history={history}
-                                />
-                                <PublicRoute
-                                    exact
-                                    path="/signup"
-                                    component={Signup}
-                                    history={history}
-                                />
-                                <PublicRoute
-                                    exact
-                                    path="/signin"
-                                    component={Signin}
-                                    history={history}
-                                />
-                            </Switch>
-                        </BrowserRouter>
-                    </ApolloProvider>
-                </Wrapper>
-                <GlobalStyle />
-            </Fragment>
-        );
-    }
-}
-
-//@ts-ignore
-function PublicRoute({ component: Component, ...rest }) {
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                !localStorage.getItem("token") ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/dispositivos",
-                            state: { from: props.location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
-
-//@ts-ignore
-function PrivateRoute({ component: Component, ...rest }) {
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                localStorage.getItem("token") ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/",
-                            state: { from: props.location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
+const App = () => (
+    <Fragment>
+        <Wrapper>
+            <ApolloProvider client={client}>
+                <BrowserRouter>
+                    <Switch>
+                        <PublicRoute
+                            exact
+                            path="/"
+                            component={HomeWrapper}
+                            history={history}
+                        />
+                        <PublicRoute
+                            exact
+                            path="/visualizar"
+                            component={MapHome}
+                            history={history}
+                        />
+                        <PublicRoute
+                            exact
+                            path="/visualizar/detail"
+                            component={MapDetail}
+                            history={history}
+                        />
+                        <PrivateRoute
+                            exact
+                            path="/dispositivos"
+                            component={Dispositivos}
+                            history={history}
+                        />
+                        <PrivateRoute
+                            exact
+                            path="/dispositivos/detail"
+                            component={DispositivosDetail}
+                            history={history}
+                        />
+                    </Switch>
+                </BrowserRouter>
+            </ApolloProvider>
+        </Wrapper>
+        <GlobalStyle />
+    </Fragment>
+);
 
 export default App;
