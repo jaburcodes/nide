@@ -1,18 +1,20 @@
 import React from "react";
-import * as L from "leaflet";
 import { Marker } from "react-leaflet";
 
-type Position = [number, number];
-
-interface MyDevices {
-    position: Position;
+interface Device {
+    _id: string;
+    xid: string;
+    name: string;
+    dataSourceType: number;
+    latitude: number;
+    longitude: number;
 }
 
 interface DevicesListProps {
-    devices: MyDevices[];
+    devices: Device[];
 }
 
-const DevicesList = ({ devices }: DevicesListProps) => {
+const Markers: React.FC<DevicesListProps> = (devices: any) => {
     const position = devices.map(({ latitude, longitude }: any) => [
         latitude,
         longitude
@@ -20,9 +22,5 @@ const DevicesList = ({ devices }: DevicesListProps) => {
 
     return <Marker position={position} />;
 };
-
-const Markers: React.FC = ({ devices }: DevicesListProps) => (
-    <DevicesList devices={devices} />
-);
 
 export default Markers;
