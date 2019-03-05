@@ -81,17 +81,19 @@ connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
 
     const lastValues = results.slice(Math.max(results.length - 5, 1));
 
-    lastValues.map(({ dataPointId, dataType, pointValue, ts }) => {
-        const date = moment(ts).format("DD/MM/YYYY");
-        const value = { dataPointId, dataType, pointValue, date };
-        console.log(value);
+    console.log(lastValues);
 
-        // SensorModel.findOneAndUpdate(
-        //     { dataSourceId: dataPointId },
-        //     { $set: { dataType, pointValue, date } },
-        //     { new: true }
-        // ).exec();
-    });
+    // lastValues.map(({ dataPointId, dataType, pointValue, ts }) => {
+    //     const date = moment(ts).format("DD/MM/YYYY");
+    //     const value = { dataPointId, dataType, pointValue, date };
+    //     console.log(value);
+
+    //     // SensorModel.findOneAndUpdate(
+    //     //     { dataSourceId: dataPointId },
+    //     //     { $set: { dataType, pointValue, date } },
+    //     //     { new: true }
+    //     // ).exec();
+    // });
 });
 
 const schema = new GraphQLSchema({

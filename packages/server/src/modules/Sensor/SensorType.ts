@@ -2,6 +2,7 @@ import {
     GraphQLID,
     GraphQLObjectType,
     GraphQLString,
+    GraphQLList,
     GraphQLInt
 } from "graphql";
 
@@ -19,7 +20,7 @@ const SensorType = new GraphQLObjectType({
             resolve: o => o.xid
         },
         pointValue: {
-            type: GraphQLInt,
+            type: GraphQLList(GraphQLInt),
             resolve: o => o.pointValue
         },
         date: {
