@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import * as L from "leaflet";
 import { Map, TileLayer } from "react-leaflet";
+import { graphql, Query } from "react-apollo";
+
+import { devices } from "../../../graphql/queries";
 
 import StyledHomeWrapper from "../../../utils/components/Home/Home";
 import Intro from "../../../utils/components/Home/Map/Intro/Intro";
@@ -40,7 +43,16 @@ const MapHome: React.FC<Props> = props => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
-                <Markers />
+                <Query query={devices}>
+                    {({ loading, error, data }) => {
+                        if (loading) return "Loading...";
+                        if (error) return `Error! ${error.message}`;
+
+                        const { devices } = data;
+
+                        return <Markers devices={devices} />;
+                    }}
+                </Query>
             </Map>
         </StyledHomeWrapper>
     );
