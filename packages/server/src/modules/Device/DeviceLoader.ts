@@ -1,5 +1,5 @@
-import DeviceModel from "./DeviceModel";
-import SensorModel from "../Sensor/SensorModel";
+import DeviceModel from "../../models/Device/DeviceModel";
+import SensorModel from "../../models/Sensor/SensorModel";
 
 export const Device = (object, { _id }, ctx) => DeviceModel.findById(_id);
 

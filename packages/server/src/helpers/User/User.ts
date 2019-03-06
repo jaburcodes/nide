@@ -1,70 +1,123 @@
+// import * as jwt from "jsonwebtoken";
+
+// import UserModel from "../../models/User/UserModel";
+// import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
+
 import * as jwt from "jsonwebtoken";
+import isEmail from "validator/lib/isEmail";
 
 import UserModel from "../../models/User/UserModel";
-import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
+import {
+    createToken,
+    verifyToken,
+    encryptPassword,
+    comparePassword
+} from "../../utils/newAuth/";
 
 const UserConnector = {
     User: async ({ _id }) => await UserModel.findById(_id),
-    Users: async ({ id, size, page }) => {
-        const where = { id };
-        const offset = page * size;
+    Users: async () =>
+        UserModel.find()
+            .populate("users")
+            .then(users => users)
+            .catch(err => err),
+    AddUser: async ({ email, password }) => {
+        return new Promise((resolve, reject) => {
+            // Validate the data
+            if (!email) {
+                return reject({ message: "You must provide a email." });
+            } else if (!isEmail(email)) {
+                return reject({ message: "You must provide a valid email." });
+            }
 
-        const totalCount = await UserModel.count(where);
-        const hasNextPage = Number(totalCount) > offset + size;
+            if (!password) {
+                return reject({ message: "You must provide a password." });
+            }
 
-        const edges = await UserModel.find(where)
-            .limit(size)
-            .skip(offset);
+            return encryptPassword(password, (err, hash) => {
+                if (err) {
+                    return reject(
+                        new Error("The password could not be hashed.")
+                    );
+                }
 
-        return {
-            edges,
-            hasNextPage,
-            totalCount
-        };
-    },
-    AddUser: async ({ name, email, password }) => {
-        const currentUser = await UserModel.findOne({ email });
+                return UserModel.create(
+                    Object.assign({ email, password }, { password: hash })
+                )
+                    .then(user => {
+                        resolve(createToken({ _id: user._id, email }));
+                    })
+                    .catch(err2 => {
+                        if (err2.code === 11000) {
+                            return reject({
+                                message:
+                                    "There is already a user with this email."
+                            });
+                        }
 
-        if (currentUser) {
-            return { error: "User already exists" };
-        }
-
-        const User = new UserModel({
-            name,
-            email,
-            password: encryptPassword(password)
+                        return reject(err2);
+                    });
+            });
         });
-
-        await User.save();
-
-        const token = `JWT ${jwt.sign({ id: email }, process.env.JWT)}`;
-
-        return {
-            token
-        };
     },
     LoginUser: async ({ email, password }) => {
-        if (!email || !password) {
-            return { error: "Email and password must be provided" };
-        }
+        return new Promise((resolve, reject) => {
+            // Validate the data
+            if (!email) {
+                return reject({ message: "You must provide a email." });
+            } else if (!isEmail(email)) {
+                return reject({ message: "You must provide a valid email." });
+            }
+            if (!password) {
+                return reject({ message: "You must provide a password." });
+            }
 
-        const User = await UserModel.findOne({ email });
+            // Find the user
+            return UserModel.findOne({ email })
+                .then(user => {
+                    if (!user) {
+                        return reject({
+                            message: "Authentication failed. User not found."
+                        });
+                    }
 
-        if (!User) {
-            return { error: "User doesn't exist" };
-        }
-        //@ts-ignore
-        const isPasswordCorrect = authenticate(password, User.password);
+                    return comparePassword(
+                        password,
+                        password,
+                        (err, isMatch) => {
+                            if (err) {
+                                return reject(err);
+                            }
+                            if (!isMatch) {
+                                return reject({ message: "Wrong password." });
+                            }
 
-        if (!isPasswordCorrect) {
-            throw new Error("Invalid email or password");
-        }
+                            return resolve(
+                                createToken({
+                                    _id: user._id,
+                                    email
+                                })
+                            );
+                        }
+                    );
+                })
+                .catch(err => reject(err));
+        });
+    },
+    isAuthenticated: ({ token }) => {
+        return new Promise((resolve, reject) => {
+            if (!token) {
+                return reject({ message: "The user token is empty." });
+            }
 
-        const token = `JWT ${jwt.sign({ id: email }, process.env.JWT)}`;
+            return verifyToken(token, (err, decoded) => {
+                if (err) {
+                    return reject({ message: "You must be authenticated." });
+                }
 
-        return {
-            token
-        };
+                return resolve(decoded);
+            });
+        });
     }
 };
 

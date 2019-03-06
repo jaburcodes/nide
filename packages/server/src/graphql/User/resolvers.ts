@@ -3,20 +3,46 @@ import UserConnector from "../../helpers/User/User";
 const resolvers = {
     Query: {
         user: (parent, { _id }, context, info) => UserConnector.User({ _id }),
-        users: async (parent, { id, size, page }, context, info) =>
-            UserConnector.Users({ id, size, page })
+        users: async (parent, args, context, info) =>
+            UserConnector.Users()
                 .then(users => users)
                 .catch(err => err)
     },
     Mutation: {
-        addUser: (parent, { name, email, password }, context, info) =>
-            UserConnector.AddUser({ name, email, password })
-                .then(user => user)
-                .catch(err => err),
-        loginUser: (parent, { email, password }, context, info) =>
-            UserConnector.LoginUser({ email, password })
-                .then(user => user)
-                .catch(err => err)
+        addUser: (parent, { email, password }, context, info) => {
+            const errors = [];
+
+            return UserConnector.AddUser({ email, password })
+                .then(token => ({
+                    token,
+                    errors
+                }))
+                .catch(err => {
+                    if (err.message) {
+                        errors.push();
+                        return { token: null, errors };
+                    }
+
+                    throw new Error(err);
+                });
+        },
+        loginUser: (parent, { email, password }, context, info) => {
+            const errors = [];
+
+            return UserConnector.LoginUser({ email, password })
+                .then(token => ({
+                    token,
+                    errors
+                }))
+                .catch(err => {
+                    if (err.message) {
+                        errors.push();
+                        return { token: null, errors };
+                    }
+
+                    throw new Error(err);
+                });
+        }
     }
 };
 

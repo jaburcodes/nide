@@ -1,5 +1,5 @@
 import * as jwt from "jsonwebtoken";
-import UserModel from "./UserModel";
+import UserModel from "../../models/User/UserModel";
 import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
 
 export const Users = async (object, args, ctx) => {

@@ -14,7 +14,7 @@ import DeviceModel from "./models/Device/DeviceModel";
 import SensorModel from "./models/Sensor/SensorModel";
 import { Sensor } from "./modules/Sensor/SensorLoader";
 
-import schema from "./graphql/index";
+//import schema from "./graphql/index";
 
 const pubsub = new PubSub();
 
@@ -100,22 +100,22 @@ connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
     }, 50000);
 });
 
-// const schema = new GraphQLSchema({
-//     query: new GraphQLObjectType({
-//         name: "RootQueryType",
-//         // @ts-ignore
-//         fields: {
-//             ...rootQuery
-//         }
-//     }),
-//     mutation: new GraphQLObjectType({
-//         name: "RootMutationType",
-//         // @ts-ignore
-//         fields: {
-//             ...rootMutation
-//         }
-//     })
-// });
+const schema = new GraphQLSchema({
+    query: new GraphQLObjectType({
+        name: "RootQueryType",
+        // @ts-ignore
+        fields: {
+            ...rootQuery
+        }
+    }),
+    mutation: new GraphQLObjectType({
+        name: "RootMutationType",
+        // @ts-ignore
+        fields: {
+            ...rootMutation
+        }
+    })
+});
 
 const server = new ApolloServer({
     schema,
