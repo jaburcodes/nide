@@ -13,7 +13,7 @@ const typeDefs = gql`
 
     type Query {
         user(_id: ID!): User!
-        users: [User!]!
+        users(size: Int!, page: Int!): [User!]!
     }
 
     type Mutation {

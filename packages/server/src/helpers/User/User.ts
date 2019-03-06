@@ -53,10 +53,8 @@ const UserConnector = {
         if (!User) {
             return { error: "User doesn't exist" };
         }
-
-        console.log("User", User);
         //@ts-ignore
-        const isPasswordCorrect = authenticate(password, user.password);
+        const isPasswordCorrect = authenticate(password, User.password);
 
         if (!isPasswordCorrect) {
             throw new Error("Invalid email or password");
