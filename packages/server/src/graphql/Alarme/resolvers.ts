@@ -25,14 +25,12 @@ const resolvers = {
                 aceitavel,
                 emergencial,
                 perigoso
-            })
-                .then(alarme => alarme)
-                .catch(err => err);
+            });
         }
     },
     Alarme: {
         sensor: async ({ _id }, args, context, info) => {
-          return await AlarmeConnector.Sensor(_id);
+            return await AlarmeConnector.Sensor(_id);
         }
     }
 };

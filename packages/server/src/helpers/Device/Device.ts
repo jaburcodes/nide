@@ -2,21 +2,19 @@ import DeviceModel from "../../models/Device/DeviceModel";
 import SensorModel from "../../models/Sensor/SensorModel";
 
 const DeviceConnector = {
-    Device: async ({ _id }) => DeviceModel.findById(_id),
+    Device: async ({ _id }) => await DeviceModel.findById(_id),
     Devices: async () =>
-        DeviceModel.find({})
+        await DeviceModel.find({})
             .populate("devices")
             .then(devices => devices)
             .catch(err => err),
-    UpdateDevice: async ({ name, latitude, longitude }) => {
-        DeviceModel.findOneAndUpdate(
+    UpdateDevice: async ({ name, latitude, longitude }) =>
+        await DeviceModel.findOneAndUpdate(
             name,
             { $set: { latitude, longitude } },
             { new: true }
-        ).exec();
-    },
-    Sensors: async ({ _id }) =>
-        SensorModel.find({ dataSourceId: _id })
+        ).then(device => device),
+    Sensors: async ({ _id }) => await SensorModel.find({ dataSourceId: _id })
 };
 
 export default DeviceConnector;

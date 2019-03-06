@@ -12,7 +12,7 @@ const typeDefs = gql`
 
     type Query {
         alarme(_id: ID!): Alarme!
-        alarmes: [Alarme!]!
+        alarmes: [Alarme!]
     }
 
     type Mutation {

@@ -4,9 +4,9 @@ import UserModel from "../../models/User/UserModel";
 import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
 
 const UserConnector = {
-    User: async ({ _id }) => UserModel.findById(_id),
+    User: async ({ _id }) => await UserModel.findById(_id),
     Users: async () =>
-        UserModel.find({})
+        await UserModel.find({})
             .populate("users")
             .then(users => users)
             .catch(err => err),
@@ -14,19 +14,21 @@ const UserConnector = {
         const { name, email, password } = input;
 
         const currentUser = await UserModel.findOne({ email });
-    
+
         if (currentUser) {
             return { error: "User already exists" };
         }
-    
-        const user = new UserModel({
+
+        const User = new UserModel({
             name,
             email,
             password: encryptPassword(password)
         });
-        await user.save();
-    
+
+        await User.save();
+
         const token = `JWT ${jwt.sign({ id: email }, process.env.JWT)}`;
+
         return {
             token
         };
@@ -37,22 +39,23 @@ const UserConnector = {
         if (!email || !password) {
             return { error: "Email and password must be provided" };
         }
-    
-        const user = await UserModel.findOne({ email });
-    
-        if (!user) {
-            return { error: "User doesnt exist" };
+
+        const User = await UserModel.findOne({ email });
+
+        if (!User) {
+            return { error: "User doesn't exist" };
         }
-    
-        console.log("user", user);
+
+        console.log("User", User);
         //@ts-ignore
         const isPasswordCorrect = authenticate(password, user.password);
-    
+
         if (!isPasswordCorrect) {
             throw new Error("Invalid email or password");
         }
-    
+
         const token = `JWT ${jwt.sign({ id: email }, process.env.JWT)}`;
+
         return {
             token
         };
@@ -60,4 +63,3 @@ const UserConnector = {
 };
 
 export default UserConnector;
-
