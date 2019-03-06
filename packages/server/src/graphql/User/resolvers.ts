@@ -2,16 +2,21 @@ import UserConnector from "../../helpers/User/User";
 
 const resolvers = {
     Query: {
-        user: async (parent, { _id }, context, info) => {
-            return UserConnector.User({ _id })
-                .then(user => user)
-                .catch(err => err);
-        },
-        users: async (parent, args, context, info) => {
-            return UserConnector.Users()
+        user: (parent, { _id }, context, info) => UserConnector.User({ _id }),
+        users: async (parent, { id, size, page }, context, info) =>
+            UserConnector.Users({ id, size, page })
                 .then(users => users)
-                .catch(err => err);
-        }
+                .catch(err => err)
+    },
+    Mutation: {
+        addUser: (parent, { name, email, password }, context, info) =>
+            UserConnector.AddUser({ name, email, password })
+                .then(user => user)
+                .catch(err => err),
+        loginUser: (parent, { email, password }, context, info) =>
+            UserConnector.LoginUser({ email, password })
+                .then(user => user)
+                .catch(err => err)
     }
 };
 

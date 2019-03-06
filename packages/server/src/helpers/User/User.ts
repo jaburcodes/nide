@@ -5,14 +5,24 @@ import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
 
 const UserConnector = {
     User: async ({ _id }) => await UserModel.findById(_id),
-    Users: async () =>
-        await UserModel.find({})
-            .populate("users")
-            .then(users => users)
-            .catch(err => err),
-    AddUser: async ({ input }) => {
-        const { name, email, password } = input;
+    Users: async ({ id, size, page }) => {
+        const where = { id };
+        const offset = page * size;
 
+        const totalCount = await UserModel.count(where);
+        const hasNextPage = Number(totalCount) > offset + size;
+
+        const edges = await UserModel.find(where)
+            .limit(size)
+            .skip(offset);
+
+        return {
+            edges,
+            hasNextPage,
+            totalCount
+        };
+    },
+    AddUser: async ({ name, email, password }) => {
         const currentUser = await UserModel.findOne({ email });
 
         if (currentUser) {
@@ -33,9 +43,7 @@ const UserConnector = {
             token
         };
     },
-    LoginUser: async (object, { input }, ctx) => {
-        const { email, password } = input;
-
+    LoginUser: async ({ email, password }) => {
         if (!email || !password) {
             return { error: "Email and password must be provided" };
         }

@@ -17,16 +17,14 @@ const AlarmeConnector = {
                 perigoso
             });
 
-            return new Promise((resolve, reject) => {
-                newAlarme.save((err, res) => {
-                    err ? reject(err) : resolve(res);
-                });
-            });
+            newAlarme.save((err, res) => (err ? err : res));
+
+            return newAlarme;
         } else {
             return "Sensor não encontrado.";
         }
     },
-    Sensor: async ({ _id }) => await SensorModel.findById(_id)
+    Sensor: async ({ sensor }) => await SensorModel.findById({ _id: sensor })
 };
 
 export default AlarmeConnector;

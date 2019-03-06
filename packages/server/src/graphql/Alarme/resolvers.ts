@@ -14,24 +14,22 @@ const resolvers = {
         }
     },
     Mutation: {
-        createAlarme: async (
+        createAlarme: (
             parent,
             { sensor, aceitavel, emergencial, perigoso },
             context,
             info
-        ) => {
-            return AlarmeConnector.CreateAlarme({
+        ) =>
+            AlarmeConnector.CreateAlarme({
                 sensor,
                 aceitavel,
                 emergencial,
                 perigoso
-            });
-        }
+            })
     },
     Alarme: {
-        sensor: async ({ _id }, args, context, info) => {
-            return await AlarmeConnector.Sensor(_id);
-        }
+        sensor: ({ sensor }, args, context, info) =>
+            AlarmeConnector.Sensor(sensor)
     }
 };
 
