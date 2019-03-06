@@ -8,12 +8,13 @@ const DeviceConnector = {
             .populate("devices")
             .then(devices => devices)
             .catch(err => err),
-    UpdateDevice: async ({ name, latitude, longitude }) =>
-        await DeviceModel.findOneAndUpdate(
+    UpdateDevice: ({ name, latitude, longitude }) =>
+        DeviceModel.findOneAndUpdate(
             name,
             { $set: { latitude, longitude } },
-            { new: true }
-        ).then(device => device),
+            { new: true },
+            (err, doc) => err ? err : doc
+        ),
     Sensors: async ({ _id }) => await SensorModel.find({ dataSourceId: _id })
 };
 
