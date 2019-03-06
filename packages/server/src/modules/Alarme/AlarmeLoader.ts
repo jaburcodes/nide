@@ -27,7 +27,10 @@ export const CreateAlarme = (
                 err ? reject(err) : resolve(res);
             });
         });
+    } else {
+        return "Sensor not found.";
     }
 };
 
-export const Sensor = (object, { _id }, ctx) => SensorModel.findById(_id);
+export const Sensor = ({ _id }, args, ctx) =>
+    SensorModel.findById({ _id });

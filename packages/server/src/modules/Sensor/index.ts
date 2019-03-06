@@ -1,14 +1,8 @@
-import {
-    GraphQLNonNull,
-    GraphQLID,
-    GraphQLInt,
-    GraphQLList,
-    GraphQLString,
-    GraphQLInputObjectType
-} from "graphql";
+import { GraphQLList, GraphQLString } from "graphql";
 
 import SensorType from "./SensorType";
 import * as Loader from "./SensorLoader";
+import AlarmeType from "../Alarme/AlarmeType";
 
 export const queries = {
     sensor: {
@@ -23,5 +17,9 @@ export const queries = {
     sensores: {
         type: GraphQLList(SensorType),
         resolve: Loader.Sensores
+    },
+    alarme: {
+        type: AlarmeType,
+        resolve: Loader.Alarme
     }
 };

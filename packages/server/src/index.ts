@@ -1,6 +1,6 @@
 import { ApolloServer, PubSub } from "apollo-server";
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
-import moment, { isDate } from "moment";
+import moment from "moment";
 import * as dotenv from "dotenv";
 import mysql from "mysql";
 
@@ -10,10 +10,11 @@ import rootMutation from "./modules/rootMutation";
 import { connectToMongo } from "./utils/db/mongo";
 import { getUser } from "./utils/auth/authMethods";
 
-import DeviceModel from "./modules/Device/DeviceModel";
-import SensorModel from "./modules/Sensor/SensorModel";
+import DeviceModel from "./models/Device/DeviceModel";
+import SensorModel from "./models/Sensor/SensorModel";
 import { Sensor } from "./modules/Sensor/SensorLoader";
-import { point } from "leaflet";
+
+import schema from "./graphql/index";
 
 const pubsub = new PubSub();
 
@@ -99,22 +100,22 @@ connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
     }, 50000);
 });
 
-const schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-        name: "RootQueryType",
-        // @ts-ignore
-        fields: {
-            ...rootQuery
-        }
-    }),
-    mutation: new GraphQLObjectType({
-        name: "RootMutationType",
-        // @ts-ignore
-        fields: {
-            ...rootMutation
-        }
-    })
-});
+// const schema = new GraphQLSchema({
+//     query: new GraphQLObjectType({
+//         name: "RootQueryType",
+//         // @ts-ignore
+//         fields: {
+//             ...rootQuery
+//         }
+//     }),
+//     mutation: new GraphQLObjectType({
+//         name: "RootMutationType",
+//         // @ts-ignore
+//         fields: {
+//             ...rootMutation
+//         }
+//     })
+// });
 
 const server = new ApolloServer({
     schema,

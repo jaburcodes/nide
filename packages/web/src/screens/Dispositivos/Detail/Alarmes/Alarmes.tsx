@@ -70,7 +70,7 @@ const Alarmes = ({ history }: any) => {
                                     color: "#999999"
                                 }}
                             >
-                                Hardware ID
+                                Sensor
                             </TableCell>
                             <TableCell
                                 style={{
@@ -80,7 +80,7 @@ const Alarmes = ({ history }: any) => {
                                     color: "#999999"
                                 }}
                             >
-                                Mensagens
+                                ID
                             </TableCell>
                             <TableCell
                                 style={{

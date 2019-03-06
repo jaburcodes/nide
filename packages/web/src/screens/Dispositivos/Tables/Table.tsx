@@ -67,7 +67,7 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
         const { history } = this.props;
 
         history.push({ pathname: `/dispositivos/${_id}` });
-    }
+    };
 
     render() {
         const { rows, rowsPerPage, page } = this.state;
@@ -139,9 +139,17 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                     </TableHead>
                                     <TableBody>
                                         {data.devices.map((device: any) => (
-                                            <TableRow 
-                                                key={device._id} 
-                                                onClick={() => this.onDispositivoClick(device._id)}>
+                                            <TableRow
+                                                style={{
+                                                    cursor: "pointer"
+                                                }}
+                                                key={device._id}
+                                                onClick={() =>
+                                                    this.onDispositivoClick(
+                                                        device._id
+                                                    )
+                                                }
+                                            >
                                                 <TableCell
                                                     style={{
                                                         textAlign: "start",

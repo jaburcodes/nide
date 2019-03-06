@@ -7,6 +7,7 @@ interface TipProps {
 
 const Tip = styled.p<TipProps>`
     width: ${props => props.width || 100}%;
+    max-width: 250px;
     height: 24px;
     display: flex;
     align-items: center;

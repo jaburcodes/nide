@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import * as bcrypt from "bcryptjs";
 
-import UserModel from "../../modules/User/UserModel";
+import UserModel from "../../models/User/UserModel";
 
 export const getUser = async (token: string) => {
     if (!token) {
