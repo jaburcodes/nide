@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { graphql, Query } from "react-apollo";
+import { Query } from "react-apollo";
 
 import { Theme } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -17,6 +17,7 @@ import { devices } from "../../../graphql/queries";
 
 interface DispositivoProps {
     classes?: any;
+    history?: any;
     theme?: Theme;
     style?: React.CSSProperties;
 }
@@ -61,6 +62,12 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
     handleChangeRowsPerPage = (event: any) => {
         this.setState({ page: 0, rowsPerPage: event.target.value });
     };
+
+    onDispositivoClick = (_id: any) => {
+        const { history } = this.props;
+
+        history.push({ pathname: `/dispositivos/${_id}` });
+    }
 
     render() {
         const { rows, rowsPerPage, page } = this.state;
@@ -132,7 +139,9 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                     </TableHead>
                                     <TableBody>
                                         {data.devices.map((device: any) => (
-                                            <TableRow key={device._id}>
+                                            <TableRow 
+                                                key={device._id} 
+                                                onClick={() => this.onDispositivoClick(device._id)}>
                                                 <TableCell
                                                     style={{
                                                         textAlign: "start",

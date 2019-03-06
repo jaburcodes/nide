@@ -85,8 +85,6 @@ connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
 
     const newPointValue = lastValues.map(({ pointValue }) => pointValue);
 
-    console.log(lastValues);
-
     setInterval(() => {
         lastValues.map(({ dataPointId, dataType, ts }) => {
             const date = moment(ts).format("DD/MM");

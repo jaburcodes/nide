@@ -36,7 +36,7 @@ const Home = ({ history }: any) => {
                 <Title style={{ alignSelf: "center" }} color="black">
                     Dispositivos
                 </Title>
-                <DispositivoTable />
+                <DispositivoTable history={history} />
                 <Fab
                     onClick={() => handleOpen()}
                     style={{

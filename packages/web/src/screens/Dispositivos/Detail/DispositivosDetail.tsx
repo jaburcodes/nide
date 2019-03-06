@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
+import { Query } from "react-apollo";
 
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import Modal from "react-modal";
 
 import StyledDetail from "../../../utils/components/Dispositivos/Detail/Detail";
 import Wrapper from "../../../utils/components/Dispositivos/Detail/Wrapper/Wrapper";
@@ -10,6 +11,8 @@ import Wrapper from "../../../utils/components/Dispositivos/Detail/Wrapper/Wrapp
 import Relatorios from "./Relatorios/Relatorios";
 import Alarmes from "./Alarmes/Alarmes";
 import AddAlarmeForm from "./AddAlarme/AddAlarme";
+
+import { device } from "../../../graphql/queries";
 
 const customStyles = {
     content: {

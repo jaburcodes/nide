@@ -64,7 +64,7 @@ const App = () => (
                         />
                         <PrivateRoute
                             exact
-                            path="/dispositivos/detail"
+                            path="/dispositivos/:id"
                             component={DispositivosDetail}
                             history={history}
                         />
