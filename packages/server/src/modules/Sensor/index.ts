@@ -19,7 +19,7 @@ export const queries = {
         resolve: Loader.Sensores
     },
     sensorAlarm: {
-        type: AlarmeType,
+        type: GraphQLList(AlarmeType),
         args: {
             _id: {
                 type: GraphQLString

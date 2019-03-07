@@ -13,19 +13,12 @@ export const CreateAlarme = (
     object,
     { sensor, aceitavel, emergencial, perigoso },
     ctx
-) => {
-    const newAlarme = new AlarmeModel({
+) =>
+    AlarmeModel.findOneAndUpdate(
         sensor,
-        aceitavel,
-        emergencial,
-        perigoso
-    });
-
-    return new Promise((resolve, reject) => {
-        newAlarme.save((err, res) => {
-            err ? reject(err) : resolve(res);
-        });
-    });
-};
+        { $set: { sensor, aceitavel, emergencial, perigoso } },
+        { upsert: true, new: true },
+        (err, doc) => (err ? err : doc)
+    );
 
 export const Sensor = ({ _id }, args, ctx) => SensorModel.findById({ _id });

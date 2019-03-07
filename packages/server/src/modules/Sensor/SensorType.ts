@@ -6,8 +6,6 @@ import {
     GraphQLInt
 } from "graphql";
 
-import AlarmeType from "../Alarme/AlarmeType";
-
 const SensorType = new GraphQLObjectType({
     name: "SensorType",
     fields: {
