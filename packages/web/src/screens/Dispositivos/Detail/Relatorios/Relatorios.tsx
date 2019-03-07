@@ -18,40 +18,6 @@ const Relatorios = ({ _id }: any) => {
         { x: "Abr", y: 6 }
     ];
 
-    // <Query query={deviceSensors} variables={{ _id }}>
-    //     {({ loading, error, data }) => {
-    //         if (loading) return "Loading...";
-    //         if (error) return `Error! ${error.message}`;
-
-    //         return (
-    //             <StyledRelatorios>
-    //                 {data.sensors.map((sensor: any) => {
-    //                     const newData = sensor.map(
-    //                         ({ date, pointValue }: any) => {
-    //                             return {
-    //                                 date,
-    //                                 ...pointValue
-    //                             };
-    //                         }
-    //                     );
-
-    //                     <Fragment>
-    //                         <Title
-    //                             color="black"
-    //                             onClick={() => console.log(newData)}
-    //                         >
-    //                             Relatorios
-    //                         </Title>
-    //                         {/* <Sensores>
-    //                             <Graph name={sensor.xid} data={data} />
-    //                         </Sensores> */}
-    //                     </Fragment>;
-    //                 })}
-    //             </StyledRelatorios>
-    //         );
-    //     }}
-    // </Query>
-
     return (
         <Query query={deviceSensors} variables={{ _id }}>
             {({ loading, error, data }) => {
@@ -71,15 +37,36 @@ const Relatorios = ({ _id }: any) => {
                 //     []
                 // );
 
+                {
+                    data.deviceSensors
+                        .map((sensor: any) => sensor)
+                        .reduce(
+                            (acc: any, item: any) => [
+                                {
+                                    ...acc,
+                                    ...item.xid,
+                                    ...item.pointValue.map((p: any) => ({
+                                        x: item.date,
+                                        y: p
+                                    }))
+                                }
+                            ],
+                            []
+                        );
+                }
+
                 const newestData = data.deviceSensors
                     .map((sensor: any) => sensor)
                     .reduce(
                         (acc: any, item: any) => [
-                            ...acc,
-                            ...item.pointValue.map((p: any) => ({
-                                x: item.date,
-                                y: p
-                            }))
+                            {
+                                ...acc,
+                                xid: item.xid,
+                                data: item.pointValue.map((p: any) => ({
+                                    x: item.date,
+                                    y: p
+                                }))
+                            }
                         ],
                         []
                     );
@@ -93,7 +80,9 @@ const Relatorios = ({ _id }: any) => {
                             Relatorios
                         </Title>
                         <Sensores>
-                            <Graph name={"X"} data={newestData} />
+                            {newestData.map(({ xid, data }: any) => (
+                                <Graph name={xid} data={data} />
+                            ))}
                         </Sensores>
                     </StyledRelatorios>
                 );
