@@ -9,13 +9,13 @@ export const Devices = (object, args, ctx) =>
         .then(posts => posts)
         .catch(err => err);
 
-export const updateDevice = (object, { name, latitude, longitude }, ctx) => {
+export const updateDevice = (object, { name, latitude, longitude }, ctx) =>
     DeviceModel.findOneAndUpdate(
         name,
         { $set: { latitude, longitude } },
-        { new: true }
-    ).exec();
-};
+        { new: true },
+        (err, doc) => (err ? err : doc)
+    );
 
 export const Sensores = (object, { _id }, ctx) =>
     SensorModel.find({ dataSourceId: _id });
