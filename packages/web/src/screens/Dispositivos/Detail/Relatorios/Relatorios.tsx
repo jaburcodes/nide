@@ -24,37 +24,6 @@ const Relatorios = ({ _id }: any) => {
                 if (loading) return "Loading...";
                 if (error) return `Error! ${error.message}`;
 
-                // const myData = data.deviceSensors.map((sensor: any) => sensor);
-
-                // const newestData = myData.reduce(
-                //     (acc: any, item: any) => [
-                //         ...acc,
-                //         ...item.pointValue.map((p: any) => ({
-                //             x: item.date,
-                //             y: p
-                //         }))
-                //     ],
-                //     []
-                // );
-
-                {
-                    data.deviceSensors
-                        .map((sensor: any) => sensor)
-                        .reduce(
-                            (acc: any, item: any) => [
-                                {
-                                    ...acc,
-                                    ...item.xid,
-                                    ...item.pointValue.map((p: any) => ({
-                                        x: item.date,
-                                        y: p
-                                    }))
-                                }
-                            ],
-                            []
-                        );
-                }
-
                 const newestData = data.deviceSensors
                     .map((sensor: any) => sensor)
                     .reduce(
@@ -73,15 +42,10 @@ const Relatorios = ({ _id }: any) => {
 
                 return (
                     <StyledRelatorios>
-                        <Title
-                            color="black"
-                            onClick={() => console.log(newestData)}
-                        >
-                            Relatorios
-                        </Title>
+                        <Title color="black">Relatorios</Title>
                         <Sensores>
                             {newestData.map(({ xid, data }: any) => (
-                                <Graph name={xid} data={data} />
+                                <Graph key={xid} name={xid} data={data} />
                             ))}
                         </Sensores>
                     </StyledRelatorios>
