@@ -104,20 +104,6 @@ export const deviceSensors = gql`
             date
             dataType
             dataSourceId
-            alarme {
-                aceitavel {
-                    min
-                    max
-                }
-                emergencial {
-                    min
-                    max
-                }
-                perigoso {
-                    min
-                    max
-                }
-            }
         }
     }
 `;
@@ -139,6 +125,7 @@ export const sensorAlarm = gql`
                 max
             }
             createdAt
+            sensor
         }
     }
 `;

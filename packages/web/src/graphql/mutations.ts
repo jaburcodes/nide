@@ -10,7 +10,11 @@ export const loginUser = gql`
 `;
 
 export const updateDevice = gql`
-    mutation updateDevice($name: String!, $latitude: String!, $longitude: String!) {
+    mutation updateDevice(
+        $name: String!
+        $latitude: String!
+        $longitude: String!
+    ) {
         updateDevice(name: $name, latitude: $latitude, longitude: $longitude) {
             _id
             xid
@@ -18,6 +22,38 @@ export const updateDevice = gql`
             dataSourceType
             latitude
             longitude
+        }
+    }
+`;
+
+export const createAlarme = gql`
+    mutation createAlarme(
+        $sensor: String!
+        $aceitavel: MinMaxInput!
+        $emergencial: MinMaxInput!
+        $perigoso: MinMaxInput!
+    ) {
+        createAlarme(
+            sensor: $sensor
+            aceitavel: $aceitavel
+            emergencial: $emergencial
+            perigoso: $perigoso
+        ) {
+            _id
+            sensor
+            aceitavel {
+                min
+                max
+            }
+            emergencial {
+                min
+                max
+            }
+            perigoso {
+                min
+                max
+            }
+            createdAt
         }
     }
 `;

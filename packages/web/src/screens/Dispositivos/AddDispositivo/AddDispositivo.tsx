@@ -39,37 +39,6 @@ interface MyFormProps {
 interface InputType {}
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-    const [porta1, setPorta1] = useState<string>("");
-    const [input, setInput] = useState<Array<InputType>>([]);
-
-    const addNewInput = () => {
-        const newInput = (
-            <FormControl style={{ width: "100%", marginTop: "25px" }}>
-                <InputLabel htmlFor="age-simple">Porta 1</InputLabel>
-                <Select
-                    value={porta1}
-                    onChange={e => setPorta1(e.target.value)}
-                    inputProps={{
-                        name: "Porta 1",
-                        id: "porta-1"
-                    }}
-                >
-                    <MenuItem value="">
-                        <em>Nenhuma</em>
-                    </MenuItem>
-                    <MenuItem value={"sensorX"}>
-                        Sensor de Inclinação X
-                    </MenuItem>
-                    <MenuItem value={"sensorY"}>
-                        Sensor de Inclinação Y
-                    </MenuItem>
-                    <MenuItem value={"sensorTensao"}>Sensor de Tensão</MenuItem>
-                </Select>
-            </FormControl>
-        );
-        setInput([...input, newInput]);
-    };
-
     const {
         values,
         errors,

@@ -1,6 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
+import { graphql, compose } from "react-apollo";
 
 import Button from "@material-ui/core/Button";
 
@@ -14,7 +15,10 @@ import Title from "../../../../utils/styles/Title/Title";
 import Label from "../../../../utils/styles/Label/Label";
 import Error from "../../../../utils/styles/Error/Error";
 
+import { createAlarme } from "../../../../graphql/mutations";
+
 interface FormValues {
+    sensor: number;
     aceitavel: InputValues;
     emergencial: InputValues;
     perigoso: InputValues;
@@ -34,6 +38,7 @@ interface OtherProps {
 interface MyFormProps {
     mutate?: any;
     history?: any;
+    createAlarme: (variables: any) => any;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
@@ -50,6 +55,24 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     return (
         <Form onSubmit={handleSubmit}>
             <Title>Adicionar Alarme</Title>
+
+            <Label>Sensor</Label>
+            <AlarmeWrapper>
+                <Input
+                    width={45}
+                    style={{ marginTop: "25px" }}
+                    placeholder="Sensor"
+                    type="text"
+                    name="sensor"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.sensor && values.sensor}
+                />
+                {touched.sensor &&
+                    touched.sensor &&
+                    errors.sensor &&
+                    errors.sensor && <Error>Mínimo inválido.</Error>}
+            </AlarmeWrapper>
 
             <Label>Nível Aceitável</Label>
             <AlarmeWrapper>
@@ -169,6 +192,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
 const AddAlarmeForm = withFormik<MyFormProps, FormValues>({
     validationSchema: Yup.object().shape({
+        sensor: Yup.number().required("Sensor é obrigatório"),
         aceitavel: Yup.object().shape({
             min: Yup.number().required("Mínimo é obrigatório"),
             max: Yup.number().required("Máximo é obrigatório")
@@ -184,12 +208,40 @@ const AddAlarmeForm = withFormik<MyFormProps, FormValues>({
     }),
 
     handleSubmit(
-        { aceitavel, emergencial, perigoso }: FormValues,
+        { sensor, aceitavel, emergencial, perigoso }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
-        console.log(aceitavel, emergencial, perigoso);
+        console.log(sensor, aceitavel, emergencial, perigoso);
+
+        props
+            .createAlarme({
+                variables: { sensor, aceitavel, emergencial, perigoso }
+            })
+            .then((response: any) => {
+                console.log("SUCCESS BITCHh!!!!", response);
+            })
+            .catch((e: any) => {
+                setSubmitting(false);
+                setErrors({
+                    sensor: "",
+                    aceitavel: {
+                        min: "",
+                        max: ""
+                    },
+                    emergencial: {
+                        min: "",
+                        max: ""
+                    },
+                    perigoso: {
+                        min: "",
+                        max: ""
+                    }
+                });
+            });
     },
     displayName: "FormEnhancer"
 })(InnerForm);
 
-export default AddAlarmeForm;
+export default compose(graphql(createAlarme, { name: "createAlarme" }))(
+    AddAlarmeForm
+);
