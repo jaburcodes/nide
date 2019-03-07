@@ -27,16 +27,18 @@ const customStyles = {
     }
 };
 
-const DispositivosDetail = ({ history }: any) => {
+const DispositivosDetail = (props: any) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const handleOpen = () => setOpen(!open);
 
+    const id = props.match.params.id;
+
     return (
         <StyledDetail>
             <Wrapper>
-                <Relatorios />
-                <Alarmes />
+                <Relatorios id={id} />
+                <Alarmes id={id} />
                 <Fab
                     onClick={() => handleOpen()}
                     style={{
