@@ -34,10 +34,6 @@ const SensorType = new GraphQLObjectType({
         dataSourceId: {
             type: GraphQLID,
             resolve: o => o.dataSourceId
-        },
-        alarme: {
-            type: AlarmeType,
-            resolve: o => o.alarme
         }
     }
 });

@@ -121,3 +121,24 @@ export const deviceSensors = gql`
         }
     }
 `;
+
+export const sensorAlarm = gql`
+    query sensorAlarm($_id: String!) {
+        sensorAlarm(_id: $_id) {
+            _id
+            aceitavel {
+                min
+                max
+            }
+            emergencial {
+                min
+                max
+            }
+            perigoso {
+                min
+                max
+            }
+            createdAt
+        }
+    }
+`;

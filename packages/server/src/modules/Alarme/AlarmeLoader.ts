@@ -11,26 +11,21 @@ export const Alarmes = (object, args, ctx) =>
 
 export const CreateAlarme = (
     object,
-    { _id, aceitavel, emergencial, perigoso },
+    { sensor, aceitavel, emergencial, perigoso },
     ctx
 ) => {
-    if (SensorModel.findById(_id)) {
-        const newAlarme = new AlarmeModel({
-            sensor: _id,
-            aceitavel,
-            emergencial,
-            perigoso
-        });
+    const newAlarme = new AlarmeModel({
+        sensor,
+        aceitavel,
+        emergencial,
+        perigoso
+    });
 
-        return new Promise((resolve, reject) => {
-            newAlarme.save((err, res) => {
-                err ? reject(err) : resolve(res);
-            });
+    return new Promise((resolve, reject) => {
+        newAlarme.save((err, res) => {
+            err ? reject(err) : resolve(res);
         });
-    } else {
-        return "Sensor not found.";
-    }
+    });
 };
 
-export const Sensor = ({ _id }, args, ctx) =>
-    SensorModel.findById({ _id });
+export const Sensor = ({ _id }, args, ctx) => SensorModel.findById({ _id });

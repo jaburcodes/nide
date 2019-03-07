@@ -9,5 +9,5 @@ export const Sensores = (object, args, ctx) =>
         .then(sensores => sensores)
         .catch(err => err);
 
-export const Alarme = ({ _id }, args, ctx) =>
-    AlarmeModel.findById({ sensor: _id });
+export const Alarme = (object, { _id }, ctx) =>
+    AlarmeModel.find({ sensor: _id });

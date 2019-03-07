@@ -1,4 +1,5 @@
 import React from "react";
+import { Query } from "react-apollo";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -35,122 +36,120 @@ const rows = [
     )
 ];
 
-const Alarmes = ({ history }: any) => {
-    return (
-        <StyledAlarmes>
-            <Title color="black">Alarmes</Title>
-            <Paper
-                style={{
-                    width: "100%",
-                    height: "auto",
-                    gridRow: "2 / 3",
-                    boxShadow: "0",
-                    borderRadius: "0",
-                    marginTop: "25px"
-                }}
-            >
-                <Table>
-                    <TableHead>
-                        <TableRow>
+const Alarmes = ({ history }: any) => (
+    <StyledAlarmes>
+        <Title color="black">Alarmes</Title>
+        <Paper
+            style={{
+                width: "100%",
+                height: "auto",
+                gridRow: "2 / 3",
+                boxShadow: "0",
+                borderRadius: "0",
+                marginTop: "25px"
+            }}
+        >
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell
+                            style={{
+                                textAlign: "start",
+                                fontFamily: "Montserrat",
+                                fontSize: "0.9rem",
+                                color: "#999999"
+                            }}
+                        >
+                            Nível de Alarme
+                        </TableCell>
+                        <TableCell
+                            style={{
+                                textAlign: "start",
+                                fontFamily: "Montserrat",
+                                fontSize: "0.9rem",
+                                color: "#999999"
+                            }}
+                        >
+                            Sensor
+                        </TableCell>
+                        <TableCell
+                            style={{
+                                textAlign: "start",
+                                fontFamily: "Montserrat",
+                                fontSize: "0.9rem",
+                                color: "#999999"
+                            }}
+                        >
+                            ID
+                        </TableCell>
+                        <TableCell
+                            style={{
+                                textAlign: "start",
+                                fontFamily: "Montserrat",
+                                fontSize: "0.9rem",
+                                color: "#999999"
+                            }}
+                        >
+                            Data
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map(row => (
+                        <TableRow
+                            style={{
+                                cursor: "pointer"
+                            }}
+                            key={row.id}
+                        >
                             <TableCell
                                 style={{
                                     textAlign: "start",
-                                    fontFamily: "Montserrat",
                                     fontSize: "0.9rem",
-                                    color: "#999999"
+                                    fontWeight: 500,
+                                    color: "black"
                                 }}
+                                component="th"
+                                scope="row"
                             >
-                                Nível de Alarme
+                                <Tip background="#2ECC71">{row.name}</Tip>
                             </TableCell>
                             <TableCell
                                 style={{
                                     textAlign: "start",
-                                    fontFamily: "Montserrat",
                                     fontSize: "0.9rem",
-                                    color: "#999999"
+                                    fontWeight: 500,
+                                    color: "black"
                                 }}
                             >
-                                Sensor
+                                {row.calories}
                             </TableCell>
                             <TableCell
                                 style={{
                                     textAlign: "start",
-                                    fontFamily: "Montserrat",
                                     fontSize: "0.9rem",
-                                    color: "#999999"
+                                    fontWeight: 500,
+                                    color: "black"
                                 }}
                             >
-                                ID
+                                {row.fat}
                             </TableCell>
                             <TableCell
                                 style={{
                                     textAlign: "start",
-                                    fontFamily: "Montserrat",
                                     fontSize: "0.9rem",
-                                    color: "#999999"
+                                    fontWeight: 500,
+                                    color: "black"
                                 }}
                             >
-                                Data
+                                {row.carbs}
                             </TableCell>
                         </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map(row => (
-                            <TableRow
-                                style={{
-                                    cursor: "pointer"
-                                }}
-                                key={row.id}
-                            >
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "0.9rem",
-                                        fontWeight: 500,
-                                        color: "black"
-                                    }}
-                                    component="th"
-                                    scope="row"
-                                >
-                                    <Tip background="#2ECC71">{row.name}</Tip>
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "0.9rem",
-                                        fontWeight: 500,
-                                        color: "black"
-                                    }}
-                                >
-                                    {row.calories}
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "0.9rem",
-                                        fontWeight: 500,
-                                        color: "black"
-                                    }}
-                                >
-                                    {row.fat}
-                                </TableCell>
-                                <TableCell
-                                    style={{
-                                        textAlign: "start",
-                                        fontSize: "0.9rem",
-                                        fontWeight: 500,
-                                        color: "black"
-                                    }}
-                                >
-                                    {row.carbs}
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Paper>
-        </StyledAlarmes>
-    );
-};
+                    ))}
+                </TableBody>
+            </Table>
+        </Paper>
+    </StyledAlarmes>
+);
 
 export default Alarmes;

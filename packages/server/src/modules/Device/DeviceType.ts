@@ -1,14 +1,9 @@
 import {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLList,
     GraphQLID,
-    GraphQLInt,
-    GraphQLFloat
+    GraphQLInt
 } from "graphql";
-
-import SensorType from "../Sensor/SensorType";
-import * as Loader from "./DeviceLoader";
 
 const DeviceType = new GraphQLObjectType({
     name: "DeviceType",

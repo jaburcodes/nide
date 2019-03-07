@@ -1,12 +1,4 @@
-import {
-    GraphQLNonNull,
-    GraphQLID,
-    GraphQLInt,
-    GraphQLFloat,
-    GraphQLList,
-    GraphQLString,
-    GraphQLInputObjectType
-} from "graphql";
+import { GraphQLList, GraphQLString } from "graphql";
 
 import DeviceType from "./DeviceType";
 import SensorType from "../Sensor/SensorType";
