@@ -50,20 +50,6 @@ export const sensores = gql`
             date
             dataType
             dataSourceId
-            alarmes {
-                aceitavel {
-                    min
-                    max
-                }
-                emergencial {
-                    min
-                    max
-                }
-                perigoso {
-                    min
-                    max
-                }
-            }
         }
     }
 `;
@@ -77,20 +63,6 @@ export const sensor = gql`
             date
             dataType
             dataSourceId
-            alarmes {
-                aceitavel {
-                    min
-                    max
-                }
-                emergencial {
-                    min
-                    max
-                }
-                perigoso {
-                    min
-                    max
-                }
-            }
         }
     }
 `;
