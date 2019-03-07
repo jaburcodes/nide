@@ -104,7 +104,7 @@ export const deviceSensors = gql`
             date
             dataType
             dataSourceId
-            alarmes {
+            alarme {
                 aceitavel {
                     min
                     max

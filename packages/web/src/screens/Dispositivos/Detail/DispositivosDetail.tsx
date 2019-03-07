@@ -32,13 +32,13 @@ const DispositivosDetail = (props: any) => {
 
     const handleOpen = () => setOpen(!open);
 
-    const id = props.match.params.id;
+    const _id = props.match.params.id;
 
     return (
         <StyledDetail>
             <Wrapper>
-                <Relatorios id={id} />
-                <Alarmes id={id} />
+                <Relatorios _id={_id} />
+                <Alarmes _id={_id} />
                 <Fab
                     onClick={() => handleOpen()}
                     style={{

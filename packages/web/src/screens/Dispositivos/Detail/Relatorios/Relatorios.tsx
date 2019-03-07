@@ -10,7 +10,7 @@ import Graph from "./Graph/Graph";
 
 import { deviceSensors } from "../../../../graphql/queries";
 
-const Relatorios = ({ id }: any) => {
+const Relatorios = ({ _id }: any) => {
     // const data = [
     //     { x: "Jan", y: 2 },
     //     { x: "Fev", y: 1 },
@@ -19,7 +19,7 @@ const Relatorios = ({ id }: any) => {
     // ];
 
     return (
-        <Query query={deviceSensors} variables={{ id }}>
+        <Query query={deviceSensors} variables={{ _id }}>
             {({ loading, error, data }) => {
                 if (loading) return "Loading...";
                 if (error) return `Error! ${error.message}`;
@@ -27,7 +27,7 @@ const Relatorios = ({ id }: any) => {
                 return (
                     <StyledRelatorios>
                         {data.sensors.map((sensor: any) => {
-                            const data = sensor.map(
+                            const newData = sensor.map(
                                 ({ date, pointValue }: any) => {
                                     return {
                                         date,
@@ -39,7 +39,7 @@ const Relatorios = ({ id }: any) => {
                             <Fragment>
                                 <Title
                                     color="black"
-                                    onClick={() => console.log(data)}
+                                    onClick={() => console.log(newData)}
                                 >
                                     Relatorios
                                 </Title>

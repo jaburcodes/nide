@@ -1,12 +1,28 @@
-import { InMemoryCache } from "apollo-boost";
-import ApolloClient from "apollo-client";
+import { ApolloClient } from "apollo-client";
+import { ApolloLink } from "apollo-link";
+import { HttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
-import { createHttpLink } from "apollo-link-http";
+import { onError } from "apollo-link-error";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
 const cache = new InMemoryCache();
 
-const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql"
+const httpLink = new HttpLink({ uri: "http://localhost:4000/graphql" });
+
+const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+    if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, path }) =>
+            console.log(`[GraphQL error]: Message: ${message}, Path: ${path}`)
+        );
+    }
+
+    if (networkError) {
+        console.log(
+            `[Network error ${operation.operationName}]: ${
+                networkError.message
+            }`
+        );
+    }
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -20,8 +36,7 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const client = new ApolloClient({
-    // @ts-ignore
-    link: authLink.concat(httpLink),
+    link: ApolloLink.from([errorLink, authLink, httpLink]),
     cache
 });
 
