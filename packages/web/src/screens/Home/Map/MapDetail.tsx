@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import Title from "../../../utils/styles/Title/Title";
-import MiniTitle from "../../../utils/styles/MiniTitle/MiniTitle";
 import Tip from "../../../utils/components/Dispositivos/Table/Tip/Tip";
 import BigTip from "../../../utils/components/Home/Map/Detail/BigTip";
 
@@ -34,24 +33,21 @@ const TipsWrapper = styled.div`
 `;
 
 interface DetailProps {
-    pointName?: string;
-    pointAddress?: string;
-    pointNivel?: string;
-    pointX?: number;
-    pointY?: number;
+    name: string;
+    pointNivel: string;
+    pointX: number;
+    pointY: number;
 }
 
 const MapDetail: React.FC<DetailProps> = ({
-    pointName,
-    pointAddress,
+    name,
     pointNivel,
     pointX,
     pointY
 }) => (
     <WholeWrapper>
         <Wrapper>
-            <Title color="black">{pointName}</Title>
-            <MiniTitle color="black">{pointAddress}</MiniTitle>
+            <Title color="black">{name}</Title>
         </Wrapper>
 
         <Wrapper>
