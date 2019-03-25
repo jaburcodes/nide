@@ -1,5 +1,4 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 import { graphql } from "react-apollo";
@@ -24,14 +23,14 @@ interface FormValues {
 interface OtherProps {
     title?: string;
     mutate?: any;
-    history?: any;
+    history: any;
 }
 
 interface MyFormProps {
     initialEmail?: string;
     initialPassword?: string;
     mutate?: any;
-    history?: any;
+    history: any;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
@@ -121,8 +120,8 @@ const SignInForm = withFormik<MyFormProps, FormValues>({
                 setSubmitting(false);
                 setErrors({ email: "", password: "" });
             });
-    },
-    displayName: "FormEnhancer"
+    }
 })(InnerForm);
 
+//@ts-ignore
 export default graphql(loginUser)(SignInForm);

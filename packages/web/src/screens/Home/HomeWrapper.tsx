@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import { createBrowserHistory } from "history";
 
 import StyledHomeWrapper from "../../utils/components/Home/Home";
 import HomeBackground from "../../utils/components/Home/HomeBackground";
@@ -9,9 +8,11 @@ import Home from "./Home";
 import MapDetail from "./Map/MapDetail";
 import MapHome from "./Map/MapHome";
 
-const history = createBrowserHistory();
+interface HomeWrapperProps {
+    history: any;
+}
 
-const HomeWrapper = () => (
+const HomeWrapper: React.FC<HomeWrapperProps> = ({ history }: any) => (
     <HomeBackground>
         <StyledHomeWrapper>
             <Switch>
