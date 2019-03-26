@@ -10,7 +10,7 @@ import PrivateRoute from "./routes/Private";
 import HomeWrapper from "./screens/Home/HomeWrapper";
 
 import MapHome from "./screens/Home/Map/MapHome";
-import MapDetail from "./screens/Home/Map/MapDetail";
+import MapDetail from "./screens/Home/Map/Detail/MapDetail";
 
 import Dispositivos from "./screens/Dispositivos/Dispositivos";
 import DispositivosDetail from "./screens/Dispositivos/Detail/DispositivosDetail";

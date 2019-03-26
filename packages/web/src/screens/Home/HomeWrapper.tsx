@@ -5,7 +5,7 @@ import StyledHomeWrapper from "../../utils/components/Home/Home";
 import HomeBackground from "../../utils/components/Home/HomeBackground";
 
 import Home from "./Home";
-import MapDetail from "./Map/MapDetail";
+import MapDetail from "./Map/Detail/MapDetail";
 import MapHome from "./Map/MapHome";
 
 interface HomeWrapperProps {

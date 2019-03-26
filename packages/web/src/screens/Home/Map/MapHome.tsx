@@ -8,8 +8,9 @@ import { devices } from "../../../graphql/queries";
 import StyledHomeWrapper from "../../../utils/components/Home/Home";
 import Intro from "../../../utils/components/Home/Map/Intro/Intro";
 import Wrapper from "../../../utils/components/Home/Map/Wrapper/Wrapper";
+import Title from "../../../utils/styles/Title/Title";
 
-import MapDetail from "./MapDetail";
+import MapDetail from "./Detail/MapDetail";
 
 interface Device {
     _id: string;
@@ -30,8 +31,12 @@ const MapHome: React.FC<Props> = props => {
     const [lat, setLat] = useState<number>(-25.4809);
     const [lng, setLng] = useState<number>(-49.3044);
     const [zoom, setZoom] = useState<number>(13);
+    const [device, setDevice] = useState<string>("");
 
-    const [name, setName] = useState<string>("");
+    const onDevice = (_id: string) => {
+        setDevice(_id);
+        console.log(device);
+    };
 
     const center: L.LatLngExpression = [lat, lng];
 
@@ -47,12 +52,11 @@ const MapHome: React.FC<Props> = props => {
                     <StyledHomeWrapper>
                         <Intro>
                             <Wrapper>
-                                <MapDetail
-                                    name="Ponto ACME Ltda."
-                                    pointNivel="Aceitável"
-                                    pointX={0.394}
-                                    pointY={0.452}
-                                />
+                                {(device === "" && (
+                                    <Title color="black">
+                                        Para iniciar selecione um ponto.
+                                    </Title>
+                                )) || <MapDetail _id={device} />}
                             </Wrapper>
                         </Intro>
                         <Map center={center} zoom={zoom}>
@@ -60,18 +64,15 @@ const MapHome: React.FC<Props> = props => {
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             />
-                            {devices.map((device: Device) => (
-                                <Marker
-                                    key={device._id}
-                                    position={[
-                                        device.latitude,
-                                        device.longitude
-                                    ]}
-                                    onClick={() =>
-                                        console.log("OIA O DEVICE", device)
-                                    }
-                                />
-                            ))}
+                            {devices.map(
+                                ({ _id, latitude, longitude }: Device) => (
+                                    <Marker
+                                        key={_id}
+                                        position={[latitude, longitude]}
+                                        onClick={() => onDevice(_id)}
+                                    />
+                                )
+                            )}
                         </Map>
                     </StyledHomeWrapper>
                 );
