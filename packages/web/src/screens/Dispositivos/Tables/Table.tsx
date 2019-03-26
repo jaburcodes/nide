@@ -13,7 +13,7 @@ import Paper from "@material-ui/core/Paper";
 
 import PaginationWrapped from "./Pagination";
 
-import { devices } from "../../../graphql/queries";
+import { devices, deviceSensors } from "../../../graphql/queries";
 
 interface DispositivoProps {
     classes?: any;
@@ -138,62 +138,112 @@ class DispositivoTable extends Component<DispositivoProps, {}> {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {data.devices.map((device: any) => (
-                                            <TableRow
-                                                style={{
-                                                    cursor: "pointer"
-                                                }}
-                                                key={device._id}
-                                                onClick={() =>
-                                                    this.onDispositivoClick(
-                                                        device._id
-                                                    )
-                                                }
-                                            >
-                                                <TableCell
-                                                    style={{
-                                                        textAlign: "start",
-                                                        fontSize: "0.9rem",
-                                                        fontWeight: 500,
-                                                        color: "black"
-                                                    }}
-                                                    component="th"
-                                                    scope="row"
+                                        {data.devices.map(
+                                            ({
+                                                _id,
+                                                name,
+                                                latitude,
+                                                longitude
+                                            }: any) => (
+                                                <Query
+                                                    query={deviceSensors}
+                                                    variables={{ _id }}
                                                 >
-                                                    {device.name}
-                                                </TableCell>
-                                                <TableCell
-                                                    style={{
-                                                        textAlign: "start",
-                                                        fontSize: "0.9rem",
-                                                        fontWeight: 500,
-                                                        color: "black"
+                                                    {({
+                                                        loading,
+                                                        error,
+                                                        data
+                                                    }) => {
+                                                        if (loading)
+                                                            return "Loading...";
+                                                        if (error)
+                                                            return `Error! ${
+                                                                error.message
+                                                            }`;
+
+                                                        const {
+                                                            deviceSensors
+                                                        } = data;
+
+                                                        console.log(
+                                                            deviceSensors
+                                                        );
+
+                                                        return (
+                                                            <TableRow
+                                                                style={{
+                                                                    cursor:
+                                                                        "pointer"
+                                                                }}
+                                                                key={_id}
+                                                                onClick={() =>
+                                                                    this.onDispositivoClick(
+                                                                        _id
+                                                                    )
+                                                                }
+                                                            >
+                                                                <TableCell
+                                                                    style={{
+                                                                        textAlign:
+                                                                            "start",
+                                                                        fontSize:
+                                                                            "0.9rem",
+                                                                        fontWeight: 500,
+                                                                        color:
+                                                                            "black"
+                                                                    }}
+                                                                    component="th"
+                                                                    scope="row"
+                                                                >
+                                                                    {name}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    style={{
+                                                                        textAlign:
+                                                                            "start",
+                                                                        fontSize:
+                                                                            "0.9rem",
+                                                                        fontWeight: 500,
+                                                                        color:
+                                                                            "black"
+                                                                    }}
+                                                                >
+                                                                    {latitude}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    style={{
+                                                                        textAlign:
+                                                                            "start",
+                                                                        fontSize:
+                                                                            "0.9rem",
+                                                                        fontWeight: 500,
+                                                                        color:
+                                                                            "black"
+                                                                    }}
+                                                                >
+                                                                    {longitude}
+                                                                </TableCell>
+                                                                <TableCell
+                                                                    style={{
+                                                                        textAlign:
+                                                                            "start",
+                                                                        fontSize:
+                                                                            "0.9rem",
+                                                                        fontWeight: 500,
+                                                                        color:
+                                                                            "black"
+                                                                    }}
+                                                                >
+                                                                    {
+                                                                        deviceSensors.length
+                                                                    }
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        );
                                                     }}
-                                                >
-                                                    {device.latitude}
-                                                </TableCell>
-                                                <TableCell
-                                                    style={{
-                                                        textAlign: "start",
-                                                        fontSize: "0.9rem",
-                                                        fontWeight: 500,
-                                                        color: "black"
-                                                    }}
-                                                >
-                                                    {device.longitude}
-                                                </TableCell>
-                                                <TableCell
-                                                    style={{
-                                                        textAlign: "start",
-                                                        fontSize: "0.9rem",
-                                                        fontWeight: 500,
-                                                        color: "black"
-                                                    }}
-                                                >
-                                                    {device.name}
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
+                                                </Query>
+                                            )
+                                        )}
                                     </TableBody>
                                     <TableFooter>
                                         <TableRow>
