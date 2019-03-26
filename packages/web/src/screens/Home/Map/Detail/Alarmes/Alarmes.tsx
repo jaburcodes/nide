@@ -26,7 +26,7 @@ const Alarmes: React.FC<AlarmesProps> = ({ _id }) => (
             <Query query={deviceSensors} variables={{ _id }}>
                 {({ loading: loadingTwo, data: { deviceSensors } }) => {
                     if (loadingOne || loadingTwo)
-                        return <span>loading...</span>;
+                        return "Loading...";
 
                     const newestData = deviceSensors
                         .map((sensor: any) => sensor)
@@ -48,8 +48,12 @@ const Alarmes: React.FC<AlarmesProps> = ({ _id }) => (
                         const lastValue = data.pop();
                         const { y: Y } = lastValue;
 
-                        return { xid, Y };
+                        return { xid, Y }
                     });
+                    
+                    // const myFunction = newValue.map(({ Y }: number) => {
+
+                    // })
 
                     console.log("newValue from two queries", newValue);
 

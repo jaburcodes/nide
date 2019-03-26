@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 const Error = styled.h3`
-    color: #C3262A;
+    cursor: pointer;
     font-family: "Roboto";
     font-size: 1rem;
-    cursor: pointer;
+    color: #c3262a;
+    margin-top: 12px;
 `;
 
 export default Error;

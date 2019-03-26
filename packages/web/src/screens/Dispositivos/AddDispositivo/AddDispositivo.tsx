@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import styled from "styled-components";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 import { graphql, compose } from "react-apollo";
 
 import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
 
 import { addDispositivoFormButton } from "../../../utils/styles/Button/Button";
 import Form from "../../../utils/styles/Form/Form";
@@ -17,6 +14,16 @@ import Title from "../../../utils/styles/Title/Title";
 import Error from "../../../utils/styles/Error/Error";
 
 import { updateDevice } from "../../../graphql/mutations";
+
+const SuccessMessage = styled.h1`
+    margin-top: 25px;
+    align-self: center;
+    font-size: 1rem;
+    font-family: "Poppins";
+    font-weight: bold;
+    line-height: normal;
+    color: #2ecc71;
+`;
 
 interface FormValues {
     name: string;
@@ -40,6 +47,7 @@ interface InputType {}
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     const {
+        status,
         values,
         errors,
         touched,
@@ -48,6 +56,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         handleSubmit,
         isSubmitting
     } = props;
+
+    console.log("OIA O STATUS", status);
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -89,6 +99,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <Error>Longitude inválida.</Error>
             )}
 
+            {status && <SuccessMessage>Atualizado com sucesso!</SuccessMessage>}
+
             <Wrapper style={{ justifyContent: "center", marginTop: "25px" }}>
                 <Button
                     style={addDispositivoFormButton}
@@ -117,17 +129,17 @@ const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
 
     handleSubmit(
         { name, latitude, longitude }: FormValues,
-        { props, setSubmitting, setErrors }
+        { props, setSubmitting, setErrors, setStatus }
     ) {
         console.log(name, latitude, longitude);
 
         props
             .updateDevice({ variables: { name, latitude, longitude } })
             .then((response: any) => {
-                console.log("SUCCESS BITCHh!!!!");
                 props.history.redirect("/dispositivos");
             })
             .catch((e: any) => {
+                setStatus({ success: true });
                 setSubmitting(false);
                 setErrors({ name: "", latitude: "", longitude: "" });
             });
