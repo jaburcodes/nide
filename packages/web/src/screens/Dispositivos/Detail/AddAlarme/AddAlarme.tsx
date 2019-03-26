@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import * as Yup from "yup";
 import { withFormik, FormikProps } from "formik";
 import { graphql, compose } from "react-apollo";
@@ -17,16 +18,26 @@ import Error from "../../../../utils/styles/Error/Error";
 
 import { createAlarme } from "../../../../graphql/mutations";
 
+const SuccessMessage = styled.h1`
+    margin-top: 25px;
+    align-self: center;
+    font-size: 1rem;
+    font-family: "Poppins";
+    font-weight: bold;
+    line-height: normal;
+    color: #2ecc71;
+`;
+
+type InputValues = {
+    min: number;
+    max: number;
+};
+
 interface FormValues {
     sensor: number;
     aceitavel: InputValues;
     emergencial: InputValues;
     perigoso: InputValues;
-}
-
-interface InputValues {
-    min: number;
-    max: number;
 }
 
 interface OtherProps {
@@ -43,6 +54,7 @@ interface MyFormProps {
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     const {
+        status,
         values,
         errors,
         touched,
@@ -80,7 +92,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     width={45}
                     style={{ marginTop: "25px" }}
                     placeholder="Mínimo"
-                    type="text"
+                    type="number"
                     name="aceitavel.min"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -95,7 +107,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     width={45}
                     style={{ marginTop: "25px" }}
                     placeholder="Máximo"
-                    type="text"
+                    type="number"
                     name="aceitavel.max"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -113,7 +125,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     width={45}
                     style={{ marginTop: "25px" }}
                     placeholder="Mínimo"
-                    type="text"
+                    type="number"
                     name="emergencial.min"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -128,7 +140,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     width={45}
                     style={{ marginTop: "25px" }}
                     placeholder="Máximo"
-                    type="text"
+                    type="number"
                     name="emergencial.max"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -146,7 +158,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     width={45}
                     style={{ marginTop: "25px" }}
                     placeholder="Mínimo"
-                    type="text"
+                    type="number"
                     name="perigoso.min"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -161,7 +173,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     width={45}
                     style={{ marginTop: "25px" }}
                     placeholder="Máximo"
-                    type="text"
+                    type="number"
                     name="perigoso.max"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -172,6 +184,9 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     errors.perigoso &&
                     errors.perigoso.max && <Error>Máximo inválido.</Error>}
             </AlarmeWrapper>
+
+            {status && <SuccessMessage>Atualizado com sucesso!</SuccessMessage>}
+
             <Wrapper style={{ justifyContent: "center", marginTop: "25px" }}>
                 <Button
                     style={addDispositivoFormButton}
@@ -209,17 +224,13 @@ const AddAlarmeForm = withFormik<MyFormProps, FormValues>({
 
     handleSubmit(
         { sensor, aceitavel, emergencial, perigoso }: FormValues,
-        { props, setSubmitting, setErrors }
+        { props, setSubmitting, setErrors, setStatus }
     ) {
-        console.log(sensor, aceitavel, emergencial, perigoso);
-
         props
             .createAlarme({
                 variables: { sensor, aceitavel, emergencial, perigoso }
             })
-            .then((response: any) => {
-                console.log("SUCCESS BITCHh!!!!", response);
-            })
+            .then(() => setStatus({ success: true }))
             .catch((e: any) => {
                 setSubmitting(false);
                 setErrors({

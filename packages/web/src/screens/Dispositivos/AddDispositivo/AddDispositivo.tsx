@@ -57,8 +57,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         isSubmitting
     } = props;
 
-    console.log("OIA O STATUS", status);
-
     return (
         <Form onSubmit={handleSubmit}>
             <Title>Atualizar</Title>
@@ -131,15 +129,10 @@ const AddDispositivoForm = withFormik<MyFormProps, FormValues>({
         { name, latitude, longitude }: FormValues,
         { props, setSubmitting, setErrors, setStatus }
     ) {
-        console.log(name, latitude, longitude);
-
         props
             .updateDevice({ variables: { name, latitude, longitude } })
-            .then((response: any) => {
-                props.history.redirect("/dispositivos");
-            })
+            .then(() => setStatus({ success: true }))
             .catch((e: any) => {
-                setStatus({ success: true });
                 setSubmitting(false);
                 setErrors({ name: "", latitude: "", longitude: "" });
             });
