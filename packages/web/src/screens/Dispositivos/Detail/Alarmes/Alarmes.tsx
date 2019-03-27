@@ -1,6 +1,5 @@
 import React from "react";
 import { Query } from "react-apollo";
-import moment from "moment";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -56,6 +55,8 @@ const Alarmes = ({ _id }: any) => (
                         alarme = a;
                         return alarme;
                     });
+
+                    const date = alarme.createdAt;
 
                     const alarmeNivel = (lastValue: any, alarme: any) => {
                         const { Y } = lastValue;
