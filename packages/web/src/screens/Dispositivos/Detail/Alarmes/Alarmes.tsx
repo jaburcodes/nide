@@ -57,23 +57,31 @@ const Alarmes = ({ _id }: any) => (
                         return alarme;
                     });
 
-                    const date = alarme.createdAt;
-
-                    console.log(date);
-
                     const alarmeNivel = (lastValue: any, alarme: any) => {
                         const { Y } = lastValue;
                         const { aceitavel, emergencial, perigoso } = alarme;
 
                         if (Y <= aceitavel.min || Y == aceitavel.max) {
-                            nivelAlarme = "Aceitável";
+                            nivelAlarme = (
+                                <Tip background="#2ECC71" width={60}>
+                                    Aceitável
+                                </Tip>
+                            );
                         } else if (
                             Y == emergencial.min ||
                             Y == emergencial.max
                         ) {
-                            nivelAlarme = "Emergencial";
+                            nivelAlarme = (
+                                <Tip background="#F2C94C" width={60}>
+                                    Emergencial
+                                </Tip>
+                            );
                         } else if (Y == perigoso.min || Y == perigoso.max) {
-                            nivelAlarme = "Perigoso";
+                            nivelAlarme = (
+                                <Tip background="#EB5757" width={60}>
+                                    Perigoso
+                                </Tip>
+                            );
                         }
 
                         return nivelAlarme;
@@ -150,12 +158,10 @@ const Alarmes = ({ _id }: any) => (
                                                     component="th"
                                                     scope="row"
                                                 >
-                                                    <Tip background="#2ECC71">
-                                                        {alarmeNivel(
-                                                            lastValue,
-                                                            alarme
-                                                        )}
-                                                    </Tip>
+                                                    {alarmeNivel(
+                                                        lastValue,
+                                                        alarme
+                                                    )}
                                                 </TableCell>
                                                 <TableCell
                                                     style={{
@@ -185,7 +191,7 @@ const Alarmes = ({ _id }: any) => (
                                                         color: "black"
                                                     }}
                                                 >
-                                                    {alarme.sensor}
+                                                    {alarme.createdAt}
                                                 </TableCell>
                                             </TableRow>
                                         )}

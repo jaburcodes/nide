@@ -25,8 +25,7 @@ const Alarmes: React.FC<AlarmesProps> = ({ _id }) => (
         {({ loading: loadingOne, data: { sensorAlarm } }: any) => (
             <Query query={deviceSensors} variables={{ _id }}>
                 {({ loading: loadingTwo, data: { deviceSensors } }) => {
-                    if (loadingOne || loadingTwo)
-                        return "Loading...";
+                    if (loadingOne || loadingTwo) return "Loading...";
 
                     const newestData = deviceSensors
                         .map((sensor: any) => sensor)
@@ -44,29 +43,58 @@ const Alarmes: React.FC<AlarmesProps> = ({ _id }) => (
                             []
                         );
 
+                    let lastValue;
+                    let alarme: any;
+                    let nivelAlarme: any;
+
                     const newValue = newestData.map(({ xid, data }: any) => {
-                        const lastValue = data.pop();
-                        const { y: Y } = lastValue;
+                        const lastItem = data.pop();
+                        const { y: Y } = lastItem;
 
-                        return { xid, Y }
+                        lastValue = { xid, Y };
+
+                        return lastValue;
                     });
-                    
-                    // const myFunction = newValue.map(({ Y }: number) => {
 
-                    // })
+                    const myData = sensorAlarm.map((a: any) => {
+                        alarme = a;
+                        return alarme;
+                    });
 
-                    console.log("newValue from two queries", newValue);
+                    const alarmeNivel = (lastValue: any, alarme: any) => {
+                        const { Y } = lastValue;
+                        const { aceitavel, emergencial, perigoso } = alarme;
 
-                    const myData = sensorAlarm.map((alarme: any) =>
-                        console.log("alarme from two queries: ", alarme)
-                    );
+                        if (Y <= aceitavel.min || Y == aceitavel.max) {
+                            nivelAlarme = (
+                                <Tip background="#2ECC71" width={60}>
+                                    Aceitável
+                                </Tip>
+                            );
+                        } else if (
+                            Y == emergencial.min ||
+                            Y == emergencial.max
+                        ) {
+                            nivelAlarme = (
+                                <Tip background="#F2C94C" width={60}>
+                                    Emergencial
+                                </Tip>
+                            );
+                        } else if (Y == perigoso.min || Y == perigoso.max) {
+                            nivelAlarme = (
+                                <Tip background="#EB5757" width={60}>
+                                    Perigoso
+                                </Tip>
+                            );
+                        }
+
+                        return nivelAlarme;
+                    };
 
                     return (
                         <Wrapper>
                             <Title color="black">Nível de Alarme</Title>
-                            <Tip background="#2ECC71" width={60}>
-                                {_id}
-                            </Tip>
+                            {alarmeNivel(lastValue, alarme)}
                         </Wrapper>
                     );
                 }}

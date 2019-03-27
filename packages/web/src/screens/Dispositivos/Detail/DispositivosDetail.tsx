@@ -45,8 +45,7 @@ const DispositivosDetail = (props: any) => {
                         backgroundColor: "#00A7D1",
                         color: "#FFF",
                         alignSelf: "flex-end",
-                        justifySelf: "flex-end",
-                        marginTop: "20px"
+                        justifySelf: "flex-end"
                     }}
                     aria-label="Add"
                 >
