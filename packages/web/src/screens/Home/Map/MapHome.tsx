@@ -43,7 +43,7 @@ const MapHome: React.FC<Props> = props => {
     return (
         <Query query={devices}>
             {({ loading, error, data }) => {
-                if (loading) return "Loading...";
+                if (loading) return "";
                 if (error) return `Error! ${error.message}`;
 
                 const { devices } = data;

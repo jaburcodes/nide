@@ -11,8 +11,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import PaginationWrapped from "./Pagination";
-
 import { devices, deviceSensors } from "../../../graphql/queries";
 
 interface DispositivoProps {
@@ -30,7 +28,7 @@ const DispositivoTable: React.FC<DispositivoProps> = ({ history }: any) => {
     return (
         <Query query={devices}>
             {({ loading, error, data }) => {
-                if (loading) return "Loading...";
+                if (loading) return "";
                 if (error) return `Error! ${error.message}`;
 
                 return (

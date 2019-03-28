@@ -32,8 +32,6 @@ var connection = mysql.createConnection({
 
 connection.connect(err => {
     if (err) console.error("Erro ao conectar: " + err.stack);
-
-    console.log("MySQL connected at " + connection.threadId);
 });
 
 // Mostra todos dispositivos disponíveis.
@@ -47,7 +45,7 @@ connection.query("SELECT * FROM datasources", (error, results, fields) => {
         });
 
         if (DeviceModel.findOne({ xid })) {
-            console.log("Devices already exists");
+            return "";
         } else {
             newDevice.save((err, res) => {
                 err ? err : res;
@@ -62,7 +60,7 @@ connection.query("SELECT * FROM datapoints", (error, results, fields) => {
 
     results.map(({ id, xid, dataSourceId }) => {
         if (SensorModel.findOne({ _id: id })) {
-            console.log("Sensor already exists");
+            return "";
         } else {
             const newSensor = new SensorModel({
                 _id: id,
@@ -89,7 +87,6 @@ connection.query("SELECT * FROM pointvalues", (error, results, fields) => {
     setInterval(() => {
         lastValues.map(({ dataPointId, dataType, ts }) => {
             const date = moment(ts).format("DD/MM");
-            console.log(date);
 
             SensorModel.findOneAndUpdate(
                 { _id: dataPointId },

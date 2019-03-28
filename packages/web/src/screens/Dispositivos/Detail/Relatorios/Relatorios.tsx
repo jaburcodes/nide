@@ -13,7 +13,7 @@ import { deviceSensors } from "../../../../graphql/queries";
 const Relatorios = ({ _id }: any) => (
     <Query query={deviceSensors} variables={{ _id }}>
         {({ loading, error, data }) => {
-            if (loading) return "Loading...";
+            if (loading) return "";
             if (error) return `Error! ${error.message}`;
 
             const newestData = data.deviceSensors

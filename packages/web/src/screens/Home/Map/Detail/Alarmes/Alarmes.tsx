@@ -25,7 +25,7 @@ const Alarmes: React.FC<AlarmesProps> = ({ _id }) => (
         {({ loading: loadingOne, data: { sensorAlarm } }: any) => (
             <Query query={deviceSensors} variables={{ _id }}>
                 {({ loading: loadingTwo, data: { deviceSensors } }) => {
-                    if (loadingOne || loadingTwo) return "Loading...";
+                    if (loadingOne || loadingTwo) return "";
 
                     const newestData = deviceSensors
                         .map((sensor: any) => sensor)
