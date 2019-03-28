@@ -1,5 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
+import { format, compareAsc } from "date-fns";
 
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -57,6 +58,9 @@ const Alarmes = ({ _id }: any) => (
                     });
 
                     const date = alarme.createdAt;
+
+                    const myDate = format(date, 'DD/MM/YYYY');
+                    console.log(myDate);
 
                     const alarmeNivel = (lastValue: any, alarme: any) => {
                         const { Y } = lastValue;
