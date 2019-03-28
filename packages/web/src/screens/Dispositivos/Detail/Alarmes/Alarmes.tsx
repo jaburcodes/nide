@@ -59,8 +59,11 @@ const Alarmes = ({ _id }: any) => (
 
                     const date = alarme.createdAt;
 
-                    const myDate = format(date, 'DD/MM/YYYY');
-                    console.log(myDate);
+                    const myDate = new Date(date * 1000);
+
+                    const newDate = myDate.toLocaleString("pt-BR", {
+                        timeZone: "UTC"
+                    });
 
                     const alarmeNivel = (lastValue: any, alarme: any) => {
                         const { Y } = lastValue;
@@ -196,7 +199,7 @@ const Alarmes = ({ _id }: any) => (
                                                         color: "black"
                                                     }}
                                                 >
-                                                    {alarme.createdAt}
+                                                    {newDate}
                                                 </TableCell>
                                             </TableRow>
                                         )}
