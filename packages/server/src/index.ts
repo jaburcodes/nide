@@ -12,9 +12,6 @@ import { getUser } from "./utils/auth/authMethods";
 
 import DeviceModel from "./models/Device/DeviceModel";
 import SensorModel from "./models/Sensor/SensorModel";
-import { Sensor } from "./modules/Sensor/SensorLoader";
-
-//import schema from "./graphql/index";
 
 const pubsub = new PubSub();
 
@@ -151,6 +148,7 @@ function normalizePort(val) {
 
     return false;
 }
+
 const port = normalizePort(process.env.PORT || "4000");
 
 server.listen(port).then(({ url }) => {

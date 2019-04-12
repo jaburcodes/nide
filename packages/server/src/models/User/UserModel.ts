@@ -3,24 +3,25 @@ import { ObjectID } from "mongodb";
 
 const Schema = mongoose.Schema;
 
-ObjectID.prototype.valueOf = function() {
+ObjectID.prototype.valueOf = function () {
     return this.toString();
 };
 
 const UserSchema = new Schema(
     {
-        name: {
+        email: {
             type: String,
-            required: true
+            required: false,
+            index: true
         },
         password: {
             type: String,
             hidden: true
         },
-        email: {
-            type: String,
-            required: false,
-            index: true
+        device: {
+            type: Schema.Types.ObjectId,
+            ref: "Device",
+            required: true
         }
     },
     {

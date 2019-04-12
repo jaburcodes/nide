@@ -17,6 +17,7 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({ history }: any) => (
         <StyledHomeWrapper>
             <Switch>
                 <Route path="/" component={Home} history={history} />
+                <Route path="/signup" component={Home} history={history} />
                 <Route
                     path="/visualizar"
                     component={MapHome}

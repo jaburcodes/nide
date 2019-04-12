@@ -46,6 +46,12 @@ const App = () => (
                         />
                         <PublicRoute
                             exact
+                            path="/signup"
+                            component={HomeWrapper}
+                            history={history}
+                        />
+                        <PublicRoute
+                            exact
                             path="/visualizar"
                             component={MapHome}
                             history={history}

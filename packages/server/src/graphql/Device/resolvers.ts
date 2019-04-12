@@ -22,6 +22,9 @@ const resolvers = {
     Device: {
         sensors: async ({ _id }, args, context, info) => {
             return await DeviceConnector.Sensors(_id);
+        },
+        user: async ({ _id }, args, context, info) => {
+            return await DeviceConnector.User(_id);
         }
     }
 };

@@ -9,6 +9,7 @@ const typeDefs = gql`
         latitude: String!
         longitude: String!
         sensors: [Sensor!]
+        user: User!
     }
 
     type Query {

@@ -1,12 +1,7 @@
-// import * as jwt from "jsonwebtoken";
-
-// import UserModel from "../../models/User/UserModel";
-// import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
-
-import * as jwt from "jsonwebtoken";
 import isEmail from "validator/lib/isEmail";
 
 import UserModel from "../../models/User/UserModel";
+import DeviceModel from "../../models/Device/DeviceModel";
 import {
     createToken,
     verifyToken,
@@ -21,7 +16,8 @@ const UserConnector = {
             .populate("users")
             .then(users => users)
             .catch(err => err),
-    AddUser: async ({ email, password }) => {
+    Device: async ({ _id }) => await DeviceModel.find({ user: _id }),
+    AddUser: async ({ email, password, device }) => {
         return new Promise((resolve, reject) => {
             // Validate the data
             if (!email) {
@@ -34,6 +30,10 @@ const UserConnector = {
                 return reject({ message: "You must provide a password." });
             }
 
+            if (!device) {
+                return reject({ message: "You must provide a device." });
+            }
+
             return encryptPassword(password, (err, hash) => {
                 if (err) {
                     return reject(
@@ -42,7 +42,7 @@ const UserConnector = {
                 }
 
                 return UserModel.create(
-                    Object.assign({ email, password }, { password: hash })
+                    Object.assign({ email, password, device }, { password: hash })
                 )
                     .then(user => {
                         resolve(createToken({ _id: user._id, email }));

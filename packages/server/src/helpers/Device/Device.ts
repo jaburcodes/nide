@@ -1,5 +1,6 @@
 import DeviceModel from "../../models/Device/DeviceModel";
 import SensorModel from "../../models/Sensor/SensorModel";
+import UserModel from "../../models/User/UserModel";
 
 const DeviceConnector = {
     Device: async ({ _id }) => await DeviceModel.findById(_id),
@@ -15,7 +16,8 @@ const DeviceConnector = {
             { new: true },
             (err, doc) => err ? err : doc
         ),
-    Sensors: async ({ _id }) => await SensorModel.find({ dataSourceId: _id })
+    Sensors: async ({ _id }) => await SensorModel.find({ dataSourceId: _id }),
+    User: async ({ _id }) => await UserModel.find({ _id })
 };
 
 export default DeviceConnector;

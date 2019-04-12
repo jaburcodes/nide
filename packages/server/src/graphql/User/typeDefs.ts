@@ -5,6 +5,7 @@ const typeDefs = gql`
         _id: ID!
         name: String!
         email: String!
+        device: Device
         hasNextPage: Boolean!
         token: String!
         error: String!
@@ -16,7 +17,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addUser(email: String!, password: String!): Auth
+        addUser(email: String!, password: String!, device: ID!): Auth
         loginUser(email: String!, password: String!): Auth
     }
 `;

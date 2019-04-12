@@ -1,11 +1,14 @@
 import React, { Fragment } from "react";
+import { Switch, Route } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 
 import Wrapper from "../../utils/components/Home/Wrapper/Wrapper";
 import Visitante from "../../utils/components/Home/Visitante/Visitante";
 
 import SignIn from "../../utils/components/Home/SignIn/SignIn";
-import SignInForm from "../../components/SignIn/SignIn";
+import Login from '../../components/Login/Login';
+import SignInForm from '../../components/Login/SignIn/SignIn';
+import SignUpForm from '../../components/Login/SignUp/SignUp';
 
 import { secondButtonStyle } from "../../utils/styles/Button/Button";
 import Title from "../../utils/styles/Title/Title";
@@ -32,9 +35,10 @@ const Home: React.FC<HomeProps> = ({ history }: any) => (
                 </Button>
             </Wrapper>
         </Visitante>
-        <SignIn>
-            <SignInForm history={history} />
-        </SignIn>
+        <Switch>
+            <Route path="/" component={SignInForm} history={history} />
+            <Route path="/signup" component={SignUpForm} history={history} />
+        </Switch>
     </Fragment>
 );
 

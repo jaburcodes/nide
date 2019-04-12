@@ -1,5 +1,8 @@
 import UserType from "./UserType";
 import * as Loader from "./UserLoader";
+
+import DeviceType from "../Device/DeviceType";
+
 import createConnection from "../utils/createCoonnection";
 
 import {
@@ -35,6 +38,15 @@ export const queries = {
             }
         },
         resolve: Loader.User
+    },
+    userDevice: {
+        type: DeviceType,
+        args: {
+            _id: {
+                type: GraphQLNonNull(GraphQLID)
+            }
+        },
+        resolve: Loader.Device
     }
 };
 
@@ -46,14 +58,14 @@ export const mutations = {
                 type: new GraphQLInputObjectType({
                     name: "AddUserInput",
                     fields: () => ({
-                        name: {
-                            type: GraphQLString
-                        },
                         email: {
                             type: GraphQLString
                         },
                         password: {
                             type: GraphQLString
+                        },
+                        device: {
+                            type: GraphQLID
                         }
                     })
                 })

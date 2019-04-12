@@ -9,10 +9,10 @@ const resolvers = {
                 .catch(err => err)
     },
     Mutation: {
-        addUser: (parent, { email, password }, context, info) => {
+        addUser: (parent, { email, password, device }, context, info) => {
             const errors = [];
 
-            return UserConnector.AddUser({ email, password })
+            return UserConnector.AddUser({ email, password, device })
                 .then(token => ({
                     token,
                     errors
@@ -43,6 +43,10 @@ const resolvers = {
                     throw new Error(err);
                 });
         }
+    },
+    User: {
+        device: async ({ _id }, args, context, info) =>
+            UserConnector.Device({ _id })
     }
 };
 

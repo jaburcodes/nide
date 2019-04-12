@@ -10,17 +10,13 @@ import {
 const UserType = new GraphQLObjectType({
     name: "UserType",
     fields: {
-        name: {
+        email: {
             type: GraphQLString,
-            resolve: o => o.name
+            resolve: o => o.email
         },
         password: {
             type: GraphQLString,
             resolve: o => o.password
-        },
-        email: {
-            type: GraphQLString,
-            resolve: o => o.email
         },
         hasNextPage: {
             type: GraphQLBoolean,
