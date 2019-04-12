@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from 'styled-components';
 import * as Yup from "yup";
-import { withFormik, FormikProps } from "formik";
+import { withFormik, FormikProps, FieldArray } from "formik";
 import { graphql } from "react-apollo";
 
 import Button from "@material-ui/core/Button";
@@ -13,9 +14,28 @@ import Title from "../../../utils/styles/Title/Title";
 import Error from "../../../utils/styles/Error/Error";
 import LinkWrapper from "../../../utils/components/Link/Link";
 
-import SignIn from '../../../utils/components/Home/SignIn/SignIn';
-
 import { addUser } from "../../../graphql/mutations";
+
+const AddDispositivo = styled.h1`
+    color: #00A7D1;
+    text-decoration: uppercase;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: "Poppins";
+    font-weight: bold;
+    line-height: normal;  
+    align-self: flex-start;
+    cursor: pointer;  
+`;
+
+const InputsWrapper = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+`;
 
 interface FormValues {
     email: string;
@@ -38,6 +58,12 @@ interface MyFormProps {
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
+    const [devices, addDevices] = useState([]);
+
+    const addDevice = () => {
+        console.log(devices)
+    };
+
     const {
         values,
         errors,
@@ -73,7 +99,23 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <Error>{errors.password}</Error>
             )}
 
-            <Input
+            <AddDispositivo onClick={addDevice}>Dispositivos</AddDispositivo>
+
+            {
+                devices.map(({ device, index }: any) => (
+                    <Input
+                        key={index}
+                        placeholder="Senha"
+                        type="device"
+                        name="device"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={device}
+                    />
+                ))
+            }
+
+            {/* <Input
                 placeholder="Dispositivo"
                 type="device"
                 name="device"
@@ -83,7 +125,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             />
             {touched.device && errors.device && (
                 <Error>{errors.device}</Error>
-            )}
+            )} */}
 
             <Wrapper>
                 <LinkWrapper to="/">Entrar</LinkWrapper>

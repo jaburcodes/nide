@@ -8,6 +8,7 @@ import Visitante from "../../utils/components/Home/Visitante/Visitante";
 import SignIn from "../../utils/components/Home/SignIn/SignIn";
 import SignInForm from '../../components/Login/SignIn/SignIn';
 import SignUpForm from '../../components/Login/SignUp/SignUp';
+import FriendList from '../../components/Login/SignUp/FriendList';
 
 import { secondButtonStyle } from "../../utils/styles/Button/Button";
 import Title from "../../utils/styles/Title/Title";
@@ -37,7 +38,7 @@ const Home: React.FC<HomeProps> = ({ history }: any) => (
         <SignIn>
             <Switch>
                 <Route exact path="/" component={SignInForm} history={history} />
-                <Route exact path="/signup" component={SignUpForm} history={history} />
+                <Route exact path="/signup" component={FriendList} history={history} />
             </Switch>
         </SignIn>
 
