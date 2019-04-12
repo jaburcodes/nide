@@ -43,7 +43,7 @@ export const queries = {
         type: DeviceType,
         args: {
             _id: {
-                type: GraphQLNonNull(GraphQLID)
+                type: GraphQLString
             }
         },
         resolve: Loader.Device
@@ -65,7 +65,7 @@ export const mutations = {
                             type: GraphQLString
                         },
                         device: {
-                            type: GraphQLInt
+                            type: GraphQLString
                         }
                     })
                 })

@@ -15,7 +15,7 @@ import LinkWrapper from "../../../utils/components/Link/Link";
 
 import SignIn from '../../../utils/components/Home/SignIn/SignIn';
 
-import { loginUser } from "../../../graphql/mutations";
+import { addUser } from "../../../graphql/mutations";
 
 interface FormValues {
     email: string;
@@ -124,8 +124,23 @@ const SignUpForm = withFormik<MyFormProps, FormValues>({
         { email, password, device }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
-        console.log(email, password, device);
+        props
+            .mutate({ variables: { input: { email, password, device } } })
+            .then(({ data }: any) => {
+                const { addUser } = data;
+
+                if (addUser.token) {
+                    localStorage.setItem("token", addUser.token);
+                }
+            })
+            .then(() => props.history.push("/dispositivos"))
+            .catch((error: string) => {
+                console.log("error", error);
+                setSubmitting(false);
+                setErrors({ email: "", password: "" });
+            });
     }
 })(InnerForm);
 
-export default SignUpForm;
+//@ts-ignore
+export default graphql(addUser)(SignUpForm);

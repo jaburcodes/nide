@@ -1,5 +1,17 @@
 import gql from "graphql-tag";
 
+export const addUser = gql`
+    mutation addUser($input: AddUserInput!) {
+        addUser(input: $input) {
+            email
+            password
+            hasNextPage
+            token
+            error
+        }
+    }
+`;
+
 export const loginUser = gql`
     mutation loginUser($input: LoginUserInput!) {
         loginUser(input: $input) {

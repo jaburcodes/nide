@@ -26,7 +26,7 @@ export const Users = async (object, args, ctx) => {
 
 export const User = (object, args, ctx) => UserModel.findOne({ id: args.id });
 
-export const Device = async ({ _id }) => await DeviceModel.find({ user: _id });
+export const Device = (object, { _id }, ctx) => DeviceModel.find({ user: _id });
 
 export const AddUser = async (object, args, ctx) => {
     const { email, password, device } = args.input;
