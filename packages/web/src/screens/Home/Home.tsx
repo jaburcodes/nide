@@ -6,7 +6,6 @@ import Wrapper from "../../utils/components/Home/Wrapper/Wrapper";
 import Visitante from "../../utils/components/Home/Visitante/Visitante";
 
 import SignIn from "../../utils/components/Home/SignIn/SignIn";
-import Login from '../../components/Login/Login';
 import SignInForm from '../../components/Login/SignIn/SignIn';
 import SignUpForm from '../../components/Login/SignUp/SignUp';
 
@@ -35,10 +34,13 @@ const Home: React.FC<HomeProps> = ({ history }: any) => (
                 </Button>
             </Wrapper>
         </Visitante>
-        <Switch>
-            <Route path="/" component={SignInForm} history={history} />
-            <Route path="/signup" component={SignUpForm} history={history} />
-        </Switch>
+        <SignIn>
+            <Switch>
+                <Route exact path="/" component={SignInForm} history={history} />
+                <Route exact path="/signup" component={SignUpForm} history={history} />
+            </Switch>
+        </SignIn>
+
     </Fragment>
 );
 

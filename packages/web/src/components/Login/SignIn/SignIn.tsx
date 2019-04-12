@@ -47,47 +47,45 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     } = props;
 
     return (
-        <SignIn>
-            <Form onSubmit={handleSubmit}>
-                <Title>Entrar</Title>
-                <Input
-                    placeholder="Email"
-                    type="email"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                />
-                {touched.email && errors.email && <Error>{errors.email}</Error>}
+        <Form onSubmit={handleSubmit}>
+            <Title>Entrar</Title>
+            <Input
+                placeholder="Email"
+                type="email"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+            />
+            {touched.email && errors.email && <Error>{errors.email}</Error>}
 
-                <Input
-                    placeholder="Senha"
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                />
-                {touched.password && errors.password && (
-                    <Error>{errors.password}</Error>
-                )}
+            <Input
+                placeholder="Senha"
+                type="password"
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+            />
+            {touched.password && errors.password && (
+                <Error>{errors.password}</Error>
+            )}
 
-                <Wrapper>
-                    <LinkWrapper to="/signup">Criar Conta</LinkWrapper>
-                    <Button
-                        style={mainButtonStyle}
-                        type="submit"
-                        disabled={
-                            isSubmitting ||
-                            !!(errors.email && touched.email) ||
-                            !!(errors.password && touched.password)
-                        }
-                    >
-                        Entrar
-                    </Button>
-                </Wrapper>
-            </Form>
-        </SignIn>
+            <Wrapper>
+                <LinkWrapper to="/signup">Criar Conta</LinkWrapper>
+                <Button
+                    style={mainButtonStyle}
+                    type="submit"
+                    disabled={
+                        isSubmitting ||
+                        !!(errors.email && touched.email) ||
+                        !!(errors.password && touched.password)
+                    }
+                >
+                    Entrar
+                </Button>
+            </Wrapper>
+        </Form>
     );
 };
 

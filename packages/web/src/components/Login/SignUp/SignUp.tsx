@@ -18,38 +18,37 @@ import SignIn from '../../../utils/components/Home/SignIn/SignIn';
 import { loginUser } from "../../../graphql/mutations";
 
 interface FormValues {
-  email: string;
-  password: string;
-  device: string;
+    email: string;
+    password: string;
+    device: string;
 }
 
 interface OtherProps {
-  title?: string;
-  mutate?: any;
-  history: any;
+    title?: string;
+    mutate?: any;
+    history: any;
 }
 
 interface MyFormProps {
-  initialEmail?: string;
-  initialPassword?: string;
-  initialDevice?: string;
-  mutate?: any;
-  history: any;
+    initialEmail?: string;
+    initialPassword?: string;
+    initialDevice?: string;
+    mutate?: any;
+    history: any;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-  const {
-      values,
-      errors,
-      touched,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-      isSubmitting
-  } = props;
+    const {
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting
+    } = props;
 
-  return (
-      <SignIn>
+    return (
         <Form onSubmit={handleSubmit}>
             <Title>Criar Conta</Title>
             <Input
@@ -86,48 +85,47 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <Error>{errors.device}</Error>
             )}
 
-                <Wrapper>
-                    <LinkWrapper to="/">Entrar</LinkWrapper>
-                    <Button
-                        style={mainButtonStyle}
-                        type="submit"
-                        disabled={
-                            isSubmitting ||
-                            !!(errors.email && touched.email) ||
-                            !!(errors.password && touched.password) ||
-                            !!(errors.device && touched.device)
-                        }
-                    >
-                        Criar
-                    </Button>
-                </Wrapper>
+            <Wrapper>
+                <LinkWrapper to="/">Entrar</LinkWrapper>
+                <Button
+                    style={mainButtonStyle}
+                    type="submit"
+                    disabled={
+                        isSubmitting ||
+                        !!(errors.email && touched.email) ||
+                        !!(errors.password && touched.password) ||
+                        !!(errors.device && touched.device)
+                    }
+                >
+                    Criar
+                </Button>
+            </Wrapper>
         </Form>
-      </SignIn>
-  );
+    );
 };
 
 // Wrap our form with the using withFormik HoC
 const SignUpForm = withFormik<MyFormProps, FormValues>({
-  mapPropsToValues: props => ({
-      email: props.initialEmail || "",
-      password: props.initialPassword || "",
-      device: props.initialDevice || ""
-  }),
+    mapPropsToValues: props => ({
+        email: props.initialEmail || "",
+        password: props.initialPassword || "",
+        device: props.initialDevice || ""
+    }),
 
-  validationSchema: Yup.object().shape({
-      email: Yup.string()
-          .email("Email not valid")
-          .required("Email is required"),
-      password: Yup.string().required("Password is required"),
-      device: Yup.number().required("Device is required")
-  }),
+    validationSchema: Yup.object().shape({
+        email: Yup.string()
+            .email("Email not valid")
+            .required("Email is required"),
+        password: Yup.string().required("Password is required"),
+        device: Yup.number().required("Device is required")
+    }),
 
-  handleSubmit(
-      { email, password, device }: FormValues,
-      { props, setSubmitting, setErrors }
-  ) {
-    console.log(email, password, device);
-  }
+    handleSubmit(
+        { email, password, device }: FormValues,
+        { props, setSubmitting, setErrors }
+    ) {
+        console.log(email, password, device);
+    }
 })(InnerForm);
 
 export default SignUpForm;

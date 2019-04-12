@@ -65,7 +65,7 @@ export const mutations = {
                             type: GraphQLString
                         },
                         device: {
-                            type: GraphQLID
+                            type: GraphQLInt
                         }
                     })
                 })

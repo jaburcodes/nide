@@ -39,11 +39,7 @@ const DeviceSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: "Sensor"
             }
-        ],
-        user:  {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }
+        ]
     },
     { _id: false }
 );
