@@ -114,7 +114,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                         {values.devices && values.devices.length > 0 ? (
                             values.devices.map((device, index) => (
                                 <InputsWrapper key={index}>
-                                    <Field name={`devices.${index}`} />
+                                    <Field
+                                        name={`devices.${index}`}
+                                        render={({ field }: any) => (
+                                            <Input {...field} width={75} height={30} />
+                                        )}
+                                    />
                                     <IconStyled type="button" onClick={() => helpers.remove(index)}>-</IconStyled>
                                     <IconStyled type="button" onClick={() => helpers.insert(index, '')}>+</IconStyled>
                                 </InputsWrapper>

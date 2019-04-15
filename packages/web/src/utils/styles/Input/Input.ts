@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 interface InputProps {
     width?: number;
+    height?: number;
 }
 
 const Input = styled.input<InputProps>`
     width: ${props => props.width || 100}%;
     max-width: 440px;
-    height: 52px;
+    height: ${props => props.height || 52}px;
     background-color: rgba(246, 246, 246, 0.3);
     border: 1px solid #d8dde6;
     text-indent: 20px;

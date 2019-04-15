@@ -43,10 +43,7 @@
         "rc-table": "^6.4.3",
         "react": "^16.7.0",
         "react-apollo": "^2.3.3",
-<<<<<<< HEAD
         "react-custom-scrollbars": "^4.2.1",
-=======
->>>>>>> 56918cd9a7269488c240a64bbd522450d17f02e7
         "react-dom": "^16.7.0",
         "react-feather": "^1.1.6",
         "react-leaflet": "^2.2.0",
