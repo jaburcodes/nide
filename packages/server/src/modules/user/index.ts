@@ -1,8 +1,6 @@
 import UserType from "./UserType";
 import * as Loader from "./UserLoader";
 
-import DeviceType from "../Device/DeviceType";
-
 import createConnection from "../utils/createCoonnection";
 
 import {
@@ -39,15 +37,6 @@ export const queries = {
             }
         },
         resolve: Loader.User
-    },
-    userDevice: {
-        type: DeviceType,
-        args: {
-            _id: {
-                type: GraphQLString
-            }
-        },
-        resolve: Loader.Device
     }
 };
 
