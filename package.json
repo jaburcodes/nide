@@ -1,0 +1,33 @@
+{
+    "name": "gigatron",
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "packages/*"
+        ],
+        "nohoist": [
+            "**/react-native",
+            "**/react-native/**"
+        ]
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/node": "^7.2.2",
+        "@types/graphql": "^14.0.4",
+        "@types/styled-components": "^4.1.5",
+        "all-contributors-cli": "^5.7.0",
+        "babel-preset-gigatron": "0.0.1",
+        "typescript": "^3.2.2",
+        "concurrently": "^4.1.0"
+    },
+    "scripts": {
+        "server": "yarn workspace @foton/server start",
+        "web": "yarn workspace @foton/web start",
+        "dev": "concurrently -n app,web,server --kill-others \"yarn web\" \"yarn server\"",
+        "dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\"",
+        "dev:app": "concurrently -n app,server --kill-others \"yarn server\""
+    },
+    "dependencies": {
+        "graphql": "^14.0.2"
+    }
+}
