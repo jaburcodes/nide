@@ -25,7 +25,7 @@ const customStyles = {
     }
 };
 
-const Home = ({ history }: any) => {
+const Dispositivos = ({ history }: any) => {
     const [open, setOpen] = useState<boolean>(false);
 
     const handleOpen = () => setOpen(!open);
@@ -72,4 +72,4 @@ const Home = ({ history }: any) => {
     );
 };
 
-export default Home;
+export default Dispositivos;
