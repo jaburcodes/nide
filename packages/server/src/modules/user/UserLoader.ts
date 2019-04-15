@@ -29,7 +29,7 @@ export const User = (object, args, ctx) => UserModel.findOne({ id: args.id });
 export const Device = (object, { _id }, ctx) => DeviceModel.find({ user: _id });
 
 export const AddUser = async (object, args, ctx) => {
-    const { email, password, device } = args.input;
+    const { email, password, devices } = args.input;
     const currentUser = await UserModel.findOne({ email });
 
     if (currentUser) {
@@ -39,7 +39,7 @@ export const AddUser = async (object, args, ctx) => {
     const user = new UserModel({
         email,
         password: encryptPassword(password),
-        device
+        devices
     });
 
     await user.save();

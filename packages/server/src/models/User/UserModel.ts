@@ -18,11 +18,11 @@ const UserSchema = new Schema(
             type: String,
             hidden: true
         },
-        device: {
+        devices: [{
             type: String,
             ref: "Device",
             required: true
-        }
+        }]
     },
     {
         timestamps: {

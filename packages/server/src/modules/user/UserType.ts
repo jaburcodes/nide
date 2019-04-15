@@ -19,9 +19,9 @@ const UserType = new GraphQLObjectType({
             type: GraphQLString,
             resolve: o => o.password
         },
-        device: {
-            type: GraphQLInt,
-            resolve: o => o.device
+        devices: {
+            type: GraphQLList(GraphQLInt),
+            resolve: o => o.devices
         },
         hasNextPage: {
             type: GraphQLBoolean,

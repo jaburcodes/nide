@@ -175,22 +175,22 @@ const SignUpForm = withFormik<MyFormProps, FormValues>({
         { email, password, devices }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
-        console.log(email, password, devices);
-        // props
-        //     .mutate({ variables: { input: { email, password, devices } } })
-        //     .then(({ data }: any) => {
-        //         const { addUser } = data;
+        //console.log(email, password, devices);
+        props
+            .mutate({ variables: { input: { email, password, devices } } })
+            .then(({ data }: any) => {
+                const { addUser } = data;
 
-        //         if (addUser.token) {
-        //             localStorage.setItem("token", addUser.token);
-        //         }
-        //     })
-        //     .then(() => props.history.push("/dispositivos"))
-        //     .catch((error: string) => {
-        //         console.log("error", error);
-        //         setSubmitting(false);
-        //         setErrors({ email: "", password: "" });
-        //     });
+                if (addUser.token) {
+                    localStorage.setItem("token", addUser.token);
+                }
+            })
+            .then(() => props.history.push("/dispositivos"))
+            .catch((error: string) => {
+                console.log("error", error);
+                setSubmitting(false);
+                setErrors({ email: "", password: "", devices: [] });
+            });
     }
 })(InnerForm);
 

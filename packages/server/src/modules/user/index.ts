@@ -7,6 +7,7 @@ import createConnection from "../utils/createCoonnection";
 
 import {
     GraphQLNonNull,
+    GraphQLList,
     GraphQLID,
     GraphQLInt,
     GraphQLString,
@@ -64,8 +65,8 @@ export const mutations = {
                         password: {
                             type: GraphQLString
                         },
-                        device: {
-                            type: GraphQLString
+                        devices: {
+                            type: GraphQLList(GraphQLString)
                         }
                     })
                 })
