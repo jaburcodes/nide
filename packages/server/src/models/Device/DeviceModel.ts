@@ -24,6 +24,9 @@ const DeviceSchema = new Schema(
             type: String,
             required: true
         },
+        owner: {
+            type: String
+        },
         dataSourceType: {
             type: Number,
             required: true

@@ -44,5 +44,17 @@ export const mutations = {
             }
         },
         resolve: Loader.updateDevice
+    },
+    addDeviceOwner: {
+        type: DeviceType,
+        args: {
+            _id: {
+                type: GraphQLString
+            },
+            owner: {
+                type: GraphQLString
+            }
+        },
+        resolve: Loader.AddDeviceOwner
     }
 };

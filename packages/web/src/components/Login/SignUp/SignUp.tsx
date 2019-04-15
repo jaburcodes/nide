@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import * as Yup from "yup";
 import { withFormik, FormikProps, Field, FieldArray } from "formik";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 
 import Button from "@material-ui/core/Button";
 
@@ -163,19 +163,15 @@ const SignUpForm = withFormik<MyFormProps, FormValues>({
     }),
 
     validationSchema: Yup.object().shape({
-        email: Yup.string()
-            .email("Email not valid")
-            .required("Email is required"),
+        email: Yup.string().email("Email not valid").required("Email is required"),
         password: Yup.string().required("Password is required"),
-        devices: Yup.array().of(Yup.string())
-            .required('Must have friends')
+        devices: Yup.array().of(Yup.string()).required('Must have friends')
     }),
 
     handleSubmit(
         { email, password, devices }: FormValues,
         { props, setSubmitting, setErrors }
     ) {
-        //console.log(email, password, devices);
         props
             .mutate({ variables: { input: { email, password, devices } } })
             .then(({ data }: any) => {

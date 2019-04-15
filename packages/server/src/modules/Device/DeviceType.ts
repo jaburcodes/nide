@@ -24,6 +24,10 @@ const DeviceType = new GraphQLObjectType({
             type: GraphQLInt,
             resolve: o => o.dataSourceType
         },
+        owner: {
+            type: GraphQLString,
+            resolve: o => o.owner
+        },
         latitude: {
             type: GraphQLString,
             resolve: o => o.latitude

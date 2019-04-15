@@ -19,3 +19,11 @@ export const updateDevice = (object, { name, latitude, longitude }, ctx) =>
 
 export const Sensores = (object, { _id }, ctx) =>
     SensorModel.find({ dataSourceId: _id });
+
+export const AddDeviceOwner = (object, { _id, owner }, ctx) =>
+    DeviceModel.findOneAndUpdate(
+        _id,
+        { $set: { owner } },
+        { new: true },
+        (err, doc) => (err ? err : doc)
+    );

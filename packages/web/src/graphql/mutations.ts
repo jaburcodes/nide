@@ -12,6 +12,20 @@ export const addUser = gql`
     }
 `;
 
+export const addDeviceOwner = gql`
+    mutation addDeviceOwner($_id: String, $owner: String!) {
+        addDeviceOwner(_id: $id, owner: $owner) {
+            _id
+            xid
+            name
+            dataSourceType
+            owner
+            latitude
+            longitude
+        }
+    }
+`;
+
 export const loginUser = gql`
     mutation loginUser($input: LoginUserInput!) {
         loginUser(input: $input) {
