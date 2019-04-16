@@ -2,9 +2,6 @@ import {
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
-    GraphQLNonNull,
-    GraphQLID,
-    GraphQLInt,
     GraphQLBoolean
 } from "graphql";
 
@@ -19,10 +16,14 @@ const UserType = new GraphQLObjectType({
             type: GraphQLString,
             resolve: o => o.password
         },
+        devices: {
+            type: GraphQLList(GraphQLString),
+            resolve: o => o.devices
+        },
         hasNextPage: {
             type: GraphQLBoolean,
             resolve: o => o.hasNextPage
-        },
+        }, 
         token: {
             type: GraphQLString,
             resolve: o => o.token
