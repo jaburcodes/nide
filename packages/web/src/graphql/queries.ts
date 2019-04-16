@@ -15,6 +15,20 @@ export const users = gql`
     }
 `;
 
+export const userDevices = gql`
+    query userDevices($_id: String!) {
+        userDevices(_id: $id) {
+            _id
+            xid
+            name
+            dataSourceType
+            owner
+            latitude
+            longitude
+        }
+    }
+`;
+
 export const devices = gql`
     query devices {
         devices {
