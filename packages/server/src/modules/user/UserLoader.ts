@@ -5,6 +5,17 @@ import DeviceModel from "../../models/Device/DeviceModel";
 
 import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
 
+export const UserDevices = (object, { _id }, ctx) => {
+    UserModel.findOne({ _id })
+    .populate('devices')
+    .exec((err, devices) => {
+        if (err) return err;
+
+        console.log(devices);
+        return devices;
+    });
+};
+
 export const Users = async (object, args, ctx) => {
     const { id, size, page } = args;
     const where = { id };
@@ -26,19 +37,9 @@ export const Users = async (object, args, ctx) => {
 
 export const User = (object, args, ctx) => UserModel.findOne({ id: args.id });
 
-export const UserDevices = (object, { _id }, ctx) => {
-    UserModel.findOne({ _id })
-    .populate('devices')
-    .exec((err, devices) => {
-        if (err) return err;
-
-        console.log(devices);
-        return devices;
-    });
-};
-
 export const AddUser = async (object, args, ctx) => {
     const { email, password, devices } = args.input;
+    
     const currentUser = await UserModel.findOne({ email });
 
     if (currentUser) {
@@ -55,13 +56,12 @@ export const AddUser = async (object, args, ctx) => {
 
     const token = `JWT ${jwt.sign({ id: email }, process.env.JWT)}`;
 
-    return {
-        token
-    };
+    return { token };
 };
 
 export const LoginUser = async (object, args, ctx) => {
     const { email, password } = args.input;
+
     if (!email || !password) {
         return { error: "Email and password must be provided" };
     }
@@ -81,7 +81,6 @@ export const LoginUser = async (object, args, ctx) => {
     }
 
     const token = `JWT ${jwt.sign({ id: email }, process.env.JWT)}`;
-    return {
-        token
-    };
+
+    return { token };
 };

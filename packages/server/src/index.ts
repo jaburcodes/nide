@@ -119,21 +119,20 @@ const server = new ApolloServer({
         if (connection) {
             return {
                 ...connection.context,
-                pubsub
-            };
+                pubsub,
+            }
         } else {
             // check from req
-            const token = req.headers.authorization
-                ? req.headers.authorization
-                : "";
-            const me = await getUser(token);
+            const token = req.headers.authorization ? req.headers.authorization : ''
+            const me = await getUser(token)
+            console.log('Oia o me -> ', me)
             return {
                 me,
-                pubsub
-            };
+                pubsub,
+            }
         }
-    }
-});
+    },
+})
 
 function normalizePort(val) {
     const port = parseInt(val, 10);
