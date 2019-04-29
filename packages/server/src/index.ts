@@ -116,20 +116,13 @@ const server = new ApolloServer({
     introspection: true,
     playground: true,
     context: async ({ req, connection }) => {
-        if (connection) {
-            return {
-                ...connection.context,
-                pubsub,
-            }
-        } else {
-            // check from req
-            const token = req.headers.authorization ? req.headers.authorization : ''
-            const me = await getUser(token)
-            console.log('Oia o me -> ', me)
-            return {
-                me,
-                pubsub,
-            }
+        console.log('Req headers ta vindo -> ', req.headers)
+        const token = req.headers.authorization ? req.headers.authorization : ''
+        const me = await getUser(token)
+        console.log('Oia o me -> ', me)
+        return {
+            me,
+            pubsub,
         }
     },
 })

@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const me = gql`
+    query me {
+        me {
+            email
+            password
+            devices
+        }
+    }
+`
+
 export const users = gql`
     query users($size: Int!, $page: Int!) {
         users(size: $size, page: $page) {
