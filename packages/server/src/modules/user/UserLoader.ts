@@ -5,16 +5,10 @@ import DeviceModel from "../../models/Device/DeviceModel";
 
 import { authenticate, encryptPassword } from "../../utils/auth/authMethods";
 
-export const UserDevices = (object, { _id }, ctx) => {
-    UserModel.findOne({ _id })
-    .populate('devices')
-    .exec((err, devices) => {
-        if (err) return err;
-
-        console.log(devices);
-        return devices;
-    });
-};
+export const UserDevices = (object, { _id }, ctx) => UserModel.findById(_id)
+    .populate("devices")
+    .then((devices: any) => devices.devices.map((device: any) => device))
+    .catch(err => err);
 
 export const Users = async (object, args, ctx) => {
     const { id, size, page } = args;
@@ -35,11 +29,11 @@ export const Users = async (object, args, ctx) => {
     };
 };
 
-export const User = (object, args, ctx) => UserModel.findOne({ id: args.id });
+export const User = (object, { _id }, ctx) => UserModel.findById(_id);
 
 export const AddUser = async (object, args, ctx) => {
     const { email, password, devices } = args.input;
-    
+
     const currentUser = await UserModel.findOne({ email });
 
     if (currentUser) {

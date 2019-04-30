@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const me = gql`
     query me {
         me {
+            _id
             email
             password
             devices
@@ -27,7 +28,7 @@ export const users = gql`
 
 export const userDevices = gql`
     query userDevices($_id: String!) {
-        userDevices(_id: $id) {
+        userDevices(_id: $_id) {
             _id
             xid
             name

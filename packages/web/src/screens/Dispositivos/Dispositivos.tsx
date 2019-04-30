@@ -39,15 +39,15 @@ const Dispositivos = ({ history }: any) => {
                 if (loading) return "";
                 if (error) return `Error! ${error.message}`;
 
-                console.log('OIA O ME -> ', data)
+                const { _id } = data.me;
 
                 return (
                     <StyledDispositivos>
                         <Wrapper>
                             <Title style={{ alignSelf: "center" }} color="black">
                                 Dispositivos
-                </Title>
-                            <DispositivoTable history={history} />
+                            </Title>
+                            <DispositivoTable history={history} _id={_id} />
                             <Fab
                                 onClick={() => handleOpen()}
                                 style={{

@@ -34,14 +34,14 @@ export const queries = {
     user: {
         type: UserType,
         args: {
-            id: {
-                type: GraphQLNonNull(GraphQLID)
+            _id: {
+                type: GraphQLString
             }
         },
         resolve: Loader.User
     },
     userDevices: {
-        type: DeviceType,
+        type: GraphQLList(DeviceType),
         args: {
             _id: {
                 type: GraphQLString

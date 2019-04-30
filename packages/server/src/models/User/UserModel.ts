@@ -19,7 +19,7 @@ const UserSchema = new Schema(
             hidden: true
         },
         devices: [{
-            type: String,
+            type: Schema.Types.ObjectId,
             ref: "Device",
             required: true
         }]

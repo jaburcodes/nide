@@ -5,9 +5,15 @@ import {
     GraphQLBoolean
 } from "graphql";
 
+import DeviceType from '../Device/DeviceType'
+
 const UserType = new GraphQLObjectType({
     name: "UserType",
     fields: {
+        _id: {
+            type: GraphQLString,
+            resolve: o => o._id
+        },
         email: {
             type: GraphQLString,
             resolve: o => o.email
@@ -17,7 +23,7 @@ const UserType = new GraphQLObjectType({
             resolve: o => o.password
         },
         devices: {
-            type: GraphQLList(GraphQLString),
+            type: GraphQLList(DeviceType),
             resolve: o => o.devices
         },
         hasNextPage: {

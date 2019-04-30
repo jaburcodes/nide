@@ -6,7 +6,7 @@ export const Device = (object, { _id }, ctx) => DeviceModel.findById(_id);
 export const Devices = (object, args, ctx) =>
     DeviceModel.find({})
         .populate("devices")
-        .then(posts => posts)
+        .then(devices => devices)
         .catch(err => err);
 
 export const updateDevice = (object, { name, latitude, longitude }, ctx) =>
