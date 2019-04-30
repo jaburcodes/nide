@@ -1,8 +1,8 @@
 {
     "version": 2,
-    "name": "gigatron",
+    "name": "nide",
     "public": true,
-    "alias": ["gigatron.now.sh"],
+    "alias": ["nide.now.sh"],
     "builds": [
         {
             "src": "packages/web/package.json",

@@ -1,5 +1,5 @@
 {
-    "name": "@foton/web",
+    "name": "@nide/web",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

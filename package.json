@@ -1,5 +1,5 @@
 {
-    "name": "gigatron",
+    "name": "nide",
     "private": true,
     "workspaces": {
         "packages": [
@@ -21,8 +21,8 @@
         "concurrently": "^4.1.0"
     },
     "scripts": {
-        "server": "yarn workspace @foton/server start",
-        "web": "yarn workspace @foton/web start",
+        "server": "yarn workspace @nide/server start",
+        "web": "yarn workspace @nide/web start",
         "dev": "concurrently -n app,web,server --kill-others \"yarn web\" \"yarn server\"",
         "dev:web": "concurrently -n web,server --kill-others \"yarn web\" \"yarn server\"",
         "dev:app": "concurrently -n app,server --kill-others \"yarn server\""

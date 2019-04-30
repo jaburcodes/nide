@@ -1,5 +1,5 @@
 {
-    "name": "@foton/server",
+    "name": "@nide/server",
     "version": "0.0.1",
     "description": "",
     "main": "index.ts",
