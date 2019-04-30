@@ -30,70 +30,145 @@ const DispositivoTable: React.FC<DispositivoProps> = ({ history, _id }: any) => 
                 if (loading) return "";
                 if (error) return `Error! ${error.message}`;
 
-                console.log('Data -> ', data)
-
                 return (
-                    <div>working</div>
-                    // <Paper
-                    //     style={{
-                    //         width: "100%",
-                    //         height: "100%",
-                    //         gridRow: "2 / 3",
-                    //         boxShadow: "0",
-                    //         borderRadius: "0"
-                    //     }}
-                    // >
-                    //     <div>
-                    //         <Table>
-                    //             <TableHead>
-                    //                 <TableRow>
-                    //                     <TableCell
-                    //                         style={{
-                    //                             textAlign: "start",
-                    //                             fontFamily: "Montserrat",
-                    //                             fontSize: "0.9rem",
-                    //                             color: "#999999"
-                    //                         }}
-                    //                     >
-                    //                         Nome do Dispositivo
-                    //                     </TableCell>
-                    //                     <TableCell
-                    //                         style={{
-                    //                             textAlign: "start",
-                    //                             fontFamily: "Montserrat",
-                    //                             fontSize: "0.9rem",
-                    //                             color: "#999999"
-                    //                         }}
-                    //                     >
-                    //                         Latitude
-                    //                     </TableCell>
-                    //                     <TableCell
-                    //                         style={{
-                    //                             textAlign: "start",
-                    //                             fontFamily: "Montserrat",
-                    //                             fontSize: "0.9rem",
-                    //                             color: "#999999"
-                    //                         }}
-                    //                     >
-                    //                         Longitude
-                    //                     </TableCell>
-                    //                     <TableCell
-                    //                         style={{
-                    //                             textAlign: "start",
-                    //                             fontFamily: "Montserrat",
-                    //                             fontSize: "0.9rem",
-                    //                             color: "#999999"
-                    //                         }}
-                    //                     >
-                    //                         Quantidade de Sensores
-                    //                     </TableCell>
-                    //                 </TableRow>
-                    //             </TableHead>
-                    //             <TableBody>
-                    //             </TableBody>
-                    //         </Table>
-                    //     </div>
-                    // </Paper>
+                    <Paper
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            gridRow: "2 / 3",
+                            boxShadow: "0",
+                            borderRadius: "0"
+                        }}
+                    >
+                        <div>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontFamily: "Montserrat",
+                                                fontSize: "0.9rem",
+                                                color: "#999999"
+                                            }}
+                                        >
+                                            Nome do Dispositivo
+                                        </TableCell>
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontFamily: "Montserrat",
+                                                fontSize: "0.9rem",
+                                                color: "#999999"
+                                            }}
+                                        >
+                                            Latitude
+                                        </TableCell>
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontFamily: "Montserrat",
+                                                fontSize: "0.9rem",
+                                                color: "#999999"
+                                            }}
+                                        >
+                                            Longitude
+                                        </TableCell>
+                                        <TableCell
+                                            style={{
+                                                textAlign: "start",
+                                                fontFamily: "Montserrat",
+                                                fontSize: "0.9rem",
+                                                color: "#999999"
+                                            }}
+                                        >
+                                            Quantidade de Sensores
+                                        </TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {data.userDevices.map(
+                                        ({
+                                            _id,
+                                            name,
+                                            latitude,
+                                            longitude
+                                        }: any) => (
+                                                <TableRow
+                                                    style={{
+                                                        cursor:
+                                                            "pointer"
+                                                    }}
+                                                    key={_id}
+                                                    onClick={() =>
+                                                        onDispositivoClick(
+                                                            _id
+                                                        )
+                                                    }
+                                                >
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign:
+                                                                "start",
+                                                            fontSize:
+                                                                "0.9rem",
+                                                            fontWeight: 500,
+                                                            color:
+                                                                "black"
+                                                        }}
+                                                        component="th"
+                                                        scope="row"
+                                                    >
+                                                        {name}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign:
+                                                                "start",
+                                                            fontSize:
+                                                                "0.9rem",
+                                                            fontWeight: 500,
+                                                            color:
+                                                                "black"
+                                                        }}
+                                                    >
+                                                        {latitude}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign:
+                                                                "start",
+                                                            fontSize:
+                                                                "0.9rem",
+                                                            fontWeight: 500,
+                                                            color:
+                                                                "black"
+                                                        }}
+                                                    >
+                                                        {longitude}
+                                                    </TableCell>
+                                                    <TableCell
+                                                        style={{
+                                                            textAlign:
+                                                                "start",
+                                                            fontSize:
+                                                                "0.9rem",
+                                                            fontWeight: 500,
+                                                            color:
+                                                                "black"
+                                                        }}
+                                                    >
+                                                        {
+                                                            data.userDevices.length
+                                                        }
+                                                    </TableCell>
+                                                </TableRow>
+                                            )
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </Paper>
                 );
             }}
         </Query>
@@ -101,104 +176,3 @@ const DispositivoTable: React.FC<DispositivoProps> = ({ history, _id }: any) => 
 };
 
 export default DispositivoTable;
-
-
-// data.devices.map(
-//     ({
-//         _id,
-//         name,
-//         latitude,
-//         longitude
-//     }: any) => (
-//         <Query
-//             key={_id}
-//             query={userDevices}
-//             variables={{ userId }}
-//         >
-//             {({ loading, error, data }) => {
-//                 if (loading)
-//                     return "Loading...";
-//                 if (error)
-//                     return `Error! ${
-//                         error.message
-//                     }`;
-
-//                 const {
-//                     deviceSensors
-//                 } = data;
-
-//                 return (
-//                     <TableRow
-//                         style={{
-//                             cursor:
-//                                 "pointer"
-//                         }}
-//                         key={_id}
-//                         onClick={() =>
-//                             onDispositivoClick(
-//                                 _id
-//                             )
-//                         }
-//                     >
-//                         <TableCell
-//                             style={{
-//                                 textAlign:
-//                                     "start",
-//                                 fontSize:
-//                                     "0.9rem",
-//                                 fontWeight: 500,
-//                                 color:
-//                                     "black"
-//                             }}
-//                             component="th"
-//                             scope="row"
-//                         >
-//                             {name}
-//                         </TableCell>
-//                         <TableCell
-//                             style={{
-//                                 textAlign:
-//                                     "start",
-//                                 fontSize:
-//                                     "0.9rem",
-//                                 fontWeight: 500,
-//                                 color:
-//                                     "black"
-//                             }}
-//                         >
-//                             {latitude}
-//                         </TableCell>
-//                         <TableCell
-//                             style={{
-//                                 textAlign:
-//                                     "start",
-//                                 fontSize:
-//                                     "0.9rem",
-//                                 fontWeight: 500,
-//                                 color:
-//                                     "black"
-//                             }}
-//                         >
-//                             {longitude}
-//                         </TableCell>
-//                         <TableCell
-//                             style={{
-//                                 textAlign:
-//                                     "start",
-//                                 fontSize:
-//                                     "0.9rem",
-//                                 fontWeight: 500,
-//                                 color:
-//                                     "black"
-//                             }}
-//                         >
-//                             {
-//                                 deviceSensors.length
-//                             }
-//                         </TableCell>
-//                     </TableRow>
-//                 );
-//             }}
-//         </Query>
-//     )
-// )
