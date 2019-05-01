@@ -3,8 +3,8 @@
     "name": "nide",
     "public": true,
     "alias": ["nide.now.sh"],
-    "builds": [
-        {
+    "scope": "fotontech",
+    "builds": [{
             "src": "packages/web/package.json",
             "use": "@now/static-build",
             "config": {
@@ -16,8 +16,7 @@
             "use": "@now/node-server@canary"
         }
     ],
-    "routes": [
-        {
+    "routes": [{
             "src": "^/graphql",
             "dest": "/packages/server/src/index.ts"
         },
