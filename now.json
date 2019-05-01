@@ -3,7 +3,6 @@
     "name": "nide",
     "public": true,
     "alias": ["nide.now.sh"],
-    "scope": "fotontech",
     "builds": [{
             "src": "packages/web/package.json",
             "use": "@now/static-build",
