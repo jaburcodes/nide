@@ -55,7 +55,7 @@
         "typescript": "3.2.2",
         "validator": "^10.11.0",
         "victory": "^31.2.0",
-        "yarn": "^1.13.0",
+        "yarn": "^1.17.3",
         "yup": "^0.26.10"
     },
     "scripts": {
